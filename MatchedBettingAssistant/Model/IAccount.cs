@@ -1,0 +1,26 @@
+﻿namespace MatchedBettingAssistant.Model
+{
+    /// <summary>
+    /// Interface for classes that represent methods of payment such as
+    /// bank accounts and credit cards.
+    /// </summary>
+    public interface IAccount
+    {
+        string Name { get; set; }
+
+        double StartingBalance { get; set; }
+
+        /// <summary>
+        /// Gets the current balance of this bookmaker
+        /// </summary>
+        double Balance { get; }
+
+        double CommissionPercent { get; set; }
+
+        /// <summary>
+        /// Adds a transaction to the account
+        /// </summary>
+        /// <param name="transaction">the transaction to be applied</param>
+        void AddTransaction(ITransaction transaction);
+    }
+}
