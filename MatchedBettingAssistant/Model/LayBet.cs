@@ -4,7 +4,7 @@ namespace MatchedBettingAssistant.Model
 {
     public class LayBet : ILayBet
     {
-        public IAccount Account { get; set; }
+        public IBettingAccount Account { get; set; }
         public DateTime Date { get; set; }
         public double Odds { get; set; }
         public double Stake { get; set; }

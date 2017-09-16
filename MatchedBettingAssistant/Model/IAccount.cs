@@ -15,7 +15,6 @@
         /// </summary>
         double Balance { get; }
 
-        double CommissionPercent { get; set; }
 
         /// <summary>
         /// Adds a transaction to the account

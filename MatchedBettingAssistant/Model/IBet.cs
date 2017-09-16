@@ -4,7 +4,7 @@ namespace MatchedBettingAssistant.Model
 {
     public interface IBet
     {
-        IAccount Account { get; set; }
+        IBettingAccount Account { get; set; }
         DateTime Date { get; set; }
         double Odds { get; set; }
         double Stake { get; set; }

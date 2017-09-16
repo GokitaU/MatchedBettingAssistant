@@ -62,11 +62,13 @@
     </ApplicationDefinition>
     <Compile Include="Model\BackBet.cs" />
     <Compile Include="Model\Bookmaker.cs" />
+    <Compile Include="Model\FundsTransaction.cs" />
     <Compile Include="Model\IAccount.cs" />
     <Compile Include="Model\IAccountAction.cs" />
     <Compile Include="Model\IAccountTransferTransaction.cs" />
     <Compile Include="Model\IBackBet.cs" />
     <Compile Include="Model\IBet.cs" />
+    <Compile Include="Model\IBettingAccount.cs" />
     <Compile Include="Model\ILayBet.cs" />
     <Compile Include="Model\LayBet.cs" />
     <Compile Include="Model\MatchedBet.cs" />

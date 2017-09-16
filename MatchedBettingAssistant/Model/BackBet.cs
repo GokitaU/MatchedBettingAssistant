@@ -7,7 +7,7 @@ namespace MatchedBettingAssistant.Model
     {
         public DateTime Date { get; set; }
 
-        public IAccount Account { get; set; }
+        public IBettingAccount Account { get; set; }
 
         public double Stake { get; set; }
 

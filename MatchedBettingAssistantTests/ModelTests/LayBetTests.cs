@@ -8,14 +8,14 @@ namespace MatchedBettingAssistantTests.ModelTests
     [TestClass]
     public class LayBetTests
     {
-        private Mock<IAccount> bookmaker;
+        private Mock<IBettingAccount> bookmaker;
         private LayBet layBet;
         private const double Tolerance = 0.01;
 
         [TestInitialize]
         public void Setup()
         {
-            this.bookmaker = new Mock<IAccount>();
+            this.bookmaker = new Mock<IBettingAccount>();
             this.layBet = new LayBet
             {
                 Account = this.bookmaker.Object,

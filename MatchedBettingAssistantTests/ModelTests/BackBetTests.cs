@@ -8,14 +8,14 @@ namespace MatchedBettingAssistantTests.ModelTests
     [TestClass]
     public class BackBetTests
     {
-        private Mock<IAccount> bookmaker;
+        private Mock<IBettingAccount> bookmaker;
         private BackBet backBet;
         private const double Tolerance = 0.01;
 
         [TestInitialize]
         public void Setup()
         {
-            this.bookmaker = new Mock<IAccount>();
+            this.bookmaker = new Mock<IBettingAccount>();
             this.backBet = new BackBet
             {
                 Account = this.bookmaker.Object,

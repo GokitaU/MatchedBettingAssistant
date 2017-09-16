@@ -8,8 +8,8 @@ namespace MatchedBettingAssistantTests.ModelTests
     [TestClass]
     public class MatchedBetTests
     {
-        private Mock<IAccount> bookmaker;
-        private Mock<IAccount> exchange;
+        private Mock<IBettingAccount> bookmaker;
+        private Mock<IBettingAccount> exchange;
         private Mock<IBackBet> backBet;
         private Mock<ILayBet> layBet;
 
@@ -19,8 +19,8 @@ namespace MatchedBettingAssistantTests.ModelTests
         [TestInitialize]
         public void Setup()
         {
-            this.bookmaker = new Mock<IAccount>();
-            this.exchange = new Mock<IAccount>();
+            this.bookmaker = new Mock<IBettingAccount>();
+            this.exchange = new Mock<IBettingAccount>();
             this.backBet = new Mock<IBackBet>();
             this.layBet = new Mock<ILayBet>();
 

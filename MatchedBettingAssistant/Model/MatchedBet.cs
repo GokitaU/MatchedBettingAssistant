@@ -20,7 +20,7 @@ namespace MatchedBettingAssistant.Model
             this.laybet = layBet;
         }
 
-        public IAccount BackAccount
+        public IBettingAccount BackAccount
         {
             get => this.backBet.Account;
             set => this.backBet.Account = value;
@@ -46,7 +46,7 @@ namespace MatchedBettingAssistant.Model
             set => this.backBet.StakeNotReturned = value;
         }
 
-        public IAccount LayAccount
+        public IBettingAccount LayAccount
         {
             get => this.laybet.Account;
             set => this.laybet.Account = value;

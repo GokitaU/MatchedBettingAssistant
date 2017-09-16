@@ -47,10 +47,4 @@ namespace MatchedBettingAssistant.Model
             this.transactions.Add(transaction);
         }
     }
-
-    public class FundsTransaction : ITransaction
-    {
-        public double Amount { get; set; }
-    }
-
 }
