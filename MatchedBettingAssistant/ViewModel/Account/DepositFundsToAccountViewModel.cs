@@ -64,6 +64,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public void Commit()
         {
             this.action.Apply();
+
+            Messenger.Default.Send(new TransactionsUpdatedMessage());
         }
 
     }

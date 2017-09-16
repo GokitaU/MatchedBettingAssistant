@@ -7,18 +7,10 @@
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Account="clr-namespace:MatchedBettingAssistant.ViewModel.Account" x:Class="MatchedBettingAssistant.View.Account.AccountTransactionListView"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <dx:IEnumerableDataSource x:Key="IEnumerableDataSource">
-            <dx:DesignDataManager.DesignData>
-                <dx:DesignDataSettings DataObjectType="{x:Type Account:AccountTransactionViewModel}" RowCount="5"/>
-            </dx:DesignDataManager.DesignData>
-        </dx:IEnumerableDataSource>
-    </UserControl.Resources>
     <Grid>
-
-        <dxg:GridControl ItemsSource="{Binding Data, Source={StaticResource IEnumerableDataSource}}" >
+        <dxg:GridControl ItemsSource="{Binding Transactions}" >
             <dxg:GridControl.View>
-                <dxg:TableView AllowPerPixelScrolling="True" ShowTotalSummary="True"/>
+                <dxg:TableView />
             </dxg:GridControl.View>
             <dxg:GridColumn FieldName="TransactionDate" IsSmart="True"/>
             <dxg:GridColumn FieldName="Amount" IsSmart="True"/>

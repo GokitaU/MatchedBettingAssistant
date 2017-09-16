@@ -78,12 +78,15 @@
     <Compile Include="Model\Wallet.cs" />
     <Compile Include="Model\TransferFundsAccountAction.cs" />
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
+    <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
+    <Compile Include="ViewModel\Account\TransactionsUpdatedMessage.cs" />
     <Compile Include="View\Account\AccountTransactionListView.xaml.cs">
       <DependentUpon>AccountTransactionListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="View\Account\DepositFundsToAccountView.xaml.cs">
       <DependentUpon>DepositFundsToAccountView.xaml</DependentUpon>
     </Compile>

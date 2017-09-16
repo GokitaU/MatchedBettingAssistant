@@ -43,5 +43,10 @@ namespace MatchedBettingAssistant.Model
         {
             this.transactions.Add(transaction);
         }
+
+        public IEnumerable<ITransaction> Transactions
+        {
+            get { return this.transactions; }
+        }
     }
 }

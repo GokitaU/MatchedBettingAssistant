@@ -27,8 +27,9 @@ namespace MatchedBettingAssistant
             InitializeComponent();
 
             var account = new Wallet() {Name = "My Wallet", StartingBalance = 10};
+            account.AddTransaction(new FundsTransaction() { Amount = 20});
 
-            var accountViewModel = new EditAccountViewModel(account);
+            var accountViewModel = new AccountViewModel(account);
 
             this.DataContext = accountViewModel;
         }

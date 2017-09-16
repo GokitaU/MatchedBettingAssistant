@@ -8,6 +8,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <account:EditAccountView/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <account:EditAccountView DataContext="{Binding EditAccountViewModel}"/>
+        <account:AccountTransactionListView Grid.Row="1"
+                                            DataContext="{Binding TransactionListViewModel}"/>
     </Grid>
 </Window>
