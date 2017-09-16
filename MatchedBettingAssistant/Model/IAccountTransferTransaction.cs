@@ -5,16 +5,13 @@ namespace MatchedBettingAssistant.Model
 {
     public interface ITransaction
     {
+        DateTime TransactionDate { get; set; }
+
         double Amount { get; set; }
     }
 
     public interface IAccountTransferTransaction : ITransaction
     {
-        /// <summary>
-        /// Gets or sets the transaction date
-        /// </summary>
-        DateTime TransactionDate { get; set; }
-
         /// <summary>
         /// Gets or sets the source of thr transaction (where the money
         /// is coming from)

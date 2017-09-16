@@ -17,7 +17,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void name_sets_correctly()
+        public void Name_sets_correctly()
         {
             this.bookmaker.Name = "Test";
 
@@ -25,7 +25,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void starting_balance_sets_correctly()
+        public void Starting_balance_sets_correctly()
         {
             this.bookmaker.StartingBalance = 100;
 
@@ -33,7 +33,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void starting_balance_sets_initial_balance()
+        public void Starting_balance_sets_initial_balance()
         {
             this.bookmaker.StartingBalance = 100;
 
@@ -41,7 +41,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void deposit_adds_to_balance()
+        public void Deposit_adds_to_balance()
         {
             var transaction = new Mock<ITransaction>();
             transaction.Setup(x => x.Amount).Returns(100);
@@ -51,7 +51,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void deposit_adds_to_non_zero_balance()
+        public void Deposit_adds_to_non_zero_balance()
         {
             this.bookmaker.StartingBalance = 100;
 
@@ -63,7 +63,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void withdraw_removes_from_balance()
+        public void Withdraw_removes_from_balance()
         {
             var transaction = new Mock<ITransaction>();
             transaction.Setup(x => x.Amount).Returns(-100);
@@ -73,7 +73,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void withdraw_removes_from_non_zero_balance()
+        public void Withdraw_removes_from_non_zero_balance()
         {
             this.bookmaker.StartingBalance = 200;
 
@@ -85,7 +85,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void editing_starting_balance_adjusts_balance_correctly()
+        public void Editing_starting_balance_adjusts_balance_correctly()
         {
             this.bookmaker.StartingBalance = 100;
 

@@ -10,7 +10,7 @@ namespace MatchedBettingAssistantTests.ModelTests
     {
         private Mock<IAccount> source;
         private Mock<IAccount> destination;
-        private const double Tolerance = 0.001;
+        private const double tolerance = 0.001;
 
         [TestInitialize]
         public void Setup()
@@ -20,7 +20,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         }
 
         [TestMethod]
-        public void transfer_removes_funds_from_source()
+        public void Transfer_removes_funds_from_source()
         {
             var withdrawal = new TransferFundsAccountAction
             {
@@ -31,11 +31,11 @@ namespace MatchedBettingAssistantTests.ModelTests
             };
             withdrawal.Apply();
 
-            this.source.Verify(x=>x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (-100.0)) < Tolerance)));
+            this.source.Verify(x=>x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (-100.0)) < tolerance)));
         }
 
         [TestMethod]
-        public void transfer_adds_funds_to_destination()
+        public void Transfer_adds_funds_to_destination()
         {
             var withdrawal = new TransferFundsAccountAction
             {
@@ -46,7 +46,7 @@ namespace MatchedBettingAssistantTests.ModelTests
             };
             withdrawal.Apply();
 
-            this.destination.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - 100.0) < Tolerance)));
+            this.destination.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - 100.0) < tolerance)));
         }
     }
 }

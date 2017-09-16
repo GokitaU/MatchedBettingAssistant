@@ -22,7 +22,7 @@ namespace MatchedBettingAssistant.Model
 
         public void Place()
         {
-            var transaction = new FundsTransaction() {Amount = (Liability*-1)};
+            var transaction = new FundsTransaction() { TransactionDate = Date, Amount = (Liability*-1)};
 
             this.Account.AddTransaction(transaction);
         }
@@ -31,7 +31,7 @@ namespace MatchedBettingAssistant.Model
         {
             var liability = Liability;
             var profit = this.Stake - (this.Stake * this.Account.CommissionPercent);
-            var transaction = new FundsTransaction() {Amount = liability + profit};
+            var transaction = new FundsTransaction() {TransactionDate = Date, Amount = liability + profit};
 
             this.Account.AddTransaction(transaction);
         }

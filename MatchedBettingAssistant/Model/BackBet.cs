@@ -32,7 +32,7 @@ namespace MatchedBettingAssistant.Model
         {
             if (!this.IsBonus)
             {
-                var backTransaction = new FundsTransaction() {Amount = this.Stake * -1};
+                var backTransaction = new FundsTransaction() { TransactionDate = Date, Amount = this.Stake * -1};
 
                 this.Account.AddTransaction(backTransaction);
             }
@@ -46,7 +46,7 @@ namespace MatchedBettingAssistant.Model
 
             var stakeReturn = this.StakeNotReturned ? 0 : this.Stake;
 
-            var backTransaction = new FundsTransaction() { Amount = stakeReturn + profit};
+            var backTransaction = new FundsTransaction() { TransactionDate = Date, Amount = stakeReturn + profit};
 
             this.Account.AddTransaction(backTransaction);
         }
