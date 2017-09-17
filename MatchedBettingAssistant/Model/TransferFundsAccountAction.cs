@@ -2,6 +2,8 @@
 
 namespace MatchedBettingAssistant.Model
 {
+    
+
     public class TransferFundsAccountAction : IAccountAction
     {
         public IAccount Source { get; set; }

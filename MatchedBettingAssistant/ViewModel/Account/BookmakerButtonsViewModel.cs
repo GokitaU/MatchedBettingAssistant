@@ -10,7 +10,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
     {
         private readonly IAccount account;
 
-        public IDialogService DepositDialogService => GetService<IDialogService>();
+        public IDialogService TransferDialogService => ServiceContainer.GetService<IDialogService>("transferDialog");
+        public IDialogService ApplyDialogService => ServiceContainer.GetService<IDialogService>("applyDialog");
+        public IDialogService BetDialogService => ServiceContainer.GetService<IDialogService>("betDialog");
 
         private DelegateCommand depositCommand;
         private DelegateCommand withdrawCommand;
@@ -94,7 +96,34 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public void Bonus()
         {
+            var action = new ApplyFundsAccountAction()
+            {
+                Destination = this.account,
+                Date = DateTime.Today
+            };
 
+            var applyFunds = new ApplyFundsToAccountViewModel(action);
+
+            var okCommand = new UICommand()
+            {
+                Caption = "Ok",
+                IsCancel = false,
+                IsDefault = true,
+                Command = new DelegateCommand(applyFunds.Commit)
+            };
+
+            var cancelCommand = new UICommand()
+            {
+                Id = MessageBoxResult.Cancel,
+                Caption = "Cancel",
+                IsCancel = true,
+                IsDefault = false
+            };
+
+            ApplyDialogService.ShowDialog(
+                new List<UICommand>() { okCommand, cancelCommand },
+                "Adjust Funds",
+                applyFunds);
         }
 
         public void Bet()
@@ -133,13 +162,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 IsDefault = false
             };
 
-            var result = DepositDialogService.ShowDialog(
-                dialogCommands: new List<UICommand>() { okCommand, cancelCommand },
-                title: walletSetter.ActionDescription,
-                viewModel: depositViewModel
-            );
+            TransferDialogService.ShowDialog(
+                new List<UICommand>() { okCommand, cancelCommand },
+                walletSetter.ActionDescription,
+                depositViewModel);
+
 
         }
 
+        
     }
 }

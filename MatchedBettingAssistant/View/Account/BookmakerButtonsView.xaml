@@ -10,10 +10,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <dxmvvm:Interaction.Behaviors>
-        <dx:DialogService DialogWindowStartupLocation="CenterScreen">
+        <dx:DialogService Name="transferDialog" DialogWindowStartupLocation="CenterScreen">
             <dx:DialogService.ViewTemplate>
                 <DataTemplate>
                     <local:DepositFundsToBookmakerView/>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="ResizeMode" Value="NoResize"/>
+                    <Setter Property="Width" Value="350"/>
+                    <Setter Property="Height" Value="250"/>
+                    <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+        <dx:DialogService Name="applyDialog" DialogWindowStartupLocation="CenterScreen">
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:ApplyFundsView/>
                 </DataTemplate>
             </dx:DialogService.ViewTemplate>
             <dx:DialogService.DialogStyle>

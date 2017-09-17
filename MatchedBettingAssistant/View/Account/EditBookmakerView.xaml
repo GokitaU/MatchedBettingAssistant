@@ -18,6 +18,15 @@
                             <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
                         </dxlc:LayoutItem>
 
+                    </dxlc:LayoutGroup>                    
+                    <dxlc:LayoutGroup>
+                        <dxlc:LayoutItem Label="Exchange">
+                            <dxe:CheckEdit/>
+                        </dxlc:LayoutItem>
+
+                        <dxlc:LayoutItem Label="Commission">
+                            <dxe:TextEdit/>
+                        </dxlc:LayoutItem>
                     </dxlc:LayoutGroup>
                     <dxlc:LayoutGroup Header="LayoutGroup" Orientation="Horizontal">
                         <dxlc:LayoutItem Label="Starting Balance">
@@ -29,15 +38,7 @@
                                           MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
                         </dxlc:LayoutItem>
                     </dxlc:LayoutGroup>
-                    <dxlc:LayoutGroup>
-                        <dxlc:LayoutItem Label="Exchange">
-                            <dxe:CheckEdit/>
-                        </dxlc:LayoutItem>
 
-                        <dxlc:LayoutItem Label="Commission">
-                            <dxe:TextEdit/>
-                        </dxlc:LayoutItem>
-                    </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup Header="LayoutGroup">

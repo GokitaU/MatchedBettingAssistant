@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\ApplyFundsAccountAction.cs" />
     <Compile Include="Model\BackBet.cs" />
     <Compile Include="Model\Bookmaker.cs" />
     <Compile Include="Model\FundsTransaction.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
+    <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
@@ -93,6 +95,9 @@
       <DependentUpon>AccountTransactionListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
+    <Compile Include="View\Account\ApplyFundsView.xaml.cs">
+      <DependentUpon>ApplyFundsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Account\BookmakerButtonsView.xaml.cs">
       <DependentUpon>BookmakerButtonsView.xaml</DependentUpon>
     </Compile>
@@ -118,6 +123,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Account\AccountTransactionListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\ApplyFundsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

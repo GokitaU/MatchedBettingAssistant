@@ -7,8 +7,6 @@ using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-
-
     public class TransferFundsToAccountViewModel : ViewModelBase
     {
         private readonly TransferFundsAccountAction action;
