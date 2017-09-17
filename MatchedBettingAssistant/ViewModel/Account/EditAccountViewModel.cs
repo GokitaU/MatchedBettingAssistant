@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using DevExpress.Mvvm;
+using DevExpress.Xpf.Editors.Internal;
 using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
@@ -16,6 +18,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public IDialogService DepositDialogService {  get { return GetService<IDialogService>(); } }
 
         private DelegateCommand depositCommand;
+        private DelegateCommand withdrawCommand;
 
         public EditAccountViewModel(IAccount account)
         {
@@ -48,18 +51,57 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        /// <summary>
+        /// Gets the current balance
+        /// </summary>
         public double Balance => this.account.Balance;
 
-        public DelegateCommand DepositCommand
-        {
-            get { return this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit)); }
-        }
+        /// <summary>
+        /// Gets the command for depositing funds to account
+        /// </summary>
+        public DelegateCommand DepositCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit));
 
+        /// <summary>
+        /// Gets the command for withdrawing funds from account
+        /// </summary>
+        public DelegateCommand WithdrawCommand => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw));
 
         /// <summary>
         /// Initiates the deposit action
         /// </summary>
         public void Deposit()
+        {
+            var action = new TransferFundsAccountAction()
+            {
+                Destination = this.account
+            };
+
+            var walletSetter = new DepositActionWalletSetter(action);
+
+            TransferFunds(action, walletSetter);
+        }
+
+        /// <summary>
+        /// Initiates the withdraw action
+        /// </summary>
+        public void Withdraw()
+        {
+            var action = new TransferFundsAccountAction()
+            {
+                Source = this.account
+            };
+
+            var walletSetter = new WithdrawActionWalletSetter(action);
+
+            TransferFunds(action, walletSetter);
+        }
+
+        /// <summary>
+        /// Creates dialog for transferring funds to or from a wallet
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="walletSetter"></param>
+        private void TransferFunds(TransferFundsAccountAction action, ITransferActionWalletSetter walletSetter)
         {
             var wallets = new List<Wallet>()
             {
@@ -67,15 +109,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 new Wallet() {Name = "Credit Card", StartingBalance = 600.0}
             };
 
-            var action = new TransferFundsAccountAction()
-            {
-                Destination = this.account
-            };
+            var depositViewModel = new TransferFundsToAccountViewModel(action, wallets, walletSetter);
 
-
-            var depositViewModel = new DepositFundsToAccountViewModel(action, wallets);
-
-            UICommand okCommand = new UICommand()
+            var okCommand = new UICommand()
             {
                 Caption = "Ok",
                 IsCancel = false,
@@ -83,7 +119,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Command = new DelegateCommand(depositViewModel.Commit)
             };
 
-            UICommand cancelCommand = new UICommand()
+            var cancelCommand = new UICommand()
             {
                 Id = MessageBoxResult.Cancel,
                 Caption = "Cancel",
@@ -92,23 +128,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
             };
 
             var result = DepositDialogService.ShowDialog(
-                dialogCommands: new List<UICommand>() {okCommand, cancelCommand},
-                title: "Deposit",
+                dialogCommands: new List<UICommand>() { okCommand, cancelCommand },
+                title: walletSetter.ActionDescription,
                 viewModel: depositViewModel
             );
 
             if (result == okCommand)
             {
-                RaisePropertyChanged(()=>Balance);
+                RaisePropertyChanged(() => Balance);
             }
         }
 
-        /// <summary>
-        /// Initiates the withdraw action
-        /// </summary>
-        public void Withdraw()
-        {
-            
-        }
     }
 }

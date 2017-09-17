@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using DevExpress.Mvvm;
@@ -6,20 +7,29 @@ using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class DepositFundsToAccountViewModel : ViewModelBase
+
+
+    public class TransferFundsToAccountViewModel : ViewModelBase
     {
         private readonly TransferFundsAccountAction action;
 
         /// <summary>
         /// The item representing the source of the funds
         /// </summary>
-        private AccountLookupItem source;
+        private AccountLookupItem wallet;
 
-        public DepositFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IAccount> wallets)
+        private readonly ITransferActionWalletSetter walletSetter;
+
+        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IAccount> wallets, ITransferActionWalletSetter walletSetter)
         {
             this.action = action;
+            this.walletSetter = walletSetter;
             this.Wallets = new ObservableCollection<AccountLookupItem>(wallets.Select(x=> new AccountLookupItem(x)));
+            this.Wallet = this.Wallets.FirstOrDefault();
+            this.Amount = 10;
         }
+
+        public string ActionDescription => this.walletSetter.ActionDescription;
 
         /// <summary>
         /// List of wallets from which funds can be drawn
@@ -29,18 +39,20 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// Name of the account to which funds are deposited
         /// </summary>
-        public string AccountName => action.Destination?.Name;
+        public string AccountName => walletSetter.AccountName;
 
         /// <summary>
         /// The wallet from which funds are drawn
         /// </summary>
         public AccountLookupItem Wallet
         {
-            get => source;
+            get => wallet;
             set
             {
-                this.source = value;
-                this.action.Source = this.source.Account;
+                this.wallet = value;
+
+                this.walletSetter.SetWallet(value.Account);
+
                 RaisePropertyChanged(()=>this.Wallet);
             }
         }

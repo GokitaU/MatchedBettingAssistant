@@ -20,8 +20,10 @@
                 </dx:DialogService.ViewTemplate>
                 <dx:DialogService.DialogStyle>
                     <Style TargetType="dx:DXDialogWindow">
+                        <Setter Property="ResizeMode" Value="NoResize"/>
                         <Setter Property="Width" Value="350"/>
-                        <Setter Property="Height" Value="200"/>
+                        <Setter Property="Height" Value="250"/>
+                        <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
                     </Style>
                 </dx:DialogService.DialogStyle>
             </dx:DialogService>
@@ -35,7 +37,8 @@
                         <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
                     </dxlc:LayoutItem>
                     <dxlc:LayoutItem Label="Starting Balance">
-                        <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"/>
+                        <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"
+                                      MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
                     </dxlc:LayoutItem>
                     <dxlc:LayoutGroup Header="LayoutGroup" 
                                       Orientation="Horizontal">
@@ -51,7 +54,8 @@
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup>
                     <dxlc:LayoutItem Label="Balance">
-                        <TextBlock Text="{Binding Balance, Mode=OneWay}"/>
+                        <dxe:TextEdit Text="{Binding Balance, Mode=OneWay}"
+                                      MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
 

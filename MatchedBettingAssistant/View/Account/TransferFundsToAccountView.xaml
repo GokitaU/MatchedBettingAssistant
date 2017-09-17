@@ -13,12 +13,13 @@
 
     <Grid>
         <dxlc:LayoutControl Orientation="Vertical" >
-            <dxlc:LayoutGroup Header="Deposit" View="GroupBox" Orientation="Vertical">
+            <dxlc:LayoutGroup Header="{Binding ActionDescription}" View="GroupBox" Orientation="Vertical">
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <dxlc:LayoutGroup Orientation="Vertical">
                         <dxlc:LayoutGroup Orientation="Vertical">
                             <dxlc:LayoutItem Label="Account">
-                                <TextBlock Text="{Binding AccountName}"/>
+                                <dxe:TextEdit Text="{Binding AccountName, Mode=OneWay}"
+                                              IsReadOnly="True"/>
                             </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="Wallet">
                                 <dxe:ComboBoxEdit ItemsSource="{Binding Wallets}"
@@ -27,7 +28,8 @@
                             </dxlc:LayoutItem>
                         </dxlc:LayoutGroup>
                         <dxlc:LayoutItem Label="Amount">
-                            <dxe:TextEdit EditValue="{Binding Amount, Mode=TwoWay}"/>
+                            <dxe:TextEdit EditValue="{Binding Amount, Mode=TwoWay}"
+                                          MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
                         </dxlc:LayoutItem>
                     </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
