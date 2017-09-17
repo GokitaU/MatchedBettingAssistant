@@ -81,7 +81,9 @@
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
+    <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
+    <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
     <Compile Include="ViewModel\Account\ITransferActionWalletSetter.cs" />
     <Compile Include="ViewModel\Account\TransferFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
@@ -91,6 +93,12 @@
       <DependentUpon>AccountTransactionListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
+    <Compile Include="View\Account\BookmakerButtonsView.xaml.cs">
+      <DependentUpon>BookmakerButtonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Account\EditBookmakerView.xaml.cs">
+      <DependentUpon>EditBookmakerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Account\TransferFundsToAccountView.xaml.cs">
       <DependentUpon>TransferFundsToAccountView.xaml</DependentUpon>
     </Compile>
@@ -110,6 +118,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Account\AccountTransactionListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\BookmakerButtonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\EditBookmakerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="MatchedBettingAssistant.View.Account.BookmakerButtonsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MatchedBettingAssistant.View.Account"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DialogService DialogWindowStartupLocation="CenterScreen">
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:DepositFundsToBookmakerView/>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="ResizeMode" Value="NoResize"/>
+                    <Setter Property="Width" Value="350"/>
+                    <Setter Property="Height" Value="250"/>
+                    <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <Grid>
+        <dxlc:LayoutControl>
+            <dxlc:LayoutItem>
+                <Button Content="Deposit"
+                        Command="{Binding DepositCommand}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <Button Content="Withdraw"
+                        Command="{Binding WithdrawCommand}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <Button Content="Bonus"
+                        Command="{Binding BonusCommand}"
+                        Visibility="{Binding BonusButtonVisibility}"/>
+            </dxlc:LayoutItem>
+            <dxlc:LayoutItem>
+                <Button Content="Bet"
+                        Command="{Binding BetCommand}"
+                        Visibility="{Binding BetButtonVisibility}"/>
+            </dxlc:LayoutItem>
+        </dxlc:LayoutControl>        
+    </Grid>
+</UserControl>

@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <account:EditAccountView DataContext="{Binding EditAccountViewModel}"/>
+        <account:EditBookmakerView DataContext="{Binding BookmakerViewModel}"/>
         <account:AccountTransactionListView Grid.Row="1"
                                             DataContext="{Binding TransactionListViewModel}"/>
     </Grid>

@@ -8,15 +8,15 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private IAccount account;
 
         private readonly EditAccountViewModel editAccountViewModel;
-
+        private readonly EditBookmakerViewModel editBookmakerViewModel;
         private readonly AccountTransactionListViewModel transactionListViewModel;
 
-        public AccountViewModel(IAccount account)
+        public AccountViewModel(IBettingAccount account)
         {
             this.account = account;
 
             this.editAccountViewModel = new EditAccountViewModel(account);
-
+            this.editBookmakerViewModel = new EditBookmakerViewModel(account);
             this.transactionListViewModel = new AccountTransactionListViewModel(account);
         }
 
@@ -28,6 +28,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public AccountTransactionListViewModel TransactionListViewModel
         {
             get { return transactionListViewModel; }
+        }
+
+        public EditBookmakerViewModel BookmakerViewModel
+        {
+            get { return editBookmakerViewModel; }
         }
     }
 }

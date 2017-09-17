@@ -9,25 +9,9 @@
              xmlns:account="clr-namespace:MatchedBettingAssistant.View.Account"
              x:Class="MatchedBettingAssistant.View.Account.EditAccountView"
              mc:Ignorable="d"
-             d:DesignHeight="150" d:DesignWidth="500">
+             d:DesignHeight="200" d:DesignWidth="500">
     <Grid>
-        <dxmvvm:Interaction.Behaviors>
-            <dx:DialogService DialogWindowStartupLocation="CenterScreen">
-                <dx:DialogService.ViewTemplate>
-                    <DataTemplate>
-                        <account:DepositFundsToBookmakerView/>
-                    </DataTemplate>
-                </dx:DialogService.ViewTemplate>
-                <dx:DialogService.DialogStyle>
-                    <Style TargetType="dx:DXDialogWindow">
-                        <Setter Property="ResizeMode" Value="NoResize"/>
-                        <Setter Property="Width" Value="350"/>
-                        <Setter Property="Height" Value="250"/>
-                        <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
-                    </Style>
-                </dx:DialogService.DialogStyle>
-            </dx:DialogService>
-        </dxmvvm:Interaction.Behaviors>
+
         <dxlc:LayoutControl Orientation="Vertical">
             <dxlc:LayoutGroup Header="Details" 
                               View="GroupBox"
@@ -40,17 +24,6 @@
                         <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"
                                       MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
                     </dxlc:LayoutItem>
-                    <dxlc:LayoutGroup Header="LayoutGroup" 
-                                      Orientation="Horizontal">
-                        <dxlc:LayoutItem>
-                            <Button Content="Deposit"
-                                    Command="{Binding DepositCommand}"/>
-                        </dxlc:LayoutItem>
-                        <dxlc:LayoutItem>
-                            <Button Content="Withdraw"
-                                    Command="{Binding WithdrawCommand}"/>
-                        </dxlc:LayoutItem>
-                    </dxlc:LayoutGroup>
                 </dxlc:LayoutGroup>
                 <dxlc:LayoutGroup>
                     <dxlc:LayoutItem Label="Balance">
@@ -58,10 +31,10 @@
                                       MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
-
             </dxlc:LayoutGroup>
-
-
+            <dxlc:LayoutGroup Header="LayoutGroup">
+                <account:BookmakerButtonsView DataContext="{Binding BookmakerButtons}"/>
+            </dxlc:LayoutGroup>
         </dxlc:LayoutControl>
     </Grid>
 </UserControl>

@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.ViewModel.Account;
 
-namespace MatchedBettingAssistant
+namespace MatchedBettingAssistant.View.Account
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EditBookmakerView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditBookmakerView : UserControl
     {
-        public MainWindow()
+        public EditBookmakerView()
         {
             InitializeComponent();
-
-            var account = new Bookmaker() {Name = "My Wallet", StartingBalance = 10};
-
-            var accountViewModel = new AccountViewModel(account);
-
-            this.DataContext = accountViewModel;
         }
     }
 }

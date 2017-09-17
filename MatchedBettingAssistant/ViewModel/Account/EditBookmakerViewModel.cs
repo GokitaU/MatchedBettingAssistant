@@ -1,42 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Documents;
+﻿using System.Windows;
 using DevExpress.Mvvm;
-using DevExpress.Xpf.Editors.Internal;
 using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class EditAccountViewModel : ViewModelBase
+    public class EditBookmakerViewModel : ViewModelBase
     {
-        private readonly IAccount account;
+        private readonly IBettingAccount account;
 
-        public EditAccountViewModel(IAccount account)
+        public EditBookmakerViewModel(IBettingAccount account)
         {
             this.account = account;
-            this.BookmakerButtons = new BookmakerButtonsViewModel(account)
+            this.BookmakerButtons = new BookmakerButtonsViewModel(this.account)
             {
-                BonusButtonVisibility = Visibility.Hidden,
-                BetButtonVisibility = Visibility.Hidden
+                BonusButtonVisibility = Visibility.Visible,
+                BetButtonVisibility = Visibility.Visible
             };
-
             this.RegisterMessages();
         }
 
-        /// <summary>
-        /// Gets or sets the name
-        /// </summary>
         public string Name
         {
             get => this.account.Name;
             set
             {
                 this.account.Name = value;
-                RaisePropertyChanged(()=>this.Name);
+                RaisePropertyChanged(() => this.Name);
             }
         }
 
@@ -49,13 +38,30 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.account.StartingBalance = value;
-                RaisePropertyChanged(()=>this.StartingBalance);
+                RaisePropertyChanged(() => this.StartingBalance);
             }
         }
 
-        /// <summary>
-        /// Gets the current balance
-        /// </summary>
+        public bool IsExchange
+        {
+            get => this.account.IsExchange;
+            set
+            {
+                this.account.IsExchange = value;
+                RaisePropertyChanged(()=>this.IsExchange);
+            }
+        }
+
+        public double CommissionPercent
+        {
+            get => this.account.CommissionPercent;
+            set
+            {
+                this.account.CommissionPercent = value;
+                RaisePropertyChanged(()=>this.CommissionPercent);
+            }
+        }
+
         public double Balance => this.account.Balance;
 
         public BookmakerButtonsViewModel BookmakerButtons { get; }
