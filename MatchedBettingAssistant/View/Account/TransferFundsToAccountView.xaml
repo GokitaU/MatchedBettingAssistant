@@ -17,6 +17,9 @@
                 <dxlc:LayoutGroup Orientation="Vertical">
                     <dxlc:LayoutGroup Orientation="Vertical">
                         <dxlc:LayoutGroup Orientation="Vertical">
+                            <dxlc:LayoutItem Label="Date">
+                                <dxe:DateEdit EditValue="{Binding TransactionDate, Mode=TwoWay}"/>
+                            </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="Account">
                                 <dxe:TextEdit Text="{Binding AccountName, Mode=OneWay}"
                                               IsReadOnly="True"/>

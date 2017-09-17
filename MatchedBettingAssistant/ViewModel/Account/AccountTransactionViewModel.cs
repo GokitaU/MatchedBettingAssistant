@@ -16,5 +16,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public DateTime TransactionDate => transaction.TransactionDate;
 
         public double Amount => transaction.Amount;
+
+        public string Description => transaction.Description;
     }
 }

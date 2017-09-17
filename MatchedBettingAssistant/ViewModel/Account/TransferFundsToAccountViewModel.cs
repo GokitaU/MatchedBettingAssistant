@@ -29,6 +29,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.Amount = 10;
         }
 
+        public DateTime TransactionDate
+        {
+            get { return this.action.Date; }
+            set
+            {
+                this.action.Date = value;
+                RaisePropertyChanged(()=>TransactionDate);
+            }
+        }
+
         public string ActionDescription => this.walletSetter.ActionDescription;
 
         /// <summary>

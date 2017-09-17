@@ -73,6 +73,7 @@
     <Compile Include="Model\IBet.cs" />
     <Compile Include="Model\IBettingAccount.cs" />
     <Compile Include="Model\ILayBet.cs" />
+    <Compile Include="Model\ITransaction.cs" />
     <Compile Include="Model\LayBet.cs" />
     <Compile Include="Model\MatchedBet.cs" />
     <Compile Include="Model\Wallet.cs" />

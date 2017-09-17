@@ -4,16 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MatchedBettingAssistant.View.Account"
-             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Account="clr-namespace:MatchedBettingAssistant.ViewModel.Account" x:Class="MatchedBettingAssistant.View.Account.AccountTransactionListView"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Account="clr-namespace:MatchedBettingAssistant.ViewModel.Account"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    x:Class="MatchedBettingAssistant.View.Account.AccountTransactionListView"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <dxg:GridControl ItemsSource="{Binding Transactions}" >
             <dxg:GridControl.View>
-                <dxg:TableView />
+                <dxg:TableView AllowEditing="False" AllowGrouping="False" AllowColumnMoving="False" ShowGroupPanel="False" />
             </dxg:GridControl.View>
-            <dxg:GridColumn FieldName="TransactionDate" IsSmart="True"/>
-            <dxg:GridColumn FieldName="Amount" IsSmart="True"/>
+            <dxg:GridColumn FieldName="TransactionDate" IsSmart="True" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="Amount" IsSmart="True" ReadOnly="True" >
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings Mask="C2" MaskType="Numeric" MaskUseAsDisplayFormat="True"/>
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+            <dxg:GridColumn FieldName="Description" IsSmart="True" ReadOnly="True"/>
         </dxg:GridControl>
 
     </Grid>

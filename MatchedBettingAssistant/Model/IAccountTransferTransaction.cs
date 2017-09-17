@@ -1,15 +1,7 @@
-﻿using System;
-using DevExpress.Mvvm.DataAnnotations;
+﻿using DevExpress.Mvvm.DataAnnotations;
 
 namespace MatchedBettingAssistant.Model
 {
-    public interface ITransaction
-    {
-        DateTime TransactionDate { get; set; }
-
-        double Amount { get; set; }
-    }
-
     public interface IAccountTransferTransaction : ITransaction
     {
         /// <summary>

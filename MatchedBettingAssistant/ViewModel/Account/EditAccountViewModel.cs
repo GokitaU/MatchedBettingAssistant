@@ -73,7 +73,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             var action = new TransferFundsAccountAction()
             {
-                Destination = this.account
+                Destination = this.account,
+                Date = DateTime.Today
             };
 
             var walletSetter = new DepositActionWalletSetter(action);
@@ -88,7 +89,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             var action = new TransferFundsAccountAction()
             {
-                Source = this.account
+                Source = this.account,
+                Date = DateTime.Today
             };
 
             var walletSetter = new WithdrawActionWalletSetter(action);
