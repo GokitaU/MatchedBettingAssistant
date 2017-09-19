@@ -2,19 +2,22 @@
 
 namespace MatchedBettingAssistant.Model
 {
-    public class MatchedBet
+    /// <summary>
+    /// A matched bet that calculates the return and liability based on stakes and odds
+    /// </summary>
+    public class CalculatedMatchedBet
     {
-        private readonly IBackBet backBet;
+        private readonly ICalculatedBackBet backBet;
 
-        private readonly ILayBet laybet;
+        private readonly ICalculatedLayBet laybet;
 
-        public MatchedBet()
+        public CalculatedMatchedBet()
         {
-            this.backBet = new BackBet();
+            this.backBet = new CalculatedBackBet();
             this.laybet = new LayBet();
         }
 
-        public MatchedBet(IBackBet backBet, ILayBet layBet)
+        public CalculatedMatchedBet(ICalculatedBackBet backBet, ICalculatedLayBet layBet)
         {
             this.backBet = backBet;
             this.laybet = layBet;

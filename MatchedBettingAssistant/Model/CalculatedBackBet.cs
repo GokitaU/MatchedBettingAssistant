@@ -3,7 +3,9 @@ using DevExpress.Xpf.Editors.Internal;
 
 namespace MatchedBettingAssistant.Model
 {
-    public class BackBet : IBackBet
+
+
+    public class CalculatedBackBet : ICalculatedBackBet
     {
         public DateTime Date { get; set; }
 

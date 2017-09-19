@@ -10,10 +10,10 @@ namespace MatchedBettingAssistantTests.ModelTests
     {
         private Mock<IBettingAccount> bookmaker;
         private Mock<IBettingAccount> exchange;
-        private Mock<IBackBet> backBet;
-        private Mock<ILayBet> layBet;
+        private Mock<ICalculatedBackBet> backBet;
+        private Mock<ICalculatedLayBet> layBet;
 
-        private MatchedBet matchedBet;
+        private CalculatedMatchedBet calculatedMatchedBet;
         private const double tolerance = 0.01;
 
         [TestInitialize]
@@ -21,8 +21,8 @@ namespace MatchedBettingAssistantTests.ModelTests
         {
             this.bookmaker = new Mock<IBettingAccount>();
             this.exchange = new Mock<IBettingAccount>();
-            this.backBet = new Mock<IBackBet>();
-            this.layBet = new Mock<ILayBet>();
+            this.backBet = new Mock<ICalculatedBackBet>();
+            this.layBet = new Mock<ICalculatedLayBet>();
 
             this.backBet.Setup(x => x.Account).Returns(this.bookmaker.Object);
             this.backBet.Setup(x => x.Odds).Returns(3.0);
@@ -33,19 +33,19 @@ namespace MatchedBettingAssistantTests.ModelTests
             this.layBet.Setup(x => x.Odds).Returns(3.1);
 
             this.exchange.Setup(x => x.CommissionPercent).Returns(0.05);
-            this.matchedBet = new MatchedBet(this.backBet.Object, this.layBet.Object);
+            this.calculatedMatchedBet = new CalculatedMatchedBet(this.backBet.Object, this.layBet.Object);
         }
 
         [TestMethod]
         public void matched_back_bet_returns_correctly()
         {
-            Assert.AreEqual(20, this.matchedBet.BackReturn);
+            Assert.AreEqual(20, this.calculatedMatchedBet.BackReturn);
         }
 
         [TestMethod]
         public void matched_lay_stake_calculates_correctly()
         {
-            this.matchedBet.Calculate();
+            this.calculatedMatchedBet.Calculate();
             this.layBet.VerifySet(x => x.Stake = 9.84);
         }
 
@@ -53,7 +53,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         public void matched_snr_lay_stake_calculates_correctly()
         {
             this.backBet.Setup(x => x.StakeNotReturned).Returns(true);
-            this.matchedBet.Calculate();
+            this.calculatedMatchedBet.Calculate();
             this.layBet.VerifySet(x => x.Stake = 6.56);
         }
     }

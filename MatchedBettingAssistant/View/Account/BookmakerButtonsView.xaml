@@ -40,6 +40,21 @@
                 </Style>
             </dx:DialogService.DialogStyle>
         </dx:DialogService>
+        <dx:DialogService Name="betDialog" DialogWindowStartupLocation="CenterScreen">
+            <dx:DialogService.ViewTemplate>
+                <DataTemplate>
+                    <local:BasicBackBetView/>
+                </DataTemplate>
+            </dx:DialogService.ViewTemplate>
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="ResizeMode" Value="NoResize"/>
+                    <Setter Property="Width" Value="350"/>
+                    <Setter Property="Height" Value="250"/>
+                    <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
     </dxmvvm:Interaction.Behaviors>
     <Grid>
         <dxlc:LayoutControl>

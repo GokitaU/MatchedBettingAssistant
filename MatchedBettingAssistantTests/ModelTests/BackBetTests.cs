@@ -9,14 +9,14 @@ namespace MatchedBettingAssistantTests.ModelTests
     public class BackBetTests
     {
         private Mock<IBettingAccount> bookmaker;
-        private BackBet backBet;
+        private CalculatedBackBet calculatedBackBet;
         private const double Tolerance = 0.01;
 
         [TestInitialize]
         public void Setup()
         {
             this.bookmaker = new Mock<IBettingAccount>();
-            this.backBet = new BackBet
+            this.calculatedBackBet = new CalculatedBackBet
             {
                 Account = this.bookmaker.Object,
                 Stake = 10,
@@ -27,7 +27,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         [TestMethod]
         public void placing_bet_affects_account_funds()
         {
-            this.backBet.Place();
+            this.calculatedBackBet.Place();
 
             this.bookmaker.Verify(x=>x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (-10.0)) < Tolerance)));
         }
@@ -35,7 +35,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         [TestMethod]
         public void bet_won_adds_winnings_to_account()
         {
-            this.backBet.Won();
+            this.calculatedBackBet.Won();
 
             this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (20.0)) < Tolerance)));
         }
@@ -45,7 +45,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         {
             this.bookmaker.Setup(x => x.CommissionPercent).Returns(0.05);
 
-            this.backBet.Won();
+            this.calculatedBackBet.Won();
 
             this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (19.50)) < Tolerance)));
 
@@ -54,9 +54,9 @@ namespace MatchedBettingAssistantTests.ModelTests
         [TestMethod]
         public void bet_won_but_stake_not_returned()
         {
-            this.backBet.StakeNotReturned = true;
+            this.calculatedBackBet.StakeNotReturned = true;
 
-            this.backBet.Won();
+            this.calculatedBackBet.Won();
 
             this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (10.0)) < Tolerance)));
 
@@ -65,9 +65,9 @@ namespace MatchedBettingAssistantTests.ModelTests
         [TestMethod]
         public void bonus_bet_does_not_affect_funds_on_place()
         {
-            this.backBet.IsBonus = true;
+            this.calculatedBackBet.IsBonus = true;
 
-            this.backBet.Place();
+            this.calculatedBackBet.Place();
 
             this.bookmaker.Verify(x => x.AddTransaction(It.IsAny<ITransaction>()), Times.Never);
         }

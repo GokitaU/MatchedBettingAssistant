@@ -128,7 +128,37 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public void Bet()
         {
+            if (this.account is IBettingAccount bettingAccount)
+            {
+                var basicBet = new SimpleBackBet()
+                {
+                    Account = bettingAccount,
+                    Date = DateTime.Today
+                };
 
+                var backBet = new BasicBackBetViewModel(basicBet);
+
+                var okCommand = new UICommand()
+                {
+                    Caption = "Ok",
+                    IsCancel = false,
+                    IsDefault = true,
+                    Command = new DelegateCommand(backBet.Commit)
+                };
+
+                var cancelCommand = new UICommand()
+                {
+                    Id = MessageBoxResult.Cancel,
+                    Caption = "Cancel",
+                    IsCancel = true,
+                    IsDefault = false
+                };
+
+                BetDialogService.ShowDialog(
+                    new List<UICommand>() {okCommand, cancelCommand},
+                    "Basic Bet",
+                    backBet);
+            }
         }
 
         /// <summary>
