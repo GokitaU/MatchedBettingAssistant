@@ -43,7 +43,7 @@
         <dx:DialogService Name="betDialog" DialogWindowStartupLocation="CenterScreen">
             <dx:DialogService.ViewTemplate>
                 <DataTemplate>
-                    <local:BasicBackBetView/>
+                    <local:BasicBetView/>
                 </DataTemplate>
             </dx:DialogService.ViewTemplate>
             <dx:DialogService.DialogStyle>

@@ -51,25 +51,6 @@ namespace MatchedBettingAssistantTests.ModelTests
 
         }
 
-        [TestMethod]
-        public void bet_won_but_stake_not_returned()
-        {
-            this.calculatedBackBet.StakeNotReturned = true;
 
-            this.calculatedBackBet.Won();
-
-            this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (10.0)) < Tolerance)));
-
-        }
-
-        [TestMethod]
-        public void bonus_bet_does_not_affect_funds_on_place()
-        {
-            this.calculatedBackBet.IsBonus = true;
-
-            this.calculatedBackBet.Place();
-
-            this.bookmaker.Verify(x => x.AddTransaction(It.IsAny<ITransaction>()), Times.Never);
-        }
     }
 }

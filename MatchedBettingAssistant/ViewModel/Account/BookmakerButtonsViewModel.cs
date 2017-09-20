@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
@@ -130,20 +131,20 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             if (this.account is IBettingAccount bettingAccount)
             {
-                var basicBet = new SimpleBackBet()
+                var basicBet = new SimpleBet()
                 {
                     Account = bettingAccount,
                     Date = DateTime.Today
                 };
 
-                var backBet = new BasicBackBetViewModel(basicBet);
+                var backBet = new BasicBetViewModel(basicBet);
 
                 var okCommand = new UICommand()
                 {
                     Caption = "Ok",
                     IsCancel = false,
                     IsDefault = true,
-                    Command = new DelegateCommand(backBet.Commit)
+                    Command = new DelegateCommand<CancelEventArgs>(x=>backBet.Commit(), x=> backBet.Returns > 0)
                 };
 
                 var cancelCommand = new UICommand()
@@ -169,7 +170,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private void TransferFunds(TransferFundsAccountAction action, ITransferActionWalletSetter walletSetter)
         {
             var wallets = new List<Wallet>()
-            {
+            { 
                 new Wallet() {Name = "Skrill", StartingBalance = 100.00},
                 new Wallet() {Name = "Credit Card", StartingBalance = 600.0}
             };

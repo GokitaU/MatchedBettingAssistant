@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="DevExpress.Data.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Mvvm.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v17.1.Core, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Grid.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Grid.v17.1.Core, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -62,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\ApplyFundsAccountAction.cs" />
     <Compile Include="Model\CalculatedBackBet.cs" />
@@ -77,18 +81,17 @@
     <Compile Include="Model\ICalculatedBackBet.cs" />
     <Compile Include="Model\ICalculatedBet.cs" />
     <Compile Include="Model\ICalculatedLayBet.cs" />
-    <Compile Include="Model\ILayBet.cs" />
     <Compile Include="Model\ITransaction.cs" />
     <Compile Include="Model\LayBet.cs" />
     <Compile Include="Model\CalculatedMatchedBet.cs" />
-    <Compile Include="Model\SimpleBackBet.cs" />
+    <Compile Include="Model\SimpleBet.cs" />
     <Compile Include="Model\Wallet.cs" />
     <Compile Include="Model\TransferFundsAccountAction.cs" />
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
-    <Compile Include="ViewModel\Account\BasicBackBetViewModel.cs" />
+    <Compile Include="ViewModel\Account\BasicBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
@@ -104,8 +107,8 @@
     <Compile Include="View\Account\ApplyFundsView.xaml.cs">
       <DependentUpon>ApplyFundsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Account\BasicBackBetView.xaml.cs">
-      <DependentUpon>BasicBackBetView.xaml</DependentUpon>
+    <Compile Include="View\Account\BasicBetView.xaml.cs">
+      <DependentUpon>BasicBetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\BookmakerButtonsView.xaml.cs">
       <DependentUpon>BookmakerButtonsView.xaml</DependentUpon>
@@ -119,18 +122,14 @@
     <Compile Include="View\Account\EditAccountView.xaml.cs">
       <DependentUpon>EditAccountView.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Account\AccountTransactionListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Account\BasicBackBetView.xaml">
+    <Page Include="View\Account\BasicBetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

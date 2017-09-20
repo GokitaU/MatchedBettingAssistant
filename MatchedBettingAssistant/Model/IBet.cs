@@ -7,8 +7,6 @@ namespace MatchedBettingAssistant.Model
         IBettingAccount Account { get; set; }
         DateTime Date { get; set; }
 
-        double Stake { get; set; }
-
         double Returns { get; }
 
         void Place();

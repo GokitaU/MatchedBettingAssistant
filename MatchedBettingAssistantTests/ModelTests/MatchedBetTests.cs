@@ -49,12 +49,5 @@ namespace MatchedBettingAssistantTests.ModelTests
             this.layBet.VerifySet(x => x.Stake = 9.84);
         }
 
-        [TestMethod]
-        public void matched_snr_lay_stake_calculates_correctly()
-        {
-            this.backBet.Setup(x => x.StakeNotReturned).Returns(true);
-            this.calculatedMatchedBet.Calculate();
-            this.layBet.VerifySet(x => x.Stake = 6.56);
-        }
     }
 }

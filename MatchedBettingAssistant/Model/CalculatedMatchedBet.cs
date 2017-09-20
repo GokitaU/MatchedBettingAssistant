@@ -43,12 +43,6 @@ namespace MatchedBettingAssistant.Model
 
         public double BackReturn => this.backBet.Returns;
 
-        public bool StakeNotReturned
-        {
-            get => this.backBet.StakeNotReturned;
-            set => this.backBet.StakeNotReturned = value;
-        }
-
         public IBettingAccount LayAccount
         {
             get => this.laybet.Account;
@@ -98,17 +92,8 @@ namespace MatchedBettingAssistant.Model
 
         private double CalculateLayStake()
         {
-            double result = 0.0d;
-
-            if (this.StakeNotReturned)
-            {
-                result = this.BackReturn / (this.LayOdds - this.laybet.Account.CommissionPercent);
-            }
-            else
-            {
-                result = (this.BackReturn + this.BackStake) / (this.LayOdds - this.laybet.Account.CommissionPercent);
-            }
-
+            double result = (this.BackReturn + this.BackStake) / (this.LayOdds - this.laybet.Account.CommissionPercent);
+ 
             return Math.Round(result, 2);
         }
     }
