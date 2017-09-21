@@ -10,6 +10,12 @@ namespace MatchedBettingAssistant.Model
 
         private DateTime date;
 
+        public SimpleMatchedBet()
+        {
+            this.backBet = new SimpleBet();
+            this.layBet = new SimpleBet();
+        }
+
         public DateTime Date
         {
             get => this.date;

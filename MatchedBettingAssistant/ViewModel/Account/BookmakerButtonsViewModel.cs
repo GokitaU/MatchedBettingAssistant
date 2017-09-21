@@ -137,14 +137,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
                     Date = DateTime.Today
                 };
 
-                var backBet = new BasicBetViewModel(basicBet);
+                var bet = new PlaceBetViewModel(bettingAccount);
 
                 var okCommand = new UICommand()
                 {
                     Caption = "Ok",
                     IsCancel = false,
                     IsDefault = true,
-                    Command = new DelegateCommand<CancelEventArgs>(x=>backBet.Commit(), x=> backBet.Returns > 0)
+                    Command = new DelegateCommand<CancelEventArgs>(x=>bet.Commit(), x=> bet.Returns > 0)
                 };
 
                 var cancelCommand = new UICommand()
@@ -158,7 +158,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 BetDialogService.ShowDialog(
                     new List<UICommand>() {okCommand, cancelCommand},
                     "Basic Bet",
-                    backBet);
+                    bet);
             }
         }
 

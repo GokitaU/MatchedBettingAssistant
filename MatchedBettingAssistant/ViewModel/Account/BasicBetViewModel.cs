@@ -7,7 +7,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
     /// <summary>
     /// basic back bet
     /// </summary>
-    public class BasicBetViewModel : ViewModelBase
+    public class BasicBetViewModel : BetViewModel
     {
         private readonly SimpleBet bet;
 
@@ -73,7 +73,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// Commits the bet
         /// </summary>
-        public void Commit()
+        public override void Commit()
         {
             if (this.CanPlaceBet)
             {

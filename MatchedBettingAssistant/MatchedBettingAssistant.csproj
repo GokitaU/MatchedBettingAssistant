@@ -93,10 +93,13 @@
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\BasicBetViewModel.cs" />
+    <Compile Include="ViewModel\Account\BetViewModel.cs" />
+    <Compile Include="ViewModel\Account\PlaceBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
     <Compile Include="ViewModel\Account\ITransferActionWalletSetter.cs" />
+    <Compile Include="ViewModel\Account\SimpleMatchedBetViewModel.cs" />
     <Compile Include="ViewModel\Account\TransferFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\TransactionsUpdatedMessage.cs" />
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Include="View\Account\BasicBetView.xaml.cs">
       <DependentUpon>BasicBetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Account\BetView.xaml.cs">
+      <DependentUpon>BetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\BookmakerButtonsView.xaml.cs">
       <DependentUpon>BookmakerButtonsView.xaml</DependentUpon>
@@ -143,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account\BasicBetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\BetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
