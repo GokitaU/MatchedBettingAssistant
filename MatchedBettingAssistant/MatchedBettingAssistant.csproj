@@ -85,6 +85,7 @@
     <Compile Include="Model\LayBet.cs" />
     <Compile Include="Model\CalculatedMatchedBet.cs" />
     <Compile Include="Model\SimpleBet.cs" />
+    <Compile Include="Model\SimpleMatchedBet.cs" />
     <Compile Include="Model\Wallet.cs" />
     <Compile Include="Model\TransferFundsAccountAction.cs" />
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="View\Account\EditBookmakerView.xaml.cs">
       <DependentUpon>EditBookmakerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Account\SimpleMatchedBetView.xaml.cs">
+      <DependentUpon>SimpleMatchedBetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\TransferFundsToAccountView.xaml.cs">
       <DependentUpon>TransferFundsToAccountView.xaml</DependentUpon>
@@ -147,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account\EditBookmakerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\SimpleMatchedBetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -11,4 +11,9 @@ namespace MatchedBettingAssistant.Model
 
         void Place();
     }
+
+    public interface ISimpleBet : IBet
+    {
+        new double Returns { get; set; }
+    }
 }

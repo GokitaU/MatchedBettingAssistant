@@ -5,7 +5,7 @@ namespace MatchedBettingAssistant.Model
     /// <summary>
     /// A simple back bet where the return is entered by the user
     /// </summary>
-    public class SimpleBet : IBet
+    public class SimpleBet : ISimpleBet
     {
         public IBettingAccount Account { get; set; }
         public DateTime Date { get; set; }
