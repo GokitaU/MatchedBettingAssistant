@@ -1,18 +1,17 @@
 ﻿using System;
-using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Account;
 using MatchedBettingAssistant.Model.Bets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace MatchedBettingAssistantTests.ModelTests
+namespace MatchedBettingAssistant.Model.Tests.ModelTests
 {
     [TestClass]
     public class BackBetTests
     {
         private Mock<IBettingAccount> bookmaker;
         private CalculatedBackBet calculatedBackBet;
-        private const double Tolerance = 0.01;
+        private const double tolerance = 0.01;
 
         [TestInitialize]
         public void Setup()
@@ -31,7 +30,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         {
             this.calculatedBackBet.Place();
 
-            this.bookmaker.Verify(x=>x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (-10.0)) < Tolerance)));
+            this.bookmaker.Verify(x=>x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (-10.0)) < tolerance)));
         }
 
         [TestMethod]
@@ -39,7 +38,7 @@ namespace MatchedBettingAssistantTests.ModelTests
         {
             this.calculatedBackBet.Won();
 
-            this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (20.0)) < Tolerance)));
+            this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (20.0)) < tolerance)));
         }
 
         [TestMethod]
@@ -49,7 +48,7 @@ namespace MatchedBettingAssistantTests.ModelTests
 
             this.calculatedBackBet.Won();
 
-            this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (19.50)) < Tolerance)));
+            this.bookmaker.Verify(x => x.AddTransaction(It.Is<ITransaction>(t => Math.Abs(t.Amount - (19.50)) < tolerance)));
 
         }
 

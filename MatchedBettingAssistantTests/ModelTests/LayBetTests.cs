@@ -1,11 +1,10 @@
 ﻿using System;
-using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Account;
 using MatchedBettingAssistant.Model.Bets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace MatchedBettingAssistantTests.ModelTests
+namespace MatchedBettingAssistant.Model.Tests.ModelTests
 {
     [TestClass]
     public class LayBetTests

@@ -66,29 +66,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Account\Account.cs" />
-    <Compile Include="Model\Account\ApplyFundsAccountAction.cs" />
-    <Compile Include="Model\Bets\CalculatedBackBet.cs" />
-    <Compile Include="Model\BetOfferType.cs" />
-    <Compile Include="Model\Account\Bookmaker.cs" />
-    <Compile Include="Model\Account\FundsTransaction.cs" />
-    <Compile Include="Model\Account\IAccount.cs" />
-    <Compile Include="Model\Account\IAccountAction.cs" />
-    <Compile Include="Model\Account\IAccountTransferTransaction.cs" />
-    <Compile Include="Model\Bets\IBackBet.cs" />
-    <Compile Include="Model\Bets\IBet.cs" />
-    <Compile Include="Model\Account\IBettingAccount.cs" />
-    <Compile Include="Model\Bets\ICalculatedBackBet.cs" />
-    <Compile Include="Model\Bets\ICalculatedBet.cs" />
-    <Compile Include="Model\Bets\ICalculatedLayBet.cs" />
-    <Compile Include="Model\Account\ITransaction.cs" />
-    <Compile Include="Model\Bets\LayBet.cs" />
-    <Compile Include="Model\Bets\CalculatedMatchedBet.cs" />
-    <Compile Include="Model\Bets\SimpleBet.cs" />
-    <Compile Include="Model\Bets\SimpleMatchedBet.cs" />
-    <Compile Include="Model\Account\Wallet.cs" />
-    <Compile Include="Model\Account\TransferFundsAccountAction.cs" />
-    <Compile Include="Model\Project\MatchedBettingAssistantProject.cs" />
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
@@ -205,6 +182,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MatchedBettingAssistant.Model\MatchedBettingAssistant.Model.csproj">
+      <Project>{691736f1-ea71-49e8-8de1-aa702076d8e2}</Project>
+      <Name>MatchedBettingAssistant.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

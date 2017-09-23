@@ -7,7 +7,7 @@
     <ProjectGuid>{631D6239-74E3-4440-9455-C8D702CF50C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MatchedBettingAssistantTests</RootNamespace>
+    <RootNamespace>MatchedBettingAssistant.Model.Tests</RootNamespace>
     <AssemblyName>MatchedBettingAssistantTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -65,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MatchedBettingAssistant\MatchedBettingAssistant.csproj">
-      <Project>{0c3a6f22-7712-47fe-ab0e-380b591842dd}</Project>
-      <Name>MatchedBettingAssistant</Name>
+    <ProjectReference Include="..\MatchedBettingAssistant.Model\MatchedBettingAssistant.Model.csproj">
+      <Project>{691736f1-ea71-49e8-8de1-aa702076d8e2}</Project>
+      <Name>MatchedBettingAssistant.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
