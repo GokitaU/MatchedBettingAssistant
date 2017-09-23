@@ -1,6 +1,7 @@
 ﻿using System;
+using MatchedBettingAssistant.Model.Account;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Bets
 {
     /// <summary>
     /// A simple back bet where the return is entered by the user

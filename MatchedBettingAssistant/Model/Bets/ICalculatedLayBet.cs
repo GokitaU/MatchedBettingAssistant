@@ -1,4 +1,4 @@
-﻿namespace MatchedBettingAssistant.Model
+﻿namespace MatchedBettingAssistant.Model.Bets
 {
     /// <summary>
     /// A laybet that calculates the liability from the odds

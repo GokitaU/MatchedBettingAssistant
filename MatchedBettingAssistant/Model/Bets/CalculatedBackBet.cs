@@ -1,7 +1,7 @@
 ﻿using System;
-using DevExpress.Xpf.Editors.Internal;
+using MatchedBettingAssistant.Model.Account;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Bets
 {
 
 

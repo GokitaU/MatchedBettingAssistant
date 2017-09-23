@@ -1,4 +1,4 @@
-﻿namespace MatchedBettingAssistant.Model
+﻿namespace MatchedBettingAssistant.Model.Account
 {
     public interface IBettingAccount : IAccount
     {

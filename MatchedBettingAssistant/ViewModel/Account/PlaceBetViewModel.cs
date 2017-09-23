@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {

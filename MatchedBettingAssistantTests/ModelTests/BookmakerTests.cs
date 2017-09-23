@@ -1,5 +1,6 @@
 ﻿using System;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

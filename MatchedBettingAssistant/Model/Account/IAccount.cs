@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Account
 {
     /// <summary>
     /// Interface for classes that represent methods of payment such as

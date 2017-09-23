@@ -1,6 +1,7 @@
 ﻿using System;
+using MatchedBettingAssistant.Model.Account;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Bets
 {
     /// <summary>
     /// A matched bet that calculates the return and liability based on stakes and odds

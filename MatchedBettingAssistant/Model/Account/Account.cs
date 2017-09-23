@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Account
 {
     public abstract class Account : IAccount
     {

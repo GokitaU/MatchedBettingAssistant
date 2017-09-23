@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {

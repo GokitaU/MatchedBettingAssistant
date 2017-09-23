@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DevExpress.Xpf.Core;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Account;
 using MatchedBettingAssistant.ViewModel.Account;
 
 

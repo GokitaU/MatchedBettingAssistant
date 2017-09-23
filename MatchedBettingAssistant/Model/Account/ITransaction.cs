@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Account
 {
     public interface ITransaction
     {

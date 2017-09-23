@@ -1,6 +1,4 @@
-﻿using DevExpress.Mvvm.DataAnnotations;
-
-namespace MatchedBettingAssistant.Model
+﻿namespace MatchedBettingAssistant.Model.Account
 {
     public interface IAccountTransferTransaction : ITransaction
     {

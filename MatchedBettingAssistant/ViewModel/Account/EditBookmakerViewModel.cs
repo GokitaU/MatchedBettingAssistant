@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Account;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {

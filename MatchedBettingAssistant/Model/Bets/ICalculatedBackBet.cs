@@ -1,4 +1,4 @@
-﻿namespace MatchedBettingAssistant.Model
+﻿namespace MatchedBettingAssistant.Model.Bets
 {
     /// <summary>
     /// A back bet that calculates the return from the odds

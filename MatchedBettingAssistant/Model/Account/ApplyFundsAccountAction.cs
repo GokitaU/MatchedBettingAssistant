@@ -1,7 +1,6 @@
 ﻿using System;
-using DevExpress.Mvvm.DataAnnotations;
 
-namespace MatchedBettingAssistant.Model
+namespace MatchedBettingAssistant.Model.Account
 {
     /// <summary>
     /// A way to apply additional funds.

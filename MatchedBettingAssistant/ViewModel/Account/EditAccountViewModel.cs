@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using DevExpress.Mvvm;
 using DevExpress.Xpf.Editors.Internal;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Account;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
