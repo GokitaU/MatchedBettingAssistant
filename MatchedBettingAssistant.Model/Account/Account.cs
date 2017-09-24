@@ -13,6 +13,11 @@ namespace MatchedBettingAssistant.Model.Account
         }
 
         /// <summary>
+        /// Identifier for this account
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the bookmaker
         /// </summary>
         public string Name { get; set; }

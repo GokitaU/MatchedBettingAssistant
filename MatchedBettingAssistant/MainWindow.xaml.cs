@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DevExpress.Xpf.Core;
+using MatchedBettingAssistant.DataAccess;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Account;
 using MatchedBettingAssistant.ViewModel.Account;
@@ -27,10 +28,12 @@ namespace MatchedBettingAssistant
         {
             InitializeComponent();
 
-            var account = new Bookmaker() { Name = "My Wallet", StartingBalance = 10 };
+            var db = new MatchedBettingAssistantDbContext(new MatchedBettingInitialiser());
+            db.Database.Initialize(true);
+            var bookmaker = db.Accounts.OfType<Bookmaker>().FirstOrDefault(x => x.Name == "Paddy Power");
+            var wallets = db.Accounts.OfType<Wallet>();
 
-            var accountViewModel = new AccountViewModel(account);
-
+            var accountViewModel = new AccountViewModel(bookmaker, wallets);
             this.DataContext = accountViewModel;
         }
     }

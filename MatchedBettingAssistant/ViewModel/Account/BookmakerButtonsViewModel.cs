@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Windows;
+using DevExpress.Entity.Model;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Account;
@@ -9,9 +11,23 @@ using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
+
+    public class AccountUnitOfWork
+    {
+        public IEnumerable<Model.Account.Account> Accounts { get; set; }
+
+
+    }
+
+    public class BookmakerManagerViewModel : ViewModelBase
+    {
+         
+    }
+
     public class BookmakerButtonsViewModel : ViewModelBase
     {
         private readonly IAccount account;
+        private IEnumerable<Wallet> wallets;
 
         public IDialogService TransferDialogService => ServiceContainer.GetService<IDialogService>("transferDialog");
         public IDialogService ApplyDialogService => ServiceContainer.GetService<IDialogService>("applyDialog");
@@ -24,9 +40,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private Visibility bonusButtonVisibility;
         private Visibility betButtonVisibility;
 
-        public BookmakerButtonsViewModel(IAccount account)
+        public BookmakerButtonsViewModel(IAccount account, IEnumerable<Wallet> wallets)
         {
             this.account = account;
+            this.wallets = wallets;
             this.BonusButtonVisibility = Visibility.Hidden;
             this.BetButtonVisibility = Visibility.Hidden;
         }
@@ -133,12 +150,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             if (this.account is IBettingAccount bettingAccount)
             {
-                var basicBet = new SimpleBet()
-                {
-                    Account = bettingAccount,
-                    Date = DateTime.Today
-                };
-
                 var bet = new PlaceBetViewModel(bettingAccount);
 
                 var okCommand = new UICommand()
@@ -171,13 +182,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <param name="walletSetter"></param>
         private void TransferFunds(TransferFundsAccountAction action, ITransferActionWalletSetter walletSetter)
         {
-            var wallets = new List<Wallet>()
-            { 
-                new Wallet() {Name = "Skrill", StartingBalance = 100.00},
-                new Wallet() {Name = "Credit Card", StartingBalance = 600.0}
-            };
-
-            var depositViewModel = new TransferFundsToAccountViewModel(action, wallets, walletSetter);
+            var depositViewModel = new TransferFundsToAccountViewModel(action, this.wallets, walletSetter);
 
             var okCommand = new UICommand()
             {

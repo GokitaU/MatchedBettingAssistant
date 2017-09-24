@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Account;
@@ -8,11 +9,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class EditBookmakerViewModel : ViewModelBase
     {
         private readonly IBettingAccount account;
+        private IEnumerable<Wallet> wallets;
 
-        public EditBookmakerViewModel(IBettingAccount account)
+        public EditBookmakerViewModel(IBettingAccount account, IEnumerable<Wallet> wallets)
         {
             this.account = account;
-            this.BookmakerButtons = new BookmakerButtonsViewModel(this.account)
+            this.wallets = wallets;
+            this.BookmakerButtons = new BookmakerButtonsViewModel(this.account, this.wallets)
             {
                 BonusButtonVisibility = Visibility.Visible,
                 BetButtonVisibility = Visibility.Visible

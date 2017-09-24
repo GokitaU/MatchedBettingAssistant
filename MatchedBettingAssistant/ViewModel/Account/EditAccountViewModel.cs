@@ -16,10 +16,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
     {
         private readonly IAccount account;
 
-        public EditAccountViewModel(IAccount account)
+        private IEnumerable<Wallet> wallets;
+
+        public EditAccountViewModel(IAccount account, IEnumerable<Wallet> wallets)
         {
             this.account = account;
-            this.BookmakerButtons = new BookmakerButtonsViewModel(account)
+            this.wallets = wallets;
+            this.BookmakerButtons = new BookmakerButtonsViewModel(this.account, this.wallets)
             {
                 BonusButtonVisibility = Visibility.Hidden,
                 BetButtonVisibility = Visibility.Hidden
