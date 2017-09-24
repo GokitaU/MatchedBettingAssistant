@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
 using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
@@ -61,8 +61,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             };
 
             var bookies = new List<IBettingAccount>() {this.account};
-            var exchange = new List<IBettingAccount>() { new Bookmaker() { CommissionPercent = 0.5, IsExchange = true, Name = "Betfair", StartingBalance = 0}};
-            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchange);
+            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, null);
         }
     }
 }

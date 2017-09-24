@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class EditBookmakerViewModel : ViewModelBase
     {
         private readonly IBettingAccount account;
-        private IEnumerable<Wallet> wallets;
+        private IEnumerable<IWallet> wallets;
 
-        public EditBookmakerViewModel(IBettingAccount account, IEnumerable<Wallet> wallets)
+        public EditBookmakerViewModel(IBettingAccount account, IEnumerable<IWallet> wallets)
         {
             this.account = account;
             this.wallets = wallets;

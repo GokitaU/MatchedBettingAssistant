@@ -1,4 +1,5 @@
-﻿using MatchedBettingAssistant.Model.Account;
+﻿using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Model.Accounts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -7,12 +8,16 @@ namespace MatchedBettingAssistant.Model.Tests.ModelTests
     [TestClass]
     public class BookmakerTests
     {
+        private Mock<IBettingAccount> baseAccount;
+
         private Bookmaker bookmaker;
 
         [TestInitialize]
         public void Setup()
         {
-            this.bookmaker = new Bookmaker();
+            this.baseAccount = new Mock<IBettingAccount>();
+
+            this.bookmaker = new Bookmaker(baseAccount.Object);
         }
 
         [TestMethod]

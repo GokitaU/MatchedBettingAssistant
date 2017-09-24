@@ -1,6 +1,7 @@
 ﻿using System;
+using MatchedBettingAssistant.Core;
 
-namespace MatchedBettingAssistant.Model.Account
+namespace MatchedBettingAssistant.Model.Accounts
 {
     
 

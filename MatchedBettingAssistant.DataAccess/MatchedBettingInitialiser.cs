@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using MatchedBettingAssistant.Model.Account;
 
 namespace MatchedBettingAssistant.DataAccess
 {
@@ -18,24 +17,24 @@ namespace MatchedBettingAssistant.DataAccess
             base.Seed(context);
         }
 
-        private IEnumerable<Wallet> CreateWallets()
+        private IEnumerable<DataModel.Wallet> CreateWallets()
         {
-            var skrill = new Wallet()
+            var skrill = new DataModel.Wallet()
             {
                 Name = "Skrill",
                 StartingBalance = 521.00d
             };
 
-            var wallets = new List<Wallet>() { skrill };
+            var wallets = new List<DataModel.Wallet>() { skrill };
 
             return wallets;
         }
 
-        private IEnumerable<Bookmaker> CreateBookmakers()
+        private IEnumerable<DataModel.Bookmaker> CreateBookmakers()
         {
-            var bookmakers = new List<Bookmaker>();
+            var bookmakers = new List<DataModel.Bookmaker>();
 
-            var betfair = new Bookmaker()
+            var betfair = new DataModel.Bookmaker()
             {
                 Name = "Betfair",
                 StartingBalance = 525.00d,
@@ -45,7 +44,7 @@ namespace MatchedBettingAssistant.DataAccess
 
             bookmakers.Add(betfair);
 
-            var paddyPower = new Bookmaker()
+            var paddyPower = new DataModel.Bookmaker()
             {
                 Name = "Paddy Power",
                 StartingBalance = 77.98,

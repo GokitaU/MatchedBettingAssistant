@@ -1,31 +1,48 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using MatchedBettingAssistant.Core;
 
-namespace MatchedBettingAssistant.Model.Account
+namespace MatchedBettingAssistant.Model.Accounts
 {
+    /// <summary>
+    /// Basic account
+    /// </summary>
     public abstract class Account : IAccount
     {
-        private readonly List<ITransaction> transactions;
+        private readonly IAccount baseAccount;
 
-        protected Account()
+        protected Account(IAccount baseAccount)
         {
-            this.transactions = new List<ITransaction>();
+            this.baseAccount = baseAccount;
         }
 
         /// <summary>
         /// Identifier for this account
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get => this.baseAccount.Id;
+            set => this.baseAccount.Id = value;
+        }
 
         /// <summary>
         /// Gets or sets the name of the bookmaker
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get => this.baseAccount.Name;
+            set => this.baseAccount.Name = value;
+        }
+
 
         /// <summary>
         /// Gets or sets the starting balance at this bookmaker
         /// </summary>
-        public double StartingBalance { get; set; }
+        public double StartingBalance
+        {
+            get => this.baseAccount.StartingBalance;
+            set => this.baseAccount.StartingBalance = value;
+        }
 
         /// <inheritdoc />
         /// <summary>
@@ -35,7 +52,7 @@ namespace MatchedBettingAssistant.Model.Account
         {
             get
             {
-                return this.StartingBalance + this.transactions.Sum(x => x.Amount);
+                return this.StartingBalance + (baseAccount.Transactions?.Sum(x => x.Amount) ?? 0);
             }
         }
 
@@ -46,12 +63,12 @@ namespace MatchedBettingAssistant.Model.Account
         /// <param name="transaction">the transaction to be applied</param>
         public virtual void AddTransaction(ITransaction transaction)
         {
-            this.transactions.Add(transaction);
+            this.baseAccount.AddTransaction(transaction);
         }
 
         public IEnumerable<ITransaction> Transactions
         {
-            get { return this.transactions; }
+            get { return this.baseAccount.Transactions; }
         }
     }
 }

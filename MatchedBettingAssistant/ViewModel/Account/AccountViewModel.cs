@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Accounts;
+
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
@@ -13,7 +15,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private readonly EditBookmakerViewModel editBookmakerViewModel;
         private readonly AccountTransactionListViewModel transactionListViewModel;
 
-        public AccountViewModel(IBettingAccount account, IEnumerable<Wallet> wallets)
+        public AccountViewModel(IBettingAccount account, IEnumerable<IWallet> wallets)
         {
             this.account = account;
 

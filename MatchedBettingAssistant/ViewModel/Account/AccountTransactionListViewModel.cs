@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Linq.Expressions;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
@@ -32,9 +32,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateTransactions()
         {
-            var transactions = this.account.Transactions.Select(x => new AccountTransactionViewModel(x));
-            this.Transactions = new ObservableCollection<AccountTransactionViewModel>(transactions);
-            RaisePropertyChanged(()=>Transactions);
+            if (this.account.Transactions != null)
+            {
+                var transactions = this.account.Transactions.Select(x => new AccountTransactionViewModel(x));
+                this.Transactions = new ObservableCollection<AccountTransactionViewModel>(transactions);
+                RaisePropertyChanged(()=>Transactions);
+            }
         }
     }
 }

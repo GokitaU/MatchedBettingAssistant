@@ -1,7 +1,7 @@
 ﻿using System;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {

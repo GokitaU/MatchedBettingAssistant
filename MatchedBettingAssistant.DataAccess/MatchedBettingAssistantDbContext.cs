@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MatchedBettingAssistant.Model.Account;
 
 namespace MatchedBettingAssistant.DataAccess
 {
@@ -14,12 +13,12 @@ namespace MatchedBettingAssistant.DataAccess
             Database.SetInitializer(intialiser);
         }
 
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<DataModel.Account> Accounts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bookmaker>().ToTable("Bookmaker");
-            modelBuilder.Entity<Wallet>().ToTable("Wallet");
+            modelBuilder.Entity<DataModel.Bookmaker>().ToTable("Bookmaker");
+            modelBuilder.Entity<DataModel.Wallet>().ToTable("Wallet");
 
             base.OnModelCreating(modelBuilder);
         }

@@ -192,6 +192,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MatchedBettingAssistant.Core\MatchedBettingAssistant.Core.csproj">
+      <Project>{25aa8178-0d06-4f8a-a83e-8a954d25af1f}</Project>
+      <Name>MatchedBettingAssistant.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MatchedBettingAssistant.DataAccess\MatchedBettingAssistant.DataAccess.csproj">
       <Project>{e5c52107-3dd7-4251-ad08-39e50d442516}</Project>
       <Name>MatchedBettingAssistant.DataAccess</Name>

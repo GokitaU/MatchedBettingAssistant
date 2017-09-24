@@ -7,8 +7,9 @@ using System.Windows;
 using System.Windows.Documents;
 using DevExpress.Mvvm;
 using DevExpress.Xpf.Editors.Internal;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
@@ -16,9 +17,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
     {
         private readonly IAccount account;
 
-        private IEnumerable<Wallet> wallets;
+        private IEnumerable<IWallet> wallets;
 
-        public EditAccountViewModel(IAccount account, IEnumerable<Wallet> wallets)
+        public EditAccountViewModel(IAccount account, IEnumerable<IWallet> wallets)
         {
             this.account = account;
             this.wallets = wallets;

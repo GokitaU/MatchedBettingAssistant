@@ -65,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MatchedBettingAssistant.Core\MatchedBettingAssistant.Core.csproj">
+      <Project>{25aa8178-0d06-4f8a-a83e-8a954d25af1f}</Project>
+      <Name>MatchedBettingAssistant.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MatchedBettingAssistant.Model\MatchedBettingAssistant.Model.csproj">
       <Project>{691736f1-ea71-49e8-8de1-aa702076d8e2}</Project>
       <Name>MatchedBettingAssistant.Model</Name>

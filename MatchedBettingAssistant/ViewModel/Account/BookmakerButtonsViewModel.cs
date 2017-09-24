@@ -5,8 +5,9 @@ using System.Data.Entity;
 using System.Windows;
 using DevExpress.Entity.Model;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
-using MatchedBettingAssistant.Model.Account;
+using MatchedBettingAssistant.Model.Accounts;
 using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
@@ -14,7 +15,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
     public class AccountUnitOfWork
     {
-        public IEnumerable<Model.Account.Account> Accounts { get; set; }
+        public IEnumerable<Model.Accounts.Account> Accounts { get; set; }
 
 
     }
@@ -27,7 +28,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class BookmakerButtonsViewModel : ViewModelBase
     {
         private readonly IAccount account;
-        private IEnumerable<Wallet> wallets;
+        private IEnumerable<IWallet> wallets;
 
         public IDialogService TransferDialogService => ServiceContainer.GetService<IDialogService>("transferDialog");
         public IDialogService ApplyDialogService => ServiceContainer.GetService<IDialogService>("applyDialog");
@@ -40,7 +41,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private Visibility bonusButtonVisibility;
         private Visibility betButtonVisibility;
 
-        public BookmakerButtonsViewModel(IAccount account, IEnumerable<Wallet> wallets)
+        public BookmakerButtonsViewModel(IAccount account, IEnumerable<IWallet> wallets)
         {
             this.account = account;
             this.wallets = wallets;

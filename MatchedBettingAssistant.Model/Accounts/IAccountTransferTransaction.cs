@@ -1,4 +1,6 @@
-﻿namespace MatchedBettingAssistant.Model.Account
+﻿using MatchedBettingAssistant.Core;
+
+namespace MatchedBettingAssistant.Model.Accounts
 {
     public interface IAccountTransferTransaction : ITransaction
     {

@@ -40,17 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\Account.cs" />
-    <Compile Include="Account\ApplyFundsAccountAction.cs" />
-    <Compile Include="Account\Bookmaker.cs" />
-    <Compile Include="Account\FundsTransaction.cs" />
-    <Compile Include="Account\IAccount.cs" />
-    <Compile Include="Account\IAccountAction.cs" />
-    <Compile Include="Account\IAccountTransferTransaction.cs" />
-    <Compile Include="Account\IBettingAccount.cs" />
-    <Compile Include="Account\ITransaction.cs" />
-    <Compile Include="Account\TransferFundsAccountAction.cs" />
-    <Compile Include="Account\Wallet.cs" />
+    <Compile Include="Accounts\Account.cs" />
+    <Compile Include="Accounts\ApplyFundsAccountAction.cs" />
+    <Compile Include="Accounts\Bookmaker.cs" />
+    <Compile Include="Accounts\FundsTransaction.cs" />
+    <Compile Include="Accounts\IAccountAction.cs" />
+    <Compile Include="Accounts\IAccountTransferTransaction.cs" />
+    <Compile Include="Accounts\TransferFundsAccountAction.cs" />
+    <Compile Include="Accounts\Wallet.cs" />
     <Compile Include="Bets\CalculatedBackBet.cs" />
     <Compile Include="Bets\CalculatedMatchedBet.cs" />
     <Compile Include="Bets\IBackBet.cs" />
@@ -62,6 +59,12 @@
     <Compile Include="Bets\SimpleBet.cs" />
     <Compile Include="Bets\SimpleMatchedBet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MatchedBettingAssistant.Core\MatchedBettingAssistant.Core.csproj">
+      <Project>{25aa8178-0d06-4f8a-a83e-8a954d25af1f}</Project>
+      <Name>MatchedBettingAssistant.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
