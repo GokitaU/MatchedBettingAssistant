@@ -21,7 +21,7 @@
                     </dxlc:LayoutGroup>                    
                     <dxlc:LayoutGroup>
                         <dxlc:LayoutItem Label="Exchange">
-                            <dxe:CheckEdit/>
+                            <dxe:CheckEdit IsChecked="{Binding IsExchange}"/>
                         </dxlc:LayoutItem>
 
                         <dxlc:LayoutItem Label="Commission">

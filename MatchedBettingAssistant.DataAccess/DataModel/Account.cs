@@ -9,7 +9,7 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
     {
         protected Account()
         {
-            
+            this.AccountTransactions = new List<Transaction>();
         }
 
         public int Id { get; set; }

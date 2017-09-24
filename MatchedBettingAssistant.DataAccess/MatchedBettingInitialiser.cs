@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess
 {
@@ -41,7 +43,7 @@ namespace MatchedBettingAssistant.DataAccess
                 IsExchange = true,
                 CommissionPercent = 0.05
             };
-
+            betfair.AccountTransactions.Add(new Transaction() {TransactionDate = DateTime.Today, Amount = 100.00, Description = "Initial Deposit"});
             bookmakers.Add(betfair);
 
             var paddyPower = new DataModel.Bookmaker()
