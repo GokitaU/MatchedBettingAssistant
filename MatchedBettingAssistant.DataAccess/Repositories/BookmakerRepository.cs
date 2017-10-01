@@ -17,7 +17,9 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IEnumerable<IBettingAccount> GetAccounts()
         {
-            var accounts = this.dataContext.Accounts.OfType<DataModel.Bookmaker>().Include(x=>x.AccountTransactions);
+            var accounts = this.dataContext.Accounts.OfType<DataModel.Bookmaker>()
+                .Include(x=>x.AccountTransactions);
+
             return new List<IBettingAccount>(accounts).Select(x => new Model.Accounts.Bookmaker(x));
         }
 

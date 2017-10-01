@@ -71,7 +71,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double Profit
         {
-            get => this.matchedBet.LayReturns - this.matchedBet.BackReturns;
+            get => this.matchedBet.LayReturns + this.matchedBet.BackReturns;
         }
 
         public ObservableCollection<AccountLookupItem> Bookmakers

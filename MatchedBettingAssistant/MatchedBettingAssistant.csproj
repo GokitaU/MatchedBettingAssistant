@@ -90,6 +90,7 @@
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
     <Compile Include="ViewModel\Account\ITransferActionWalletSetter.cs" />
+    <Compile Include="ViewModel\Account\SelectedBookmakerChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SimpleMatchedBetViewModel.cs" />
     <Compile Include="ViewModel\Account\TransferFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />

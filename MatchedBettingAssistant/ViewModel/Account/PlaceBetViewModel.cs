@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
@@ -9,10 +10,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class PlaceBetViewModel : ViewModelBase
     {
-        private IBettingAccount account;
+        private readonly IBettingAccount account;
         private BetViewModel currentBet;
 
-        private IBookmakerRepository bookmakerRepository;
+        private readonly IBookmakerRepository bookmakerRepository;
 
         public PlaceBetViewModel(IBettingAccount account, IBookmakerRepository bookmakerRepository)
         {
@@ -63,7 +64,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             };
 
             var bookies = new List<IBettingAccount>() {this.account};
-            var exchanges = this.bookmakerRepository.GetAccounts();
+            var exchanges = this.bookmakerRepository.GetAccounts().Where(x => x.IsExchange);
             this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges);
         }
     }

@@ -5,16 +5,6 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class SelectedBookmakerChangedMessage
-    {
-        public SelectedBookmakerChangedMessage(IBettingAccount bookmaker)
-        {
-            this.Bookmaker = bookmaker;
-        }
-        public IBettingAccount Bookmaker { get; }
-
-    }
-
     public class BookmakerNavigationViewModel : ViewModelBase
     {
         private readonly IBookmakerRepository bookmakerRepository;
