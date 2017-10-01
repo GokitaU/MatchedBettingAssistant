@@ -7,15 +7,15 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class BookmakerViewModel : ViewModelBase
     {
-        private IBettingAccount bookmaker;
-        private IBookmakerRepository repository;
+        private readonly IBettingAccount bookmaker;
+        private readonly IRepository repository;
 
         private EditBookmakerViewModel bookmakerEdit;
 
         private AccountTransactionListViewModel transactions;
 
 
-        public BookmakerViewModel(IBettingAccount bookmaker, IBookmakerRepository repository)
+        public BookmakerViewModel(IBettingAccount bookmaker, IRepository repository)
         {
             this.bookmaker = bookmaker;
             this.repository = repository;
@@ -45,9 +45,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateEditViewModel()
         {
-            var wallets = this.repository.GetAccounts().OfType<Wallet>();
+            var wallets = this.repository.WalletRepository.GetWallets();
 
-            this.BookmakerEdit = new EditBookmakerViewModel(bookmaker, wallets);
+            this.BookmakerEdit = new EditBookmakerViewModel(bookmaker, this.repository);
         }
 
         private void CreateTransactions()

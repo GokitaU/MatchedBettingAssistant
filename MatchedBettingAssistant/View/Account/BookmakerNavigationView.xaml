@@ -12,6 +12,7 @@
     <Grid>
 
         <dxe:ListBoxEdit ItemsSource="{Binding Bookmakers}"
+                         SelectedItem="{Binding SelectedBookmaker}"
                          DisplayMember="Name"/>
 
     </Grid>

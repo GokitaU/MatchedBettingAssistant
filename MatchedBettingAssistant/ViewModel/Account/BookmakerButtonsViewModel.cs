@@ -15,7 +15,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class BookmakerButtonsViewModel : ViewModelBase
     {
         private readonly IAccount account;
-        private IEnumerable<IWallet> wallets;
+        private IRepository repository;
 
         public IDialogService TransferDialogService => ServiceContainer.GetService<IDialogService>("transferDialog");
         public IDialogService ApplyDialogService => ServiceContainer.GetService<IDialogService>("applyDialog");
@@ -28,10 +28,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private Visibility bonusButtonVisibility;
         private Visibility betButtonVisibility;
 
-        public BookmakerButtonsViewModel(IAccount account, IEnumerable<IWallet> wallets)
+        public BookmakerButtonsViewModel(IAccount account, IRepository repository)
         {
             this.account = account;
-            this.wallets = wallets;
+            this.repository = repository;
             this.BonusButtonVisibility = Visibility.Hidden;
             this.BetButtonVisibility = Visibility.Hidden;
         }
@@ -138,7 +138,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             if (this.account is IBettingAccount bettingAccount)
             {
-                var bet = new PlaceBetViewModel(bettingAccount);
+                var bet = new PlaceBetViewModel(bettingAccount, this.repository.BookmakerRepository);
 
                 var okCommand = new UICommand()
                 {
@@ -170,7 +170,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <param name="walletSetter"></param>
         private void TransferFunds(TransferFundsAccountAction action, ITransferActionWalletSetter walletSetter)
         {
-            var depositViewModel = new TransferFundsToAccountViewModel(action, this.wallets, walletSetter);
+            var depositViewModel = new TransferFundsToAccountViewModel(action, this.repository.WalletRepository.GetWallets(), walletSetter);
 
             var okCommand = new UICommand()
             {

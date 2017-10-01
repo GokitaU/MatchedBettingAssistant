@@ -5,9 +5,20 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
+    public class SelectedBookmakerChangedMessage
+    {
+        public SelectedBookmakerChangedMessage(IBettingAccount bookmaker)
+        {
+            this.Bookmaker = bookmaker;
+        }
+        public IBettingAccount Bookmaker { get; }
+
+    }
+
     public class BookmakerNavigationViewModel : ViewModelBase
     {
-        private IBookmakerRepository bookmakerRepository;
+        private readonly IBookmakerRepository bookmakerRepository;
+        private BookmakerLookupItem selectedBookmaker;
 
         private ObservableCollection<BookmakerLookupItem> bookmakers;
 
@@ -16,6 +27,17 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.bookmakerRepository = bookmakerRepository;
 
             CreateBookmakers();
+        }
+
+        public BookmakerLookupItem SelectedBookmaker
+        {
+            get => this.selectedBookmaker;
+            set
+            {
+                this.selectedBookmaker = value;
+                Messenger.Default.Send(new SelectedBookmakerChangedMessage(this.selectedBookmaker.Account));
+                RaisePropertyChanged(()=>SelectedBookmaker);
+            }
         }
 
         public ObservableCollection<BookmakerLookupItem> Bookmakers

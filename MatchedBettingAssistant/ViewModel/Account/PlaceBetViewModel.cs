@@ -12,10 +12,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private IBettingAccount account;
         private BetViewModel currentBet;
 
-        public PlaceBetViewModel(IBettingAccount account)
+        private IBookmakerRepository bookmakerRepository;
+
+        public PlaceBetViewModel(IBettingAccount account, IBookmakerRepository bookmakerRepository)
         {
             this.account = account;
-
+            this.bookmakerRepository = bookmakerRepository;
             CreateSimpleMatchedBet();
         }
 
@@ -61,7 +63,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
             };
 
             var bookies = new List<IBettingAccount>() {this.account};
-            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, null);
+            var exchanges = this.bookmakerRepository.GetAccounts();
+            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges);
         }
     }
 }

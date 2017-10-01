@@ -5,15 +5,15 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class BookmakerLookupItem : ViewModelBase
     {
-        private IBettingAccount account;
-
         public BookmakerLookupItem(IBettingAccount account)
         {
-            this.account = account;
+            this.Account = account;
         }
 
-        public int Id => this.account.Id;
+        public int Id => this.Account.Id;
 
-        public string Name => this.account.Name;
+        public string Name => this.Account.Name;
+
+        internal IBettingAccount Account { get; }
     }
 }

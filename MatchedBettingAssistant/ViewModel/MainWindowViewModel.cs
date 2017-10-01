@@ -51,7 +51,7 @@ namespace MatchedBettingAssistant.ViewModel
         private void Connect()
         {
             this.repository = new Repository();
-            this.CurrentViewModel = new BookmakerManagerViewModel(this.repository.BookmakerRepository);
+            this.CurrentViewModel = new BookmakerManagerViewModel(this.repository);
         }
     }
 }

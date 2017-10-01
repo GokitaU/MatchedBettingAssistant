@@ -7,16 +7,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class BookmakerManagerViewModel : ViewModelBase
     {
-        private IBookmakerRepository bookmakerRepository;
+        private IRepository repository;
 
         private BookmakerNavigationViewModel navigationViewModel;
         private BookmakerViewModel bookmakerEditViewModel;
 
-        public BookmakerManagerViewModel(IBookmakerRepository bookmakerRepository)
+        public BookmakerManagerViewModel(IRepository repository)
         {
-            this.bookmakerRepository = bookmakerRepository;
-            this.NavigationViewModel = new BookmakerNavigationViewModel(this.bookmakerRepository);
-            this.CreateEditViewModel();
+            this.repository = repository;
+            this.NavigationViewModel = new BookmakerNavigationViewModel(this.repository.BookmakerRepository);      
+            RegisterMessages();
         }
 
         public BookmakerNavigationViewModel NavigationViewModel
@@ -39,11 +39,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        private void CreateEditViewModel()
+        private void RegisterMessages()
         {
-            var first = this.bookmakerRepository.GetAccounts().OfType<Model.Accounts.Bookmaker>().FirstOrDefault();
+            Messenger.Default.Register< SelectedBookmakerChangedMessage>(this, BookmakerChanged);
+        }
 
-            this.BookmakerEditViewModel = new BookmakerViewModel(first, this.bookmakerRepository);
+        private void BookmakerChanged(SelectedBookmakerChangedMessage message)
+        {
+            this.BookmakerEditViewModel = new BookmakerViewModel(message.Bookmaker, this.repository);
         }
     }
 }
