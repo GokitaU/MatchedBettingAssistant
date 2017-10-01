@@ -41,6 +41,8 @@
     <Reference Include="DevExpress.Xpf.Grid.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.Grid.v17.1.Core, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.NavBar.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v17.1, Version=17.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -79,6 +81,10 @@
     <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\BasicBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BetViewModel.cs" />
+    <Compile Include="ViewModel\Account\BookmakerLookupItem.cs" />
+    <Compile Include="ViewModel\Account\BookmakerManagerViewModel.cs" />
+    <Compile Include="ViewModel\Account\BookmakerNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Account\BookmakerViewModel.cs" />
     <Compile Include="ViewModel\Account\PlaceBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
@@ -106,6 +112,15 @@
     <Compile Include="View\Account\BookmakerButtonsView.xaml.cs">
       <DependentUpon>BookmakerButtonsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Account\BookmakerManagerView.xaml.cs">
+      <DependentUpon>BookmakerManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Account\BookmakerNavigationView.xaml.cs">
+      <DependentUpon>BookmakerNavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Account\BookmakerView.xaml.cs">
+      <DependentUpon>BookmakerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Account\EditBookmakerView.xaml.cs">
       <DependentUpon>EditBookmakerView.xaml</DependentUpon>
     </Compile>
@@ -122,6 +137,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ImageResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +162,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account\BookmakerButtonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\BookmakerManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\BookmakerNavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\BookmakerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +235,16 @@
       <Project>{691736f1-ea71-49e8-8de1-aa702076d8e2}</Project>
       <Name>MatchedBettingAssistant.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-Year of Horse-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-Year of Horse-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-Connected-32.png" />
+    <Resource Include="Assets\Images\icons8-Create-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

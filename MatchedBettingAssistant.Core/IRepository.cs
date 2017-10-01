@@ -5,6 +5,8 @@
         IBookmakerRepository BookmakerRepository { get; }
 
         IWalletRepository WalletRepository { get; }
+
+        void Create();
     }
 
 }

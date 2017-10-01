@@ -12,19 +12,6 @@ using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-
-    public class AccountUnitOfWork
-    {
-        public IEnumerable<Model.Accounts.Account> Accounts { get; set; }
-
-
-    }
-
-    public class BookmakerManagerViewModel : ViewModelBase
-    {
-         
-    }
-
     public class BookmakerButtonsViewModel : ViewModelBase
     {
         private readonly IAccount account;

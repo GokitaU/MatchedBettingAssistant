@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:MatchedBettingAssistant"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+         <ResourceDictionary Source="ImageResources.xaml"/>
     </Application.Resources>
 </Application>

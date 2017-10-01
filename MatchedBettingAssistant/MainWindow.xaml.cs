@@ -14,6 +14,7 @@ using DevExpress.Xpf.Core;
 using MatchedBettingAssistant.DataAccess;
 using MatchedBettingAssistant.DataAccess.Repositories;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.ViewModel;
 using MatchedBettingAssistant.ViewModel.Account;
 
 
@@ -28,15 +29,9 @@ namespace MatchedBettingAssistant
         {
             InitializeComponent();
 
-            var db = new Repository();
-            db.Create();
+            var mainWindow = new MainWindowViewModel();
+            this.DataContext = mainWindow;
 
-            var bookmakers = db.BookmakerRepository.GetAccounts();
-            var wallets = db.WalletRepository.GetWallets();
-
-            var account = new AccountViewModel(bookmakers.FirstOrDefault(), wallets);
-
-            this.DataContext = account;
         }
     }
 }
