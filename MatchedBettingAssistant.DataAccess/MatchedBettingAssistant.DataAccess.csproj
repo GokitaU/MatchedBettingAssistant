@@ -50,6 +50,7 @@
     <Compile Include="DataModel\Account.cs" />
     <Compile Include="DataModel\Bookmaker.cs" />
     <Compile Include="DataModel\Transaction.cs" />
+    <Compile Include="DataModel\TransactionDetail.cs" />
     <Compile Include="DataModel\Wallet.cs" />
     <Compile Include="MatchedBettingAssistantDbContext.cs" />
     <Compile Include="MatchedBettingInitialiser.cs" />

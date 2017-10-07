@@ -43,7 +43,15 @@ namespace MatchedBettingAssistant.DataAccess
                 IsExchange = true,
                 CommissionPercent = 0.05
             };
-            betfair.AccountTransactions.Add(new Transaction() {TransactionDate = DateTime.Today, Amount = 100.00, Description = "Initial Deposit"});
+
+            betfair.AccountTransactions.Add(new Transaction()
+            {
+                TransactionDate = DateTime.Today,
+                Amount = 100.00,
+                Description = "Initial Deposit",
+                TransactionDetail = new TransactionDetail { Profit = 0.00 }
+            });
+
             bookmakers.Add(betfair);
 
             var paddyPower = new DataModel.Bookmaker()
@@ -53,6 +61,16 @@ namespace MatchedBettingAssistant.DataAccess
                 IsExchange = false,
                 CommissionPercent = 0.0d
             };
+
+            var transaction = new Transaction()
+            {
+                TransactionDate = DateTime.Today,
+                Amount = 29.00,
+                Description = "Free Bet",
+                TransactionDetail = new TransactionDetail {  Profit = 22.00 }
+            };
+
+            paddyPower.AccountTransactions.Add(transaction);
 
             bookmakers.Add(paddyPower);
 

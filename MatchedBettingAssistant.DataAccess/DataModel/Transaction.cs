@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
@@ -20,5 +21,15 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         public DateTime TransactionDate { get; set; }
         public double Amount { get; set; }
         public string Description { get; set; }
+
+        public virtual TransactionDetail TransactionDetail { get; set; }
+
+        [NotMapped]
+        public ITransactionDetail Detail { get { return TransactionDetail; } }
+
+        public void AddDetail(ITransactionDetail detail)
+        {
+            this.TransactionDetail = new TransactionDetail(detail);
+        }
     }
 }

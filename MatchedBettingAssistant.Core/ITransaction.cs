@@ -9,5 +9,9 @@ namespace MatchedBettingAssistant.Core
         double Amount { get; set; }
 
         string Description { get; set; }
+
+        ITransactionDetail Detail { get; }
+
+        void AddDetail(ITransactionDetail detail);
     }
 }

@@ -37,6 +37,10 @@
                             <dxe:TextEdit Text="{Binding Balance, Mode=OneWay}"
                                           MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
                         </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Profit">
+                            <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}"
+                                          MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                        </dxlc:LayoutItem>
                     </dxlc:LayoutGroup>
 
                 </dxlc:LayoutGroup>

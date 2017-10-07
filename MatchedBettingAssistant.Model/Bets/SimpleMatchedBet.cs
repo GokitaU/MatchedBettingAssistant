@@ -58,6 +58,9 @@ namespace MatchedBettingAssistant.Model.Bets
         {
             this.backBet.Place();
             this.layBet.Place();
+
+            //create transaction detail bet
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MatchedBettingAssistant.Model.Bets
             
         }
 
-        public void Place()
+        public void Place(bool calculateDetail = true)
         {
             var transaction = new FundsTransaction() { TransactionDate = Date, Amount = (Liability*-1)};
 

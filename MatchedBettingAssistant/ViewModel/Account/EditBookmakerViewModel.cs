@@ -69,6 +69,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double Balance => this.account.Balance;
 
+        public double Profit => this.account.Profit;
+
         public BookmakerButtonsViewModel BookmakerButtons { get; }
 
         private void RegisterMessages()

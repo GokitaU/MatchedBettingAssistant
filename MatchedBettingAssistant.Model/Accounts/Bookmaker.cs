@@ -22,5 +22,10 @@ namespace MatchedBettingAssistant.Model.Accounts
             get => this.baseAccount.IsExchange;
             set => this.baseAccount.IsExchange = value;
         }
+
+        public double Profit
+        {
+            get => this.baseAccount.Profit;
+        }
     }
 }

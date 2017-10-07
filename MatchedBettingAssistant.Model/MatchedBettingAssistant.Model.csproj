@@ -55,6 +55,7 @@
     <Compile Include="Bets\ICalculatedBackBet.cs" />
     <Compile Include="Bets\ICalculatedBet.cs" />
     <Compile Include="Bets\ICalculatedLayBet.cs" />
+    <Compile Include="Bets\ISimpleBet.cs" />
     <Compile Include="Bets\LayBet.cs" />
     <Compile Include="Bets\SimpleBet.cs" />
     <Compile Include="Bets\SimpleMatchedBet.cs" />

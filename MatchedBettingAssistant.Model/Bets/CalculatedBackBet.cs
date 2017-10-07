@@ -20,7 +20,7 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public double Probability => 1 / this.Odds;
 
-        public void Place()
+        public void Place(bool calculateDetail = true)
         {
             var backTransaction = new FundsTransaction() { TransactionDate = Date, Amount = this.Stake * -1};
 
