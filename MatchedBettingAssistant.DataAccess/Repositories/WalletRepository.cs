@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.DataAccess.DTO;
 
 namespace MatchedBettingAssistant.DataAccess.Repositories
 {
@@ -16,8 +18,10 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IEnumerable<IWallet> GetWallets()
         {
-            var wallets = this.dataContext.Accounts.OfType<DataModel.Wallet>();
-            return new List<IWallet>(wallets).Select(x => new Model.Accounts.Wallet(x)); 
+            var wallets = this.dataContext.Accounts.OfType<DataModel.Wallet>()
+                .Include(x => x.Transactions)
+                .Include(x => x.Transactions.Select(d => d.Detail)).ToList();
+            return new List<IWallet>(wallets.Select(x => new WalletDto(x))); 
         }
 
         public IWallet New()
@@ -25,7 +29,7 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
             var newWallet = new DataModel.Wallet();
             this.dataContext.Accounts.Add(newWallet);
 
-            return new Model.Accounts.Wallet(newWallet);
+            return new WalletDto(newWallet);
 
         }
     }

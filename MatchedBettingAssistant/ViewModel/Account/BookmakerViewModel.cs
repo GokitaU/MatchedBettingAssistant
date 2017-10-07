@@ -45,8 +45,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateEditViewModel()
         {
-            var wallets = this.repository.WalletRepository.GetWallets();
-
             this.BookmakerEdit = new EditBookmakerViewModel(bookmaker, this.repository);
         }
 

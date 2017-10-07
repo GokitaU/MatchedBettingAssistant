@@ -2,7 +2,7 @@
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
-    public class Wallet : Account, IWallet
+    public class Wallet : Account
     {
 
     }

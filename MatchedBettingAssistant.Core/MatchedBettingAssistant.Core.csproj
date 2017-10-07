@@ -46,6 +46,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="ITransaction.cs" />
     <Compile Include="ITransactionDetail.cs" />
+    <Compile Include="IWallet.cs" />
     <Compile Include="IWalletRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

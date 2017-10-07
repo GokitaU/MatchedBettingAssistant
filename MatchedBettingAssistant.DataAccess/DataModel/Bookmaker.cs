@@ -4,7 +4,7 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
-    public class Bookmaker : Account, IBettingAccount
+    public class Bookmaker : Account
     {
         public double CommissionPercent { get; set; }
         public bool IsExchange { get; set; }

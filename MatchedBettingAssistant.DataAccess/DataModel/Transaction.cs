@@ -4,7 +4,7 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
-    public class Transaction : ITransaction
+    public class Transaction
     {
         public Transaction()
         {
@@ -22,14 +22,7 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         public double Amount { get; set; }
         public string Description { get; set; }
 
-        public virtual TransactionDetail TransactionDetail { get; set; }
+        public virtual TransactionDetail Detail { get; set; }
 
-        [NotMapped]
-        public ITransactionDetail Detail { get { return TransactionDetail; } }
-
-        public void AddDetail(ITransactionDetail detail)
-        {
-            this.TransactionDetail = new TransactionDetail(detail);
-        }
     }
 }

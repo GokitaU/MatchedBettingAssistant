@@ -19,7 +19,7 @@ namespace MatchedBettingAssistant.DataAccess
         {
             modelBuilder.Entity<DataModel.Bookmaker>().ToTable("Bookmaker");
             modelBuilder.Entity<DataModel.Wallet>().ToTable("Wallet");
-            modelBuilder.Entity<DataModel.Transaction>().HasOptional(a => a.TransactionDetail);
+            modelBuilder.Entity<DataModel.Transaction>().HasOptional(a => a.Detail);
 
             base.OnModelCreating(modelBuilder);
         }

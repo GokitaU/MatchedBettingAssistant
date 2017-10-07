@@ -8,9 +8,4 @@
 
         double Profit { get; }
     }
-
-    public interface IWallet : IAccount
-    {
-        
-    }
 }

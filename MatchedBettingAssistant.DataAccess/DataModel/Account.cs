@@ -5,11 +5,11 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
-    public abstract class Account : IAccount
+    public abstract class Account
     {
         protected Account()
         {
-            this.AccountTransactions = new List<Transaction>();
+            this.Transactions = new List<Transaction>();
         }
 
         public int Id { get; set; }
@@ -23,12 +23,10 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
 
         public void AddTransaction(ITransaction transaction)
         {
-            this.AccountTransactions.Add(new Transaction(transaction));
+            this.Transactions.Add(new Transaction(transaction));
         }
-        public ICollection<Transaction> AccountTransactions { get; set; }
+        public ICollection<Transaction> Transactions { get; set; }
 
-        [NotMapped]
-        public IEnumerable<ITransaction> Transactions => this.AccountTransactions;
 
     }
 }

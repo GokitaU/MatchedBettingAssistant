@@ -82,6 +82,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private void UpdateBalance(TransactionsUpdatedMessage obj)
         {
             this.RaisePropertyChanged(() => this.Balance);
+            this.RaisePropertyChanged(() => this.Profit);
         }
     }
 }

@@ -19,7 +19,6 @@ namespace MatchedBettingAssistant.Core
         /// </summary>
         double Balance { get; }
 
-
         /// <summary>
         /// Adds a transaction to the account
         /// </summary>

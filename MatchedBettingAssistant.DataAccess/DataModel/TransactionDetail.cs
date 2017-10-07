@@ -2,7 +2,7 @@
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
-    public class TransactionDetail : ITransactionDetail
+    public class TransactionDetail
     {
         public TransactionDetail()
         {

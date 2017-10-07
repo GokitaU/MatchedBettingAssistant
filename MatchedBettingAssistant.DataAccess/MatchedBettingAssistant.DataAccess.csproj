@@ -52,6 +52,10 @@
     <Compile Include="DataModel\Transaction.cs" />
     <Compile Include="DataModel\TransactionDetail.cs" />
     <Compile Include="DataModel\Wallet.cs" />
+    <Compile Include="DTO\BookmakerDto.cs" />
+    <Compile Include="DTO\TransactionDetailDto.cs" />
+    <Compile Include="DTO\TransactionDto.cs" />
+    <Compile Include="DTO\WalletDto.cs" />
     <Compile Include="MatchedBettingAssistantDbContext.cs" />
     <Compile Include="MatchedBettingInitialiser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,5 +77,6 @@
       <Name>MatchedBettingAssistant.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
