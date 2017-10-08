@@ -7,6 +7,7 @@
         IWalletRepository WalletRepository { get; }
 
         void Create();
+        void Save();
     }
 
 }

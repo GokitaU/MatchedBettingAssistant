@@ -5,7 +5,7 @@ using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess
 {
-    public class MatchedBettingInitialiser : DropCreateDatabaseAlways<MatchedBettingAssistantDbContext>
+    public class MatchedBettingInitialiser : DropCreateDatabaseIfModelChanges<MatchedBettingAssistantDbContext>
     {
         protected override void Seed(MatchedBettingAssistantDbContext context)
         {

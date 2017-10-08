@@ -247,5 +247,8 @@
     <Resource Include="Assets\Images\icons8-Connected-32.png" />
     <Resource Include="Assets\Images\icons8-Create-32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-Save-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

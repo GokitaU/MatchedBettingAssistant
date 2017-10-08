@@ -14,6 +14,7 @@ namespace MatchedBettingAssistant.ViewModel
 
         private DelegateCommand connectCommand;
         private DelegateCommand connectAndCreateCommand;
+        private DelegateCommand saveCommand;
 
         public MainWindowViewModel()
         {
@@ -30,6 +31,7 @@ namespace MatchedBettingAssistant.ViewModel
         public DelegateCommand ConnectAndCreateCommand => this.connectAndCreateCommand ??
                                                           (this.connectAndCreateCommand = new DelegateCommand(ConnectAndCreate));
 
+        public DelegateCommand SaveCommand => this.saveCommand ?? (this.saveCommand = new DelegateCommand(Save));
 
         public ViewModelBase CurrentViewModel
         {
@@ -52,6 +54,11 @@ namespace MatchedBettingAssistant.ViewModel
         {
             this.repository = new Repository();
             this.CurrentViewModel = new BookmakerManagerViewModel(this.repository);
+        }
+
+        private void Save()
+        {
+            this.repository?.Save();
         }
     }
 }

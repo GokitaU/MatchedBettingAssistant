@@ -1,4 +1,6 @@
-﻿using MatchedBettingAssistant.Core;
+﻿using System;
+using System.Data.Entity.Infrastructure;
+using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.Repositories
 {
@@ -21,6 +23,24 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IWalletRepository WalletRepository => new WalletRepository(dbContext);
 
+        public void Save()
+        {
+            DisplayTrackedEntities(this.dbContext.ChangeTracker);
+            this.dbContext.SaveChanges();
+        }
 
+        private static void DisplayTrackedEntities(DbChangeTracker changeTracker)
+        {
+            Console.WriteLine("");
+
+            var entries = changeTracker.Entries();
+            foreach (var entry in entries)
+            {
+                Console.WriteLine("Entity Name: {0}", entry.Entity.GetType().FullName);
+                Console.WriteLine("Status: {0}", entry.State);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("---------------------------------------");
+        }
     }
 }

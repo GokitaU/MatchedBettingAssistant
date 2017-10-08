@@ -26,6 +26,10 @@
                                Command="{Binding ConnectAndCreateCommand}"
                                Glyph="{StaticResource Create}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarButtonItem Content="Save"
+                               Command="{Binding SaveCommand}"
+                               Glyph="{StaticResource Save}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
         </dxb:ToolBarControl>
         <ContentPresenter Grid.Row="1" Content="{Binding CurrentViewModel}"/>
     </Grid>
