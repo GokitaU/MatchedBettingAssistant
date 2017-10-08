@@ -37,7 +37,7 @@ namespace MatchedBettingAssistant.Model.Bets
         /// <summary>
         /// Places the bet and creates the transaction
         /// </summary>
-        public void Place(bool calculateDetail = true)
+        public void Place()
         {
             if (this.Transaction == null)
             {
@@ -49,6 +49,18 @@ namespace MatchedBettingAssistant.Model.Bets
                 };
 
                 this.Account.AddTransaction(this.Transaction);
+            }
+        }
+
+        public void Complete()
+        {
+            if (this.Transaction != null)
+            {
+                if (this.Transaction.Detail == null)
+                {
+                    var detail = new TransactionDetail() {Profit = this.Returns};
+                    this.Transaction.AddDetail(detail);
+                }
             }
         }
     }

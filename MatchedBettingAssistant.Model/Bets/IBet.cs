@@ -10,6 +10,8 @@ namespace MatchedBettingAssistant.Model.Bets
 
         double Returns { get; }
 
-        void Place(bool calculateDetail = true);
+        void Place();
+
+        void Complete();
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="Accounts\FundsTransaction.cs" />
     <Compile Include="Accounts\IAccountAction.cs" />
     <Compile Include="Accounts\IAccountTransferTransaction.cs" />
+    <Compile Include="Accounts\TransactionDetail.cs" />
     <Compile Include="Accounts\TransferFundsAccountAction.cs" />
     <Compile Include="Accounts\Wallet.cs" />
     <Compile Include="Bets\CalculatedBackBet.cs" />

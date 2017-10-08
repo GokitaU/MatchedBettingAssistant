@@ -22,11 +22,16 @@ namespace MatchedBettingAssistant.Model.Bets
             
         }
 
-        public void Place(bool calculateDetail = true)
+        public void Place()
         {
             var transaction = new FundsTransaction() { TransactionDate = Date, Amount = (Liability*-1)};
 
             this.Account.AddTransaction(transaction);
+        }
+
+        public void Complete()
+        {
+            throw new NotImplementedException();
         }
 
         public void Won()

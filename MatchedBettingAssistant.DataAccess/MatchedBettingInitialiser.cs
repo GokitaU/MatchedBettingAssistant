@@ -62,17 +62,33 @@ namespace MatchedBettingAssistant.DataAccess
                 CommissionPercent = 0.0d
             };
 
-            var transaction = new Transaction()
+            var detail = new TransactionDetail()
+            {
+                Profit = 1.00
+            };
+
+            var backTransaction = new Transaction()
             {
                 TransactionDate = DateTime.Today,
                 Amount = 29.00,
                 Description = "Free Bet",
-                Detail = new TransactionDetail {  Profit = 22.00 }
+                Detail = detail
             };
 
-            paddyPower.Transactions.Add(transaction);
+            var layTransaction = new Transaction()
+            {
+                TransactionDate = DateTime.Today,
+                Amount = -28.00,
+                Description = "Paddy Power Free Bet",
+                Detail = detail
+            };
+
+            betfair.Transactions.Add(layTransaction);
+            paddyPower.Transactions.Add(backTransaction);
 
             bookmakers.Add(paddyPower);
+
+
 
             return bookmakers;
         }
