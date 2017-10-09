@@ -18,6 +18,16 @@
                 <dxlc:LayoutItem Label="Profit/Loss">
                     <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}" IsReadOnly="True" MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True" />
                 </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Bet Type">
+                    <dxe:ComboBoxEdit ItemsSource="{Binding BetTypes}"
+                                      DisplayMember="Name"
+                                      EditValue="{Binding BetType}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Offer Type">
+                    <dxe:ComboBoxEdit ItemsSource="{Binding OfferTypes}"
+                                      DisplayMember="Name"
+                                      EditValue="{Binding OfferType}"/>
+                </dxlc:LayoutItem>
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup Orientation="Horizontal">
                 <dxlc:LayoutGroup Header="Back" View="GroupBox" Orientation="Vertical">

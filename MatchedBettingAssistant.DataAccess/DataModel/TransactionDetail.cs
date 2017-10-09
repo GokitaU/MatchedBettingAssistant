@@ -22,5 +22,9 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         /// The profit of the bet when matching bets are accounted for
         /// </summary>
         public double Profit { get; set; }
+
+        public BetType BetType { get; set; }
+
+        public OfferType OfferType { get; set; }
     }
 }

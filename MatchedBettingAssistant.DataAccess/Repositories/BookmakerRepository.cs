@@ -18,20 +18,26 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IEnumerable<IBettingAccount> GetAccounts()
         {
+            var betTypeRepository = new BetTypeRepository(this.dataContext);
+            var offerTypeRepository  = new OfferTypeRepository(this.dataContext);
+
             var accounts = this.dataContext.Accounts.OfType<DataModel.Bookmaker>()
                 .Include(x => x.Transactions)
                 .Include(x => x.Transactions.Select(d => d.Detail)).ToList();
 
-            return new List<IBettingAccount>(accounts.Select(x => new BookmakerDto(x)));
+            return new List<IBettingAccount>(accounts.Select(x => new BookmakerDto(x, betTypeRepository, offerTypeRepository)));
 
         }
 
         public IBettingAccount New()
         {
+            var betTypeRepository = new BetTypeRepository(this.dataContext);
+            var offerTypeRepository = new OfferTypeRepository(this.dataContext);
+
             var newAccount = new DataModel.Bookmaker();
             this.dataContext.Accounts.Add(newAccount);
 
-            return new BookmakerDto(newAccount);
+            return new BookmakerDto(newAccount, betTypeRepository, offerTypeRepository);
         }
     }
 }

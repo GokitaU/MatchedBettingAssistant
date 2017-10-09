@@ -12,4 +12,11 @@ namespace MatchedBettingAssistant.Core
 
         IBettingAccount New();
     }
+
+    public interface ITransactionRepository
+    {
+        ITransaction New();
+
+        ITransactionDetail NewDetail();
+    }
 }

@@ -9,14 +9,19 @@ namespace MatchedBettingAssistant.DataAccess.DTO
     public class BookmakerDto : IBettingAccount
     {
         private readonly DataModel.Bookmaker bookmaker;
+        private readonly IBetTypeRepository betTypeRepository;
+        private readonly IOfferTypeRepository offerTypeRepository;
 
-        private IList<ITransaction> transactions;
+        private readonly IList<ITransaction> transactions;
 
-        public BookmakerDto(Bookmaker bookmaker)
+        public BookmakerDto(Bookmaker bookmaker, IBetTypeRepository betTypeRepository, IOfferTypeRepository offerTypeRepository)
         {
             this.bookmaker = bookmaker;
+            this.betTypeRepository = betTypeRepository;
+            this.offerTypeRepository = offerTypeRepository;
 
-            this.transactions = new List<ITransaction>(this.bookmaker.Transactions.Select(x => new TransactionDto(x)));
+            this.transactions = new List<ITransaction>
+                (this.bookmaker.Transactions.Select(x => new TransactionDto(x)));
         }
 
         public int Id
@@ -57,11 +62,14 @@ namespace MatchedBettingAssistant.DataAccess.DTO
 
         public void AddTransaction(ITransaction transaction)
         {
-            var transactionDataObject = new Transaction(transaction);
-            this.bookmaker.Transactions.Add(transactionDataObject);
+            if (transaction is TransactionDto transactionDto)
+            {
+                this.bookmaker.Transactions.Add(transactionDto.Transaction);
 
-            var dto = new TransactionDto(transactionDataObject);
-            this.transactions.Add(dto);
+                this.transactions.Add(transactionDto);
+
+            }
+
         }
     }
 }

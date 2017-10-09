@@ -9,6 +9,13 @@ namespace MatchedBettingAssistant.Model.Bets
     /// </summary>
     public class SimpleBet : ISimpleBet
     {
+        private ITransactionRepository transactionRepository;
+
+        public SimpleBet(ITransactionRepository transactionRepository)
+        {
+            this.transactionRepository = transactionRepository;
+        }
+
         /// <summary>
         /// The betting account on which the bet was made
         /// </summary>
@@ -34,6 +41,12 @@ namespace MatchedBettingAssistant.Model.Bets
         /// </summary>
         public ITransaction Transaction { get; private set; }
 
+
+        public IBetType BetType { get; set; }
+
+
+        public IOfferType OfferType { get; set; }
+
         /// <summary>
         /// Places the bet and creates the transaction
         /// </summary>
@@ -41,12 +54,12 @@ namespace MatchedBettingAssistant.Model.Bets
         {
             if (this.Transaction == null)
             {
-                this.Transaction = new FundsTransaction()
-                {
-                    TransactionDate = Date,
-                    Amount = this.Returns,
-                    Description = this.Description
-                };
+                var transaction = transactionRepository.New();
+                transaction.TransactionDate = Date;
+                transaction.Amount = this.Returns;
+                transaction.Description = this.Description;
+
+                this.Transaction = transaction;
 
                 this.Account.AddTransaction(this.Transaction);
             }
@@ -58,7 +71,11 @@ namespace MatchedBettingAssistant.Model.Bets
             {
                 if (this.Transaction.Detail == null)
                 {
-                    var detail = new TransactionDetail() {Profit = this.Returns};
+                    var detail = this.transactionRepository.NewDetail();
+                    detail.Profit = this.Returns;
+                    detail.OfferType = this.OfferType;
+                    detail.BetType = this.BetType;
+
                     this.Transaction.AddDetail(detail);
                 }
             }

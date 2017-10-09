@@ -1,20 +1,24 @@
 using System;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.Model.Bets
 {
     public class SimpleMatchedBet
     {
+        private ITransactionRepository repository;
+
         private ISimpleBet backBet;
 
         private ISimpleBet layBet;
 
         private DateTime date;
 
-        public SimpleMatchedBet()
+        public SimpleMatchedBet(ITransactionRepository repository)
         {
-            this.backBet = new SimpleBet();
-            this.layBet = new SimpleBet();
+            this.repository = repository;
+            this.backBet = new SimpleBet(repository);
+            this.layBet = new SimpleBet(repository);
         }
 
         public DateTime Date
@@ -54,13 +58,29 @@ namespace MatchedBettingAssistant.Model.Bets
             set => this.layBet.Returns = value;
         }
 
+        public IOfferType OfferType { get; set; }
+
+        public IBetType BetType { get; set; }
+
         public void Place()
         {
             this.backBet.Place();
             this.layBet.Place();
 
             //create transaction detail bet
+            var detail = this.repository.NewDetail();
+            detail.OfferType = this.OfferType;
+            detail.BetType = this.BetType;
+            detail.Profit = this.LayReturns + this.BackReturns;
 
+            this.backBet.Transaction.AddDetail(detail);
+            this.layBet.Transaction.AddDetail(detail);
+        }
+
+        public void Complete()
+        {
+            this.backBet.Complete();
+            this.layBet.Complete();
         }
     }
 }

@@ -23,6 +23,13 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IWalletRepository WalletRepository => new WalletRepository(dbContext);
 
+        public IBetTypeRepository BetTypeRepository => new BetTypeRepository(dbContext);
+
+        public IOfferTypeRepository OfferTypeRepository => new OfferTypeRepository(dbContext);
+
+        public ITransactionRepository TransactionRepository => new TransactionRepository();
+
+
         public void Save()
         {
             DisplayTrackedEntities(this.dbContext.ChangeTracker);

@@ -6,6 +6,12 @@
 
         IWalletRepository WalletRepository { get; }
 
+        IBetTypeRepository BetTypeRepository { get; }
+
+        IOfferTypeRepository OfferTypeRepository { get; }
+
+        ITransactionRepository TransactionRepository { get; }
+
         void Create();
         void Save();
     }

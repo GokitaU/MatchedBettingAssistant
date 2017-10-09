@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Bets;
 
@@ -11,10 +14,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class BasicBetViewModel : BetViewModel
     {
         private readonly SimpleBet bet;
+        private BetTypeLookup betType;
+        private OfferTypeLookup offerType;
 
-        public BasicBetViewModel(SimpleBet bet)
+        public BasicBetViewModel(SimpleBet bet, IEnumerable<IBetType> betTypes, IEnumerable<IOfferType> offerTypes)
         {
             this.bet = bet;
+            this.BetTypes = betTypes.Select(x => new BetTypeLookup(x));
+            this.OfferTypes = offerTypes.Select(x => new OfferTypeLookup(x));
         }
 
         /// <summary>
@@ -48,12 +55,39 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        public BetTypeLookup BetType
+        {
+            get => this.betType;
+            set
+            {
+                this.betType = value;
+                this.bet.BetType = value?.BetType;
+
+                RaisePropertyChanged(() => this.BetType);
+            }
+        }
+
+        public OfferTypeLookup OfferType
+        {
+            get => this.offerType;
+            set
+            {
+                this.offerType = value;
+                this.bet.OfferType = offerType?.OfferType;
+                RaisePropertyChanged(()=>this.OfferType);
+            }
+        }
+
         /// <summary>
         /// Gets the account name
         /// </summary>
         public string AccountName => this.bet.Account?.Name;
 
         public bool CanPlaceBet => this.bet.Returns > 0;
+
+        public IEnumerable<BetTypeLookup> BetTypes { get; }
+
+        public IEnumerable<OfferTypeLookup> OfferTypes { get; }
 
         /// <summary>
         /// Gets or sets the return
@@ -71,6 +105,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+
         /// <summary>
         /// Commits the bet
         /// </summary>
@@ -83,5 +118,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Messenger.Default.Send(new TransactionsUpdatedMessage());
             }
         }
+
     }
 }

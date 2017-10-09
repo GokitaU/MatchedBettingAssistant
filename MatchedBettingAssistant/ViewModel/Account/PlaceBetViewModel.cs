@@ -13,12 +13,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private readonly IBettingAccount account;
         private BetViewModel currentBet;
 
-        private readonly IBookmakerRepository bookmakerRepository;
+        private readonly IRepository repository;
 
-        public PlaceBetViewModel(IBettingAccount account, IBookmakerRepository bookmakerRepository)
+        public PlaceBetViewModel(IBettingAccount account, IRepository repository)
         {
             this.account = account;
-            this.bookmakerRepository = bookmakerRepository;
+            this.repository = repository;
             CreateSimpleMatchedBet();
         }
 
@@ -47,25 +47,35 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateSimpleBackBet()
         {
-            var basicBet = new SimpleBet()
+            var betTypes = this.repository.BetTypeRepository.GetBetTypes();
+            var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes();
+
+            var basicBet = new SimpleBet(this.repository.TransactionRepository)
             {
                 Account = account,
                 Date = DateTime.Today
             };
-            this.CurrentBet = new BasicBetViewModel(basicBet);
+            this.CurrentBet = new BasicBetViewModel(basicBet, betTypes, offerTypes);
         }
 
         private void CreateSimpleMatchedBet()
         {
-            var simpleMatchedBet = new SimpleMatchedBet()
-            {
-                BackAccount = this.account,
-                Date = DateTime.Today
-            };
+
 
             var bookies = new List<IBettingAccount>() {this.account};
-            var exchanges = this.bookmakerRepository.GetAccounts().Where(x => x.IsExchange);
-            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges);
+            var exchanges = this.repository.BookmakerRepository.GetAccounts().Where(x => x.IsExchange).ToList();
+            var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes().ToList();
+            var betTypes = this.repository.BetTypeRepository.GetBetTypes().ToList();
+
+            var simpleMatchedBet = new SimpleMatchedBet(this.repository.TransactionRepository)
+            {
+                BackAccount = this.account,
+                LayAccount = exchanges.FirstOrDefault(),
+                Date = DateTime.Today,
+                BetType = betTypes.FirstOrDefault(),
+                OfferType = offerTypes.FirstOrDefault()
+            };
+            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges, betTypes, offerTypes);
         }
     }
 }

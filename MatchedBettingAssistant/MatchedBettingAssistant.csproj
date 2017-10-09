@@ -80,11 +80,13 @@
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\BasicBetViewModel.cs" />
+    <Compile Include="ViewModel\Account\BetTypeLookup.cs" />
     <Compile Include="ViewModel\Account\BetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerLookupItem.cs" />
     <Compile Include="ViewModel\Account\BookmakerManagerViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerNavigationViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerViewModel.cs" />
+    <Compile Include="ViewModel\Account\OfferTypeLookup.cs" />
     <Compile Include="ViewModel\Account\PlaceBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />

@@ -16,6 +16,16 @@
                         <dxlc:LayoutItem Label="Date">
                             <dxe:DateEdit EditValue="{Binding Date, Mode=TwoWay}"/>
                         </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Bet Type">
+                            <dxe:ComboBoxEdit ItemsSource="{Binding BetTypes}"
+                                              DisplayMember="Name"
+                                              EditValue="{Binding BetType}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Offer Type">
+                            <dxe:ComboBoxEdit ItemsSource="{Binding OfferTypes}"
+                                              DisplayMember="Name"
+                                              EditValue="{Binding OfferType}"/>
+                        </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Profit/Loss" ToolTip="Amount returned on completion">
                             <dxe:TextEdit EditValue="{Binding Returns}" MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
                         </dxlc:LayoutItem>

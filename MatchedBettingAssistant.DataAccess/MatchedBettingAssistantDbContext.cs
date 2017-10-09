@@ -15,6 +15,10 @@ namespace MatchedBettingAssistant.DataAccess
 
         public DbSet<DataModel.Account> Accounts { get; set; }
 
+        public DbSet<DataModel.BetType> BetTypes { get; set; }
+
+        public DbSet<DataModel.OfferType> OfferTypes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DataModel.Bookmaker>().ToTable("Bookmaker");

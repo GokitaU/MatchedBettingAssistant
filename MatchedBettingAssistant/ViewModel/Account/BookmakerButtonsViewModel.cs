@@ -9,7 +9,7 @@ using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Accounts;
 using MatchedBettingAssistant.Model.Bets;
-
+ 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class BookmakerButtonsViewModel : ViewModelBase
@@ -138,7 +138,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             if (this.account is IBettingAccount bettingAccount)
             {
-                var bet = new PlaceBetViewModel(bettingAccount, this.repository.BookmakerRepository);
+                var bet = new PlaceBetViewModel(bettingAccount, this.repository);
 
                 var okCommand = new UICommand()
                 {

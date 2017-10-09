@@ -15,17 +15,26 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private const double tolerance = 0.0001;
         private AccountLookupItem backAccount;
         private AccountLookupItem layAccount;
+        private BetTypeLookup betType;
+        private OfferTypeLookup offerType;
         private ObservableCollection<AccountLookupItem> bookmakers;
         private ObservableCollection<AccountLookupItem> exchanges;
+        private ObservableCollection<BetTypeLookup> betTypes;
+        private ObservableCollection<OfferTypeLookup> offerTypes;
 
         public SimpleMatchedBetViewModel(SimpleMatchedBet matchedBet, 
                                          IEnumerable<IBettingAccount> bookmakers, 
-                                         IEnumerable<IBettingAccount> exchanges)
+                                         IEnumerable<IBettingAccount> exchanges,
+                                         IEnumerable<IBetType> betTypes,
+                                         IEnumerable<IOfferType> offerTypes)
         {
             this.matchedBet = matchedBet;
             CreateBookmakers(bookmakers);
             CreateExchanges(exchanges);
+            CreateBetTypes(betTypes);
+            CreateOfferTypes(offerTypes);
         }
+
 
         public DateTime Date
         {
@@ -94,6 +103,26 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        public ObservableCollection<BetTypeLookup> BetTypes
+        {
+            get { return betTypes; }
+            private set
+            {
+                this.betTypes = value;
+                this.RaisePropertyChanged(()=>BetTypes);
+            }
+        }
+
+        public ObservableCollection<OfferTypeLookup> OfferTypes
+        {
+            get { return offerTypes; }
+            private set
+            {
+                this.offerTypes = value;
+                this.RaisePropertyChanged(()=>OfferTypes);
+            }
+        }
+
         public AccountLookupItem BackAccount
         {
             get { return backAccount; }
@@ -116,6 +145,27 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        public BetTypeLookup BetType
+        {
+            get => this.betType;
+            set
+            {
+                this.betType = value;
+                this.matchedBet.BetType = value.BetType;
+                RaisePropertyChanged(()=>BetType);
+            }
+        }
+
+        public OfferTypeLookup OfferType
+        {
+            get => this.offerType;
+            set
+            {
+                this.offerType = value;
+                this.matchedBet.OfferType = value.OfferType;
+                RaisePropertyChanged(()=>OfferType);
+            }
+        }
 
         public override void Commit()
         {
@@ -137,6 +187,21 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.Bookmakers = new ObservableCollection<AccountLookupItem>(bookmakers.Select(x => new AccountLookupItem(x)));
 
             this.BackAccount = this.Bookmakers.FirstOrDefault(x => ReferenceEquals(x.Account, this.matchedBet.BackAccount));
+        }
+
+
+        private void CreateOfferTypes(IEnumerable<IOfferType> offerTypes)
+        {
+            this.OfferTypes = new ObservableCollection<OfferTypeLookup>(offerTypes.Select(x => new OfferTypeLookup(x)));
+
+            this.OfferType = this.OfferTypes.FirstOrDefault(x => ReferenceEquals(x.OfferType, this.matchedBet.OfferType));
+        }
+
+        private void CreateBetTypes(IEnumerable<IBetType> betTypes)
+        {
+            this.BetTypes = new ObservableCollection<BetTypeLookup>(betTypes.Select(x => new BetTypeLookup(x)));
+
+            this.BetType = this.BetTypes.FirstOrDefault(x => ReferenceEquals(x.BetType, this.matchedBet.BetType));
         }
     }
 }

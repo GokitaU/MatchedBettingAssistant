@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBetType.cs" />
+    <Compile Include="IBetTypeRepository.cs" />
     <Compile Include="IBookmakerRepository.cs" />
     <Compile Include="IAccount.cs" />
     <Compile Include="IBettingAccount.cs" />
+    <Compile Include="IOfferType.cs" />
+    <Compile Include="IOfferTypeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ITransaction.cs" />
     <Compile Include="ITransactionDetail.cs" />

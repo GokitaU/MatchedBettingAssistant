@@ -8,11 +8,17 @@ namespace MatchedBettingAssistant.DataAccess.DTO
     public class WalletDto : IWallet
     {
         private readonly DataModel.Wallet wallet;
+        private readonly IBetTypeRepository betTypeRepository;
+        private readonly IOfferTypeRepository offerTypeRepository;
         private IList<ITransaction> transactions;
 
-        public WalletDto(Wallet wallet)
+        public WalletDto(Wallet wallet, 
+                        IBetTypeRepository betTypeRepository,
+                        IOfferTypeRepository offerTypeRepository)
         {
             this.wallet = wallet;
+            this.betTypeRepository = betTypeRepository;
+            this.offerTypeRepository = offerTypeRepository;
 
             this.transactions = new List<ITransaction>(this.wallet.Transactions.Select(x => new TransactionDto(x)));
         }

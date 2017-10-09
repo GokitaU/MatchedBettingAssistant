@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess
@@ -9,7 +10,13 @@ namespace MatchedBettingAssistant.DataAccess
     {
         protected override void Seed(MatchedBettingAssistantDbContext context)
         {
-            var bookmakers = CreateBookmakers();
+            var betTypes = CreateBetTypes();
+            context.BetTypes.AddRange(betTypes);
+
+            var offerTypes = CreateOfferTypes();
+            context.OfferTypes.AddRange(offerTypes);
+
+            var bookmakers = CreateBookmakers(context.BetTypes, context.OfferTypes);
             context.Accounts.AddRange(bookmakers);
 
             var wallets = CreateWallets();
@@ -17,6 +24,31 @@ namespace MatchedBettingAssistant.DataAccess
 
             context.SaveChanges();
             base.Seed(context);
+        }
+
+        private IEnumerable<BetType> CreateBetTypes()
+        {
+            var betTypes = new List<BetType>()
+            {
+                new BetType() {Name = "Sports Bet"},
+                new BetType() {Name = "Accumulator"},
+                new BetType() {Name = "Casino"},
+                new BetType() {Name = "Bingo"},
+            };
+
+            return betTypes;
+        }
+
+        private IEnumerable<OfferType> CreateOfferTypes()
+        {
+            var offerTypes = new List<OfferType>()
+            {
+                new OfferType() { Name = "None" },
+                new OfferType() { Name = "Qualifier"},
+                new OfferType() { Name="Bonus"}
+            };
+
+            return offerTypes;
         }
 
         private IEnumerable<DataModel.Wallet> CreateWallets()
@@ -32,7 +64,7 @@ namespace MatchedBettingAssistant.DataAccess
             return wallets;
         }
 
-        private IEnumerable<DataModel.Bookmaker> CreateBookmakers()
+        private IEnumerable<DataModel.Bookmaker> CreateBookmakers(IEnumerable<BetType> betTypes, IEnumerable<OfferType> offerTypes)
         {
             var bookmakers = new List<DataModel.Bookmaker>();
 
@@ -64,7 +96,9 @@ namespace MatchedBettingAssistant.DataAccess
 
             var detail = new TransactionDetail()
             {
-                Profit = 1.00
+                Profit = 1.00,
+                BetType = betTypes.FirstOrDefault(x => x.Name == "Sports Bet"),
+                OfferType = offerTypes.FirstOrDefault(x => x.Name == "Bonus")
             };
 
             var backTransaction = new Transaction()
