@@ -7,6 +7,13 @@ namespace MatchedBettingAssistant.Model.Accounts
 
     public class TransferFundsAccountAction : IAccountAction
     {
+        private readonly ITransactionRepository repository;
+
+        public TransferFundsAccountAction(ITransactionRepository repository)
+        {
+            this.repository = repository;
+        }
+
         public IAccount Source { get; set; }
         public IAccount Destination { get; set; }
         public double Amount { get; set; }
@@ -15,9 +22,15 @@ namespace MatchedBettingAssistant.Model.Accounts
 
         public void Apply()
         {
-            var withdraw = new FundsTransaction() {TransactionDate = this.Date, Amount = this.Amount * -1, Description = GetWithdrawDescription()};
+            var withdraw = this.repository.New();
+            withdraw.TransactionDate = this.Date;
+            withdraw.Amount = this.Amount * -1;
+            withdraw.Description = GetWithdrawDescription();
 
-            var deposit = new FundsTransaction() {TransactionDate = this.Date, Amount = this.Amount, Description = GetDepositDescription()};
+            var deposit = this.repository.New();
+            deposit.TransactionDate = this.Date;
+            deposit.Amount = this.Amount;
+            deposit.Description = GetDepositDescription();
 
             this.Source.AddTransaction(withdraw);
 

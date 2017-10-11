@@ -15,5 +15,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public string Name => this.Account.Name;
 
         internal IBettingAccount Account { get; }
+
+        public void Refresh()
+        {
+            RaisePropertyChanged(()=>Name);
+        }
     }
 }

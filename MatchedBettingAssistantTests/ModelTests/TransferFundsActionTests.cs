@@ -11,6 +11,8 @@ namespace MatchedBettingAssistant.Model.Tests.ModelTests
     {
         private Mock<IAccount> source;
         private Mock<IAccount> destination;
+        private Mock<ITransactionRepository> repository;
+
         private const double tolerance = 0.001;
 
         [TestInitialize]
@@ -18,12 +20,14 @@ namespace MatchedBettingAssistant.Model.Tests.ModelTests
         {
             this.source = new Mock<IAccount>();
             this.destination = new Mock<IAccount>();
+            this.repository = new Mock<ITransactionRepository>();
+            this.repository.Setup(x => x.New()).Returns(new FundsTransaction());
         }
 
         [TestMethod]
         public void Transfer_removes_funds_from_source()
         {
-            var withdrawal = new TransferFundsAccountAction
+            var withdrawal = new TransferFundsAccountAction(repository.Object)
             {
                 Source = source.Object,
                 Destination = destination.Object,
@@ -38,7 +42,7 @@ namespace MatchedBettingAssistant.Model.Tests.ModelTests
         [TestMethod]
         public void Transfer_adds_funds_to_destination()
         {
-            var withdrawal = new TransferFundsAccountAction
+            var withdrawal = new TransferFundsAccountAction(repository.Object)
             {
                 Source = source.Object,
                 Destination = destination.Object,

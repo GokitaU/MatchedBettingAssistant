@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModel\Account.cs" />
+    <Compile Include="DataModel\Bank.cs" />
     <Compile Include="DataModel\BetType.cs" />
     <Compile Include="DataModel\Bookmaker.cs" />
     <Compile Include="DataModel\OfferType.cs" />

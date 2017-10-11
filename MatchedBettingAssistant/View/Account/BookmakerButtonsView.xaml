@@ -20,7 +20,7 @@
                 <Style TargetType="dx:DXDialogWindow">
                     <Setter Property="ResizeMode" Value="NoResize"/>
                     <Setter Property="Width" Value="350"/>
-                    <Setter Property="Height" Value="250"/>
+                    <Setter Property="Height" Value="300"/>
                     <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
                 </Style>
             </dx:DialogService.DialogStyle>

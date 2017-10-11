@@ -84,8 +84,11 @@
     <Compile Include="ViewModel\Account\BetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerLookupItem.cs" />
     <Compile Include="ViewModel\Account\BookmakerManagerViewModel.cs" />
+    <Compile Include="ViewModel\Account\BookmakerNameChangedMessage.cs" />
     <Compile Include="ViewModel\Account\BookmakerNavigationViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerViewModel.cs" />
+    <Compile Include="ViewModel\Account\IAddsEntity.cs" />
+    <Compile Include="ViewModel\Account\IDeletesEntity.cs" />
     <Compile Include="ViewModel\Account\OfferTypeLookup.cs" />
     <Compile Include="ViewModel\Account\PlaceBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
@@ -251,6 +254,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\icons8-Save-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-Add-32.png" />
+    <Resource Include="Assets\Images\icons8-Delete-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

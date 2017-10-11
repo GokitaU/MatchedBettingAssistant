@@ -31,6 +31,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
             {
                 this.account.Name = value;
                 RaisePropertyChanged(() => this.Name);
+
+                Messenger.Default.Send(new BookmakerNameChangedMessage(this.account));
             }
         }
 

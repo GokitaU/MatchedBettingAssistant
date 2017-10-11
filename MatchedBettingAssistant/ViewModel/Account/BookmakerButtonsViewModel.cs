@@ -75,7 +75,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public void Deposit()
         {
-            var action = new TransferFundsAccountAction()
+            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
             {
                 Destination = this.account,
                 Date = DateTime.Today
@@ -91,7 +91,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public void Withdraw()
         {
-            var action = new TransferFundsAccountAction()
+            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
             {
                 Source = this.account,
                 Date = DateTime.Today

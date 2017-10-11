@@ -6,5 +6,7 @@
     <BitmapImage x:Key="Connect32" UriSource="Assets/Images/icons8-Connected-32.png"/>
     <BitmapImage x:Key="Create" UriSource="Assets/Images/icons8-Create-32.png"/>
     <BitmapImage x:Key="Save" UriSource="Assets/Images/icons8-Save-32.png"/>
+    <BitmapImage x:Key="Add" UriSource="Assets/Images/icons8-Add-32.png"/>
+    <BitmapImage x:Key="Delete" UriSource="Assets/Images/icons8-Delete-32.png"/>
 
 </ResourceDictionary>

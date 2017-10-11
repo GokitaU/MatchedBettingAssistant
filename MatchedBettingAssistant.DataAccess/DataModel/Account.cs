@@ -21,12 +21,8 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public double Balance => this.StartingBalance + this.Transactions.Sum(x=>x.Amount);
 
-        public void AddTransaction(ITransaction transaction)
-        {
-            this.Transactions.Add(new Transaction(transaction));
-        }
         public ICollection<Transaction> Transactions { get; set; }
 
-
+        public bool Deleted { get; set; }
     }
 }

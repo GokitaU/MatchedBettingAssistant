@@ -17,6 +17,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.bookmakerRepository = bookmakerRepository;
 
             CreateBookmakers();
+
+            RegisterMessages();
+        }
+
+        private void RegisterMessages()
+        {
+            Messenger.Default.Register<BookmakerNameChangedMessage>(this, BookmakerNameChanged);
         }
 
         public BookmakerLookupItem SelectedBookmaker
@@ -35,11 +42,26 @@ namespace MatchedBettingAssistant.ViewModel.Account
             get { return this.bookmakers; }
         }
 
+        public void Add(IBettingAccount account)
+        {
+            var bookmaker = new BookmakerLookupItem(account);
+            this.Bookmakers.Add(bookmaker);
+
+            this.SelectedBookmaker = bookmaker;
+        }
+
         private void CreateBookmakers()
         {
             var bookies = this.bookmakerRepository.GetAccounts();
 
             this.bookmakers = new ObservableCollection<BookmakerLookupItem>(bookies.Select(x => new BookmakerLookupItem(x)));
-        }        
+        }
+
+        private void BookmakerNameChanged(BookmakerNameChangedMessage message)
+        {
+            var account = this.bookmakers.FirstOrDefault(x => ReferenceEquals(x.Account, message.Account));
+
+            account?.Refresh();
+        } 
     }
 }

@@ -7,5 +7,9 @@
         IBetType BetType { get; set; }
 
         IOfferType OfferType { get; set; }
+
+        double PaybackPercent { get; set; }
+
+        double Payback { get; }
     }
 }

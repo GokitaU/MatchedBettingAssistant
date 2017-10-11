@@ -30,6 +30,14 @@
                                Command="{Binding SaveCommand}"
                                Glyph="{StaticResource Save}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarButtonItem Content="Add"
+                               Command="{Binding AddCommand}"
+                               Glyph="{StaticResource Add}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarButtonItem Content="Delete"
+                               Command="{Binding DeleteCommand}"
+                               Glyph="{StaticResource Delete}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
         </dxb:ToolBarControl>
         <ContentPresenter Grid.Row="1" Content="{Binding CurrentViewModel}"/>
     </Grid>

@@ -5,7 +5,7 @@ namespace MatchedBettingAssistant.DataAccess.DTO
 {
     public class TransactionDetailDto : ITransactionDetail
     {
-        private DataModel.TransactionDetail detail;
+        private readonly DataModel.TransactionDetail detail;
 
         private IBetType betType;
         private IOfferType offerType;
@@ -57,6 +57,15 @@ namespace MatchedBettingAssistant.DataAccess.DTO
 
             }
         }
+
+        public double PaybackPercent
+        {
+            get => this.detail.PaybackPercent;
+            set => this.detail.PaybackPercent = value;
+        }
+
+        public double Payback => this.Profit * this.PaybackPercent;
+
 
         internal TransactionDetail TransactionDetail => this.detail;
     }

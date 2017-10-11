@@ -5,7 +5,7 @@ using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class BookmakerManagerViewModel : ViewModelBase
+    public class BookmakerManagerViewModel : ViewModelBase, IAddsEntity, IDeletesEntity
     {
         private IRepository repository;
 
@@ -37,6 +37,21 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 this.bookmakerEditViewModel = value;
                 RaisePropertyChanged(()=>BookmakerEditViewModel);
             }
+        }
+
+        /// <summary>
+        /// Adds a new bookmaker
+        /// </summary>
+        public void Add()
+        {
+            var bookmaker = this.repository.BookmakerRepository.New();
+            bookmaker.Name = "New Bookmaker";
+            this.navigationViewModel.Add(bookmaker);
+        }
+
+        public void DeleteCurrent()
+        {
+            
         }
 
         private void RegisterMessages()

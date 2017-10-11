@@ -60,8 +60,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateSimpleMatchedBet()
         {
-
-
             var bookies = new List<IBettingAccount>() {this.account};
             var exchanges = this.repository.BookmakerRepository.GetAccounts().Where(x => x.IsExchange).ToList();
             var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes().ToList();

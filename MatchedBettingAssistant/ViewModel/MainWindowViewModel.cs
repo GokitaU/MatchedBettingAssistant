@@ -15,6 +15,8 @@ namespace MatchedBettingAssistant.ViewModel
         private DelegateCommand connectCommand;
         private DelegateCommand connectAndCreateCommand;
         private DelegateCommand saveCommand;
+        private DelegateCommand addCommand;
+        private DelegateCommand deleteCommand;
 
         public MainWindowViewModel()
         {
@@ -27,11 +29,11 @@ namespace MatchedBettingAssistant.ViewModel
         }
 
         public DelegateCommand ConnectCommand => this.connectCommand ?? (this.connectCommand = new DelegateCommand(Connect));
-
         public DelegateCommand ConnectAndCreateCommand => this.connectAndCreateCommand ??
                                                           (this.connectAndCreateCommand = new DelegateCommand(ConnectAndCreate));
-
         public DelegateCommand SaveCommand => this.saveCommand ?? (this.saveCommand = new DelegateCommand(Save));
+        public DelegateCommand DeleteCommand => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete));
+        public DelegateCommand AddCommand => this.addCommand ?? (this.addCommand = new DelegateCommand(Add));
 
         public ViewModelBase CurrentViewModel
         {
@@ -59,6 +61,23 @@ namespace MatchedBettingAssistant.ViewModel
         private void Save()
         {
             this.repository?.Save();
+        }
+
+
+        private void Delete()
+        {
+            if (this.CurrentViewModel is IDeletesEntity deletableVm)
+            {
+                deletableVm.DeleteCurrent();
+            }
+        }
+
+        private void Add()
+        {
+            if (this.CurrentViewModel is IAddsEntity addableVm)
+            {
+                addableVm.Add();
+            }
         }
     }
 }
