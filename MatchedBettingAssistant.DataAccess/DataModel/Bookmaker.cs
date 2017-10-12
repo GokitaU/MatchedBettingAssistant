@@ -34,6 +34,20 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         /// losses and therefore subtracted).
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public double Payback => this.Transactions.Sum(x => x.Detail?.Payback ?? 0);
+        public double PaybackDue
+        {
+            get
+            {
+                var totalOwed = this.Transactions
+                    .Where(x => x.Detail?.OfferType?.IsBonusOffer ?? false)
+                    .Sum(x => x.Detail?.Payback ?? 0);
+
+                var totalPaid = this.Transactions
+                    .Where(x => (x.Detail?.OfferType?.IsBonusOffer ?? false) == false)
+                    .Sum(x => x.Detail?.Profit ?? 0);
+
+                return totalOwed + totalPaid;
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace MatchedBettingAssistant.DataAccess
             var offerTypes = CreateOfferTypes();
             context.OfferTypes.AddRange(offerTypes);
 
-            var bookmakers = CreateBookmakers(context.BetTypes, context.OfferTypes);
+            var bookmakers = CreateBookmakers(betTypes, offerTypes);
             context.Accounts.AddRange(bookmakers);
 
             var wallets = CreateWallets();
@@ -43,9 +43,9 @@ namespace MatchedBettingAssistant.DataAccess
         {
             var offerTypes = new List<OfferType>()
             {
-                new OfferType() { Name = "None" },
-                new OfferType() { Name = "Qualifier"},
-                new OfferType() { Name="Bonus"}
+                new OfferType() { Name = "None", IsBonusOffer = false},
+                new OfferType() { Name = "Qualifier", IsBonusOffer = true},
+                new OfferType() { Name="Bonus", IsBonusOffer = true}
             };
 
             return offerTypes;
@@ -72,6 +72,7 @@ namespace MatchedBettingAssistant.DataAccess
             {
                 Name = "Betfair",
                 StartingBalance = 525.00d,
+                PayBackPercent = 0.00,
                 IsExchange = true,
                 CommissionPercent = 0.05
             };
@@ -90,15 +91,20 @@ namespace MatchedBettingAssistant.DataAccess
             {
                 Name = "Paddy Power",
                 StartingBalance = 77.98,
+                PayBackPercent = 0.10,
                 IsExchange = false,
                 CommissionPercent = 0.0d
             };
 
+            var betType = betTypes.First(x => x.Name == "Sports Bet");
+            var offerType = offerTypes.FirstOrDefault(x => x.Name == "Bonus");
+
             var detail = new TransactionDetail()
             {
                 Profit = 1.00,
-                BetType = betTypes.FirstOrDefault(x => x.Name == "Sports Bet"),
-                OfferType = offerTypes.FirstOrDefault(x => x.Name == "Bonus")
+                PaybackPercent = 0.10,
+                BetType = betType,
+                OfferType = offerType
             };
 
             var backTransaction = new Transaction()

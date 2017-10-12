@@ -52,6 +52,7 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             if (detail is TransactionDetailDto transactionDetailDto)
             {
                 this.transaction.Detail = transactionDetailDto.TransactionDetail;
+                this.detail = transactionDetailDto;
             }
         }
 

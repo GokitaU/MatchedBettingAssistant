@@ -21,6 +21,14 @@
                 </dxg:GridColumn.EditSettings>
             </dxg:GridColumn>
             <dxg:GridColumn FieldName="Description" IsSmart="True" ReadOnly="True"/>
+            <dxg:GridColumn FieldName="BetType" IsSmart="True" ReadOnly="True" Width="100"/>
+            <dxg:GridColumn FieldName="OfferType" IsSmart="True" ReadOnly="True" Width="100"/>
+            <dxg:GridColumn FieldName="Profit" IsSmart="True" ReadOnly="True">
+                <dxg:GridColumn.EditSettings>
+                    <dxe:TextEditSettings Mask="C2" MaskType="Numeric" MaskUseAsDisplayFormat="True"/>
+                </dxg:GridColumn.EditSettings>
+            </dxg:GridColumn>
+
         </dxg:GridControl>
 
     </Grid>

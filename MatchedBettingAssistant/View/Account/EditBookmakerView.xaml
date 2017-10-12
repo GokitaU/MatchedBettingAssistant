@@ -11,46 +11,44 @@
     <Grid>
         <dxlc:LayoutControl Orientation="Vertical">
             <dxlc:LayoutGroup Header="Details" 
-                              View="GroupBox">
-                <dxlc:LayoutGroup Orientation="Vertical">
-                    <dxlc:LayoutGroup>
-                        <dxlc:LayoutItem Label="Name">
-                            <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
-                        </dxlc:LayoutItem>
-
-                    </dxlc:LayoutGroup>                    
-                    <dxlc:LayoutGroup>
-                        <dxlc:LayoutItem Label="Exchange">
-                            <dxe:CheckEdit IsChecked="{Binding IsExchange}"/>
-                        </dxlc:LayoutItem>
-
-                        <dxlc:LayoutItem Label="Commission">
-                            <dxe:TextEdit/>
-                        </dxlc:LayoutItem>
-                    </dxlc:LayoutGroup>
-                    <dxlc:LayoutGroup Header="LayoutGroup" Orientation="Horizontal">
-                        <dxlc:LayoutItem Label="Starting Balance">
-                            <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"
-                                          MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
-                        </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="Balance">
-                            <dxe:TextEdit Text="{Binding Balance, Mode=OneWay}"
-                                          MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
-                        </dxlc:LayoutItem>
-                        <dxlc:LayoutItem Label="Profit">
-                            <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}"
-                                          MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
-                        </dxlc:LayoutItem>
-                    </dxlc:LayoutGroup>
-
-                </dxlc:LayoutGroup>
-            </dxlc:LayoutGroup>
-            <dxlc:LayoutGroup Header="LayoutGroup">
-                <dxlc:LayoutItem>
-                    <account:BookmakerButtonsView DataContext="{Binding BookmakerButtons}"/>
+                              View="GroupBox" Orientation="Vertical">
+                <dxlc:LayoutItem Label="Name">
+                    <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
                 </dxlc:LayoutItem>
 
+                <dxlc:LayoutGroup>
+                    <dxlc:LayoutItem Label="Exchange">
+                        <dxe:CheckEdit IsChecked="{Binding IsExchange}"/>
+                    </dxlc:LayoutItem>
+
+                    <dxlc:LayoutItem Label="Commission">
+                        <dxe:TextEdit/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="LayoutGroup" Orientation="Horizontal">
+                    <dxlc:LayoutItem Label="Starting Balance">
+                        <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"
+                                          MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Balance">
+                        <dxe:TextEdit Text="{Binding Balance, Mode=OneWay}"
+                                          MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup>
+                    <dxlc:LayoutItem Label="Profit">
+                        <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}"
+                                      MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Payback Due">
+                        <dxe:TextEdit Text="{Binding PaybackDue, Mode=OneWay}"
+                                      MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
+            <dxlc:LayoutItem>
+                <account:BookmakerButtonsView DataContext="{Binding BookmakerButtons}"/>
+            </dxlc:LayoutItem>
 
 
         </dxlc:LayoutControl>

@@ -44,7 +44,6 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public IBetType BetType { get; set; }
 
-
         public IOfferType OfferType { get; set; }
 
         /// <summary>
@@ -58,7 +57,6 @@ namespace MatchedBettingAssistant.Model.Bets
                 transaction.TransactionDate = Date;
                 transaction.Amount = this.Returns;
                 transaction.Description = this.Description;
-
                 this.Transaction = transaction;
 
                 this.Account.AddTransaction(this.Transaction);
@@ -75,7 +73,7 @@ namespace MatchedBettingAssistant.Model.Bets
                     detail.Profit = this.Returns;
                     detail.OfferType = this.OfferType;
                     detail.BetType = this.BetType;
-
+                    detail.PaybackPercent = this.Account.PaybackPercent;
                     this.Transaction.AddDetail(detail);
                 }
             }

@@ -56,7 +56,15 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             set => this.bookmaker.IsExchange = value;
         }
 
+        public double PaybackPercent
+        {
+            get => this.bookmaker.PayBackPercent;
+            set { this.bookmaker.PayBackPercent = value; }
+        }
+
         public double Profit => this.bookmaker.Profit;
+
+        public double PaybackDue => this.bookmaker.PaybackDue;
 
         public IEnumerable<ITransaction> Transactions => transactions;
 

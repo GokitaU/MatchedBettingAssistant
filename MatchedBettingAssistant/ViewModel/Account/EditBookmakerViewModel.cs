@@ -73,6 +73,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double Profit => this.account.Profit;
 
+        public double PaybackDue => this.account.PaybackDue;
+
         public BookmakerButtonsViewModel BookmakerButtons { get; }
 
         private void RegisterMessages()
@@ -85,6 +87,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             this.RaisePropertyChanged(() => this.Balance);
             this.RaisePropertyChanged(() => this.Profit);
+            this.RaisePropertyChanged(() => this.PaybackDue);
         }
     }
 }

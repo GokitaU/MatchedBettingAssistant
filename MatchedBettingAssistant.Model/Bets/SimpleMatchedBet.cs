@@ -72,7 +72,7 @@ namespace MatchedBettingAssistant.Model.Bets
             detail.OfferType = this.OfferType;
             detail.BetType = this.BetType;
             detail.Profit = this.LayReturns + this.BackReturns;
-
+            detail.PaybackPercent = this.BackAccount.PaybackPercent;
             this.backBet.Transaction.AddDetail(detail);
             this.layBet.Transaction.AddDetail(detail);
         }

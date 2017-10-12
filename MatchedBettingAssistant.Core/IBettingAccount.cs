@@ -7,5 +7,9 @@
         bool IsExchange { get; set; }
 
         double Profit { get; }
+
+        double PaybackPercent { get; set; }
+
+        double PaybackDue { get; }
     }
 }

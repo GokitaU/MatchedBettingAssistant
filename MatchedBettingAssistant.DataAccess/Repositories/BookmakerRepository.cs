@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.DataAccess.DTO;
@@ -23,7 +24,9 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
             var accounts = this.dataContext.Accounts.OfType<DataModel.Bookmaker>()
                 .Include(x => x.Transactions)
-                .Include(x => x.Transactions.Select(d => d.Detail)).ToList();
+                .Include(x => x.Transactions.Select(d => d.Detail))
+                .Include(x => x.Transactions.Select(d => d.Detail.BetType))
+                .Include(x => x.Transactions.Select(d => d.Detail.OfferType)).ToList();
 
             return new List<IBettingAccount>(accounts.Select(x => new BookmakerDto(x, betTypeRepository, offerTypeRepository)));
 
