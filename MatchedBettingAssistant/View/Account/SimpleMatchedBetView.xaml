@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MatchedBettingAssistant.View.Account"
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" x:Class="MatchedBettingAssistant.View.Account.SimpleMatchedBetView"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             x:Class="MatchedBettingAssistant.View.Account.SimpleMatchedBetView"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="500">
+             d:DesignHeight="350" d:DesignWidth="500">
     <Grid>
         <dxlc:LayoutControl Orientation="Vertical" >
             <dxlc:LayoutGroup Header="Result" View="GroupBox" Orientation="Vertical">
@@ -27,6 +29,9 @@
                     <dxe:ComboBoxEdit ItemsSource="{Binding OfferTypes}"
                                       DisplayMember="Name"
                                       EditValue="{Binding OfferType}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Description">
+                    <dxe:TextEdit EditValue="{Binding Description}"/>
                 </dxlc:LayoutItem>
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup Orientation="Horizontal">
@@ -50,6 +55,22 @@
                         <dxe:TextEdit EditValue="{Binding LayReturns}" MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
+            <dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="LayoutGroup"
+                    Orientation="Horizontal">
+                    <dxlc:LayoutItem>
+                        <dx:SimpleButton Content="Mug" Command="{Binding MugBetCommand}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem>
+                        <dx:SimpleButton Content="Qualifier" Command="{Binding QualifyingBetCommand}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem>
+                        <dx:SimpleButton Content="Bonus" Command="{Binding BonusBetCommand}"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+
+
             </dxlc:LayoutGroup>
 
         </dxlc:LayoutControl>

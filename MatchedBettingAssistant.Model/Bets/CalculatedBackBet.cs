@@ -17,6 +17,7 @@ namespace MatchedBettingAssistant.Model.Bets
         public double Odds { get; set; }
 
         public double Returns => this.Stake * (this.Odds - 1);
+        public string Description { get; set; }
 
         public double Probability => 1 / this.Odds;
 

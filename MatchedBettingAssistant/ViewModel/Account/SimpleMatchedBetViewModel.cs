@@ -21,6 +21,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private ObservableCollection<AccountLookupItem> exchanges;
         private ObservableCollection<BetTypeLookup> betTypes;
         private ObservableCollection<OfferTypeLookup> offerTypes;
+        private DelegateCommand mugBetCommand;
+        private DelegateCommand qualifyingBetCommand;
+        private DelegateCommand bonusBetCommand;
 
         public SimpleMatchedBetViewModel(SimpleMatchedBet matchedBet, 
                                          IEnumerable<IBettingAccount> bookmakers, 
@@ -151,7 +154,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.betType = value;
-                this.matchedBet.BetType = value.BetType;
+                this.matchedBet.BetType = value?.BetType;
                 RaisePropertyChanged(()=>BetType);
             }
         }
@@ -162,10 +165,30 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.offerType = value;
-                this.matchedBet.OfferType = value.OfferType;
+                this.matchedBet.OfferType = value?.OfferType;
                 RaisePropertyChanged(()=>OfferType);
             }
         }
+
+        public string Description
+        {
+            get => this.matchedBet.Description;
+            set
+            {
+                if (this.matchedBet.Description == value)
+                    return;
+
+                this.matchedBet.Description = value;
+
+                RaisePropertyChanged(() => this.Description);
+            }
+        }
+
+        public DelegateCommand MugBetCommand => this.mugBetCommand ?? (this.mugBetCommand = new DelegateCommand(MugBet));
+
+        public DelegateCommand QualifyingBetCommand => this.qualifyingBetCommand ?? (this.qualifyingBetCommand = new DelegateCommand(QualifyingBet));
+
+        public DelegateCommand BonusBetCommand => this.bonusBetCommand ?? (this.bonusBetCommand = new DelegateCommand(BonusBet));
 
         public override void Commit()
         {
@@ -202,6 +225,24 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.BetTypes = new ObservableCollection<BetTypeLookup>(betTypes.Select(x => new BetTypeLookup(x)));
 
             this.BetType = this.BetTypes.FirstOrDefault(x => ReferenceEquals(x.BetType, this.matchedBet.BetType));
+        }
+
+        private void MugBet()
+        {
+            this.OfferType = this.OfferTypes.FirstOrDefault(x => x.Name == "None");
+            this.Description = "Payback Bet";
+        }
+
+        private void QualifyingBet()
+        {
+            this.OfferType = this.OfferTypes.FirstOrDefault(x => x.Name == "Qualifier");
+            this.Description = "Qualifier";
+        }
+
+        private void BonusBet()
+        {
+            this.OfferType = this.OfferTypes.FirstOrDefault(x => x.Name == "Bonus");
+            this.Description = "Bonus";
         }
     }
 }

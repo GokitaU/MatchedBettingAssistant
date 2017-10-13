@@ -14,6 +14,8 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public double Returns => this.Stake;
 
+        public string Description { get; set; }
+
         /// <summary>
         /// Bet has lost. The funds will already have been taken from the account
         /// </summary>

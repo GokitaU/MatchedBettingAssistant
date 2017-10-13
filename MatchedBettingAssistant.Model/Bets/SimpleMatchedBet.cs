@@ -62,6 +62,16 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public IBetType BetType { get; set; }
 
+        public string Description
+        {
+            get => this.backBet.Description;
+            set
+            {
+                this.backBet.Description = value;
+                this.layBet.Description = value;
+            }
+        }
+
         public void Place()
         {
             this.backBet.Place();

@@ -5,8 +5,7 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:account="clr-namespace:MatchedBettingAssistant.View.Account"
     xmlns:viewmodel="clr-namespace:MatchedBettingAssistant.ViewModel.Account"
-    Title="MainWindow" Height="800" Width="1024"
-    >
+    Title="Matched Betting Assistant" Height="800" Width="1024">
     <dx:DXWindow.Resources>
         <DataTemplate DataType="{x:Type viewmodel:BookmakerManagerViewModel}">
             <account:BookmakerManagerView/>
@@ -17,19 +16,30 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <dxb:ToolBarControl Caption="{x:Null}" BarItemDisplayMode="ContentAndGlyph" Orientation="Horizontal" >
+        <dxb:ToolBarControl Caption="{x:Null}" BarItemDisplayMode="ContentAndGlyph" Orientation="Horizontal" AllowCustomizationMenu="False" >
+            
             <dxb:BarButtonItem Content="Connect" 
                                Command="{Binding ConnectCommand}"
                                Glyph="{StaticResource Connect32}" 
                                BarItemDisplayMode="ContentAndGlyph"/>
-            <dxb:BarButtonItem Content="Create"
-                               Command="{Binding ConnectAndCreateCommand}"
-                               Glyph="{StaticResource Create}"
-                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarButtonItem Content="Save"
                                Command="{Binding SaveCommand}"
                                Glyph="{StaticResource Save}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarItemLinkSeparator/>
+            <dxb:BarButtonItem Content="Bookies"
+                               Command="{Binding SaveCommand}"
+                               Glyph="{StaticResource Horse32}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarButtonItem Content="Wallets"
+                               Command="{Binding SaveCommand}"
+                               Glyph="{StaticResource Wallets}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarButtonItem Content="Banks"
+                               Command="{Binding SaveCommand}"
+                               Glyph="{StaticResource Bank}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarItemLinkSeparator/>
             <dxb:BarButtonItem Content="Add"
                                Command="{Binding AddCommand}"
                                Glyph="{StaticResource Add}"
