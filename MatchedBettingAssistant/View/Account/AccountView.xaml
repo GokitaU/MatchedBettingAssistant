@@ -1,20 +1,26 @@
-﻿<UserControl x:Class="MatchedBettingAssistant.View.Account.BookmakerView"
+﻿<UserControl x:Class="MatchedBettingAssistant.View.Account.AccountView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MatchedBettingAssistant.View.Account"
+             xmlns:account="clr-namespace:MatchedBettingAssistant.ViewModel.Account"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
-        
+        <DataTemplate DataType="{x:Type account:EditBookmakerViewModel}">
+            <local:EditBookmakerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type account:EditAccountViewModel}">
+            <local:EditAccountView/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <local:EditBookmakerView DataContext="{Binding BookmakerEdit}"/>        
+        <ContentPresenter Content="{Binding EditViewModel}"/>        
         <local:AccountTransactionListView Grid.Row="1"
                                           DataContext="{Binding Transactions}"/>
     </Grid>

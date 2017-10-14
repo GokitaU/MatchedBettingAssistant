@@ -8,9 +8,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class BookmakerNavigationViewModel : ViewModelBase
     {
         private readonly IBookmakerRepository bookmakerRepository;
-        private BookmakerLookupItem selectedBookmaker;
+        private BookmakerLookupItem selectedAccount;
 
-        private ObservableCollection<BookmakerLookupItem> bookmakers;
+        private ObservableCollection<BookmakerLookupItem> accounts;
 
         public BookmakerNavigationViewModel(IBookmakerRepository bookmakerRepository)
         {
@@ -26,40 +26,40 @@ namespace MatchedBettingAssistant.ViewModel.Account
             Messenger.Default.Register<BookmakerNameChangedMessage>(this, BookmakerNameChanged);
         }
 
-        public BookmakerLookupItem SelectedBookmaker
+        public BookmakerLookupItem SelectedAccount
         {
-            get => this.selectedBookmaker;
+            get => this.selectedAccount;
             set
             {
-                this.selectedBookmaker = value;
-                Messenger.Default.Send(new SelectedBookmakerChangedMessage(this.selectedBookmaker.Account));
-                RaisePropertyChanged(()=>SelectedBookmaker);
+                this.selectedAccount = value;
+                if (selectedAccount != null)
+                {
+                    Messenger.Default.Send(new SelectedBookmakerChangedMessage(this.selectedAccount.Account));
+                }
+                RaisePropertyChanged(()=>SelectedAccount);
             }
         }
 
-        public ObservableCollection<BookmakerLookupItem> Bookmakers
-        {
-            get { return this.bookmakers; }
-        }
+        public ObservableCollection<BookmakerLookupItem> Accounts => this.accounts;
 
         public void Add(IBettingAccount account)
         {
             var bookmaker = new BookmakerLookupItem(account);
-            this.Bookmakers.Add(bookmaker);
+            this.Accounts.Add(bookmaker);
 
-            this.SelectedBookmaker = bookmaker;
+            this.SelectedAccount = bookmaker;
         }
 
         private void CreateBookmakers()
         {
             var bookies = this.bookmakerRepository.GetAccounts();
 
-            this.bookmakers = new ObservableCollection<BookmakerLookupItem>(bookies.Select(x => new BookmakerLookupItem(x)));
+            this.accounts = new ObservableCollection<BookmakerLookupItem>(bookies.Select(x => new BookmakerLookupItem(x)));
         }
 
         private void BookmakerNameChanged(BookmakerNameChangedMessage message)
         {
-            var account = this.bookmakers.FirstOrDefault(x => ReferenceEquals(x.Account, message.Account));
+            var account = this.accounts.FirstOrDefault(x => ReferenceEquals(x.Account, message.Account));
 
             account?.Refresh();
         } 

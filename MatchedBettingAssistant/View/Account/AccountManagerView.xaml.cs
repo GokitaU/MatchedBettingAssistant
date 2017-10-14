@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MatchedBettingAssistant.View.Account
 {
     /// <summary>
-    /// Interaction logic for BookmakerNavigationView.xaml
+    /// Interaction logic for AccountManagerView.xaml
     /// </summary>
-    public partial class BookmakerNavigationView : UserControl
+    public partial class AccountManagerView : UserControl
     {
-        public BookmakerNavigationView()
+        public AccountManagerView()
         {
             InitializeComponent();
         }

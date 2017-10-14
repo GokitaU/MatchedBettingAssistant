@@ -96,16 +96,19 @@
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
     <Compile Include="ViewModel\Account\ITransferActionWalletSetter.cs" />
     <Compile Include="ViewModel\Account\SelectedBookmakerChangedMessage.cs" />
+    <Compile Include="ViewModel\Account\SelectedWalletChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SimpleMatchedBetViewModel.cs" />
     <Compile Include="ViewModel\Account\TransferFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\TransactionsUpdatedMessage.cs" />
+    <Compile Include="ViewModel\Account\WalletManagerViewModel.cs" />
+    <Compile Include="ViewModel\Account\WalletNavigationViewModel.cs" />
     <Compile Include="ViewModel\Account\WithdrawActionWalletSetter.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\Account\AccountTransactionListView.xaml.cs">
       <DependentUpon>AccountTransactionListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Account\AccountViewModel.cs" />
+    <Compile Include="ViewModel\Account\WalletViewModel.cs" />
     <Compile Include="View\Account\ApplyFundsView.xaml.cs">
       <DependentUpon>ApplyFundsView.xaml</DependentUpon>
     </Compile>
@@ -118,14 +121,14 @@
     <Compile Include="View\Account\BookmakerButtonsView.xaml.cs">
       <DependentUpon>BookmakerButtonsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Account\BookmakerManagerView.xaml.cs">
-      <DependentUpon>BookmakerManagerView.xaml</DependentUpon>
+    <Compile Include="View\Account\AccountManagerView.xaml.cs">
+      <DependentUpon>AccountManagerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Account\BookmakerNavigationView.xaml.cs">
-      <DependentUpon>BookmakerNavigationView.xaml</DependentUpon>
+    <Compile Include="View\Account\AccountNavigationView.xaml.cs">
+      <DependentUpon>AccountNavigationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Account\BookmakerView.xaml.cs">
-      <DependentUpon>BookmakerView.xaml</DependentUpon>
+    <Compile Include="View\Account\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\EditBookmakerView.xaml.cs">
       <DependentUpon>EditBookmakerView.xaml</DependentUpon>
@@ -142,6 +145,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Account\WalletManagerView.xaml.cs">
+      <DependentUpon>WalletManagerView.xaml</DependentUpon>
     </Compile>
     <Page Include="ImageResources.xaml">
       <SubType>Designer</SubType>
@@ -171,15 +177,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Account\BookmakerManagerView.xaml">
+    <Page Include="View\Account\AccountManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Account\BookmakerNavigationView.xaml">
+    <Page Include="View\Account\AccountNavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Account\BookmakerView.xaml">
+    <Page Include="View\Account\AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account\EditAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\WalletManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

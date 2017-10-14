@@ -8,7 +8,10 @@
     Title="Matched Betting Assistant" Height="800" Width="1024">
     <dx:DXWindow.Resources>
         <DataTemplate DataType="{x:Type viewmodel:BookmakerManagerViewModel}">
-            <account:BookmakerManagerView/>
+            <account:AccountManagerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:WalletManagerViewModel}">
+            <account:AccountManagerView/>
         </DataTemplate>
     </dx:DXWindow.Resources>
     <Grid>
@@ -28,15 +31,15 @@
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarItemLinkSeparator/>
             <dxb:BarButtonItem Content="Bookies"
-                               Command="{Binding SaveCommand}"
+                               Command="{Binding BookmakersCommand}"
                                Glyph="{StaticResource Horse32}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarButtonItem Content="Wallets"
-                               Command="{Binding SaveCommand}"
+                               Command="{Binding WalletsCommand}"
                                Glyph="{StaticResource Wallets}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarButtonItem Content="Banks"
-                               Command="{Binding SaveCommand}"
+                               Command="{Binding NoCommand}"
                                Glyph="{StaticResource Bank}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarItemLinkSeparator/>

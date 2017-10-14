@@ -7,10 +7,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class BookmakerManagerViewModel : ViewModelBase, IAddsEntity, IDeletesEntity
     {
-        private IRepository repository;
+        private readonly IRepository repository;
 
         private BookmakerNavigationViewModel navigationViewModel;
-        private BookmakerViewModel bookmakerEditViewModel;
+        private BookmakerViewModel editViewModel;
 
         public BookmakerManagerViewModel(IRepository repository)
         {
@@ -29,13 +29,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public BookmakerViewModel BookmakerEditViewModel
+        public BookmakerViewModel EditViewModel
         {
-            get => this.bookmakerEditViewModel;
+            get => this.editViewModel;
             set
             {
-                this.bookmakerEditViewModel = value;
-                RaisePropertyChanged(()=>BookmakerEditViewModel);
+                this.editViewModel = value;
+                RaisePropertyChanged(()=>EditViewModel);
             }
         }
 
@@ -61,7 +61,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void BookmakerChanged(SelectedBookmakerChangedMessage message)
         {
-            this.BookmakerEditViewModel = new BookmakerViewModel(message.Bookmaker, this.repository);
+            this.EditViewModel = new BookmakerViewModel(message.Bookmaker, this.repository);
         }
     }
 }

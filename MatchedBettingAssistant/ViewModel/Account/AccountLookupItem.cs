@@ -1,19 +1,27 @@
-﻿using MatchedBettingAssistant.Core;
+﻿using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class AccountLookupItem
+    public class AccountLookupItem<T> : ViewModelBase where T: IAccount
     {
-        private readonly IAccount account;
+        private readonly T account;
 
-        public AccountLookupItem(IAccount account)
+        public AccountLookupItem(T account)
         {
             this.account = account;
         }
 
+        public int Id => this.account.Id;
+
         public string Name => this.account.Name;
 
-        internal IAccount Account => this.account;
+        internal T Account => this.account;
+
+        public void Refresh()
+        {
+            RaisePropertyChanged(() => Name);
+        }
     }
 }

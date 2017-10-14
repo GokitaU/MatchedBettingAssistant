@@ -16,15 +16,15 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// The item representing the source of the funds
         /// </summary>
-        private AccountLookupItem wallet;
+        private WalletLookupItem wallet;
 
         private readonly ITransferActionWalletSetter walletSetter;
 
-        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IAccount> wallets, ITransferActionWalletSetter walletSetter)
+        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IWallet> wallets, ITransferActionWalletSetter walletSetter)
         {
             this.action = action;
             this.walletSetter = walletSetter;
-            this.Wallets = new ObservableCollection<AccountLookupItem>(wallets.Select(x=> new AccountLookupItem(x)));
+            this.Wallets = new ObservableCollection<WalletLookupItem>(wallets.Select(x=> new WalletLookupItem(x)));
             this.Wallet = this.Wallets.FirstOrDefault();
             this.Amount = 10;
         }
@@ -44,7 +44,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// List of wallets from which funds can be drawn
         /// </summary>
-        public ObservableCollection<AccountLookupItem> Wallets { get; }
+        public ObservableCollection<WalletLookupItem> Wallets { get; }
 
         /// <summary>
         /// Name of the account to which funds are deposited
@@ -54,7 +54,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// The wallet from which funds are drawn
         /// </summary>
-        public AccountLookupItem Wallet
+        public WalletLookupItem Wallet
         {
             get => wallet;
             set

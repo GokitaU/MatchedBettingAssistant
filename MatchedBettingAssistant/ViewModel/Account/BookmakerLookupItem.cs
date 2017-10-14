@@ -3,22 +3,17 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class BookmakerLookupItem : ViewModelBase
+    public class BookmakerLookupItem : AccountLookupItem<IBettingAccount>
     {
-        public BookmakerLookupItem(IBettingAccount account)
+        public BookmakerLookupItem(IBettingAccount account) : base(account)
         {
-            this.Account = account;
         }
+    }
 
-        public int Id => this.Account.Id;
-
-        public string Name => this.Account.Name;
-
-        internal IBettingAccount Account { get; }
-
-        public void Refresh()
+    public class WalletLookupItem : AccountLookupItem<IWallet>
+    {
+        public WalletLookupItem(IWallet account) : base(account)
         {
-            RaisePropertyChanged(()=>Name);
         }
     }
 }

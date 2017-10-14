@@ -1,35 +1,37 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
-using MatchedBettingAssistant.DataAccess.DataModel;
+using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.Model.Accounts;
+
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class BookmakerViewModel : ViewModelBase
+    public class WalletViewModel : ViewModelBase
     {
-        private readonly IBettingAccount bookmaker;
+        private readonly IWallet wallet;
         private readonly IRepository repository;
 
-        private EditBookmakerViewModel editViewModel;
+        private EditAccountViewModel editViewModel;
 
         private AccountTransactionListViewModel transactions;
 
 
-        public BookmakerViewModel(IBettingAccount bookmaker, IRepository repository)
+        public WalletViewModel(IWallet wallet, IRepository repository)
         {
-            this.bookmaker = bookmaker;
+            this.wallet = wallet;
             this.repository = repository;
             this.CreateEditViewModel();
             this.CreateTransactions();
         }
 
-        public EditBookmakerViewModel EditViewModel
+        public EditAccountViewModel EditViewModel
         {
             get => this.editViewModel;
             set
             {
                 this.editViewModel = value;
-                RaisePropertyChanged(()=>EditViewModel);
+                RaisePropertyChanged(() => EditViewModel);
             }
         }
 
@@ -39,20 +41,19 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.transactions = value;
-                RaisePropertyChanged(()=>Transactions);
+                RaisePropertyChanged(() => Transactions);
             }
         }
 
         private void CreateEditViewModel()
         {
-            this.EditViewModel = new EditBookmakerViewModel(bookmaker, this.repository);
+            this.EditViewModel = new EditAccountViewModel(wallet, this.repository);
         }
 
         private void CreateTransactions()
         {
-            this.Transactions = new AccountTransactionListViewModel(this.bookmaker);
+            this.Transactions = new AccountTransactionListViewModel(this.wallet);
         }
+
     }
-
-
 }

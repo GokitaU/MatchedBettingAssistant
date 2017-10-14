@@ -13,12 +13,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
     {
         private readonly SimpleMatchedBet matchedBet;
         private const double tolerance = 0.0001;
-        private AccountLookupItem backAccount;
-        private AccountLookupItem layAccount;
+        private BookmakerLookupItem backAccount;
+        private BookmakerLookupItem layAccount;
         private BetTypeLookup betType;
         private OfferTypeLookup offerType;
-        private ObservableCollection<AccountLookupItem> bookmakers;
-        private ObservableCollection<AccountLookupItem> exchanges;
+        private ObservableCollection<BookmakerLookupItem> bookmakers;
+        private ObservableCollection<BookmakerLookupItem> exchanges;
         private ObservableCollection<BetTypeLookup> betTypes;
         private ObservableCollection<OfferTypeLookup> offerTypes;
         private DelegateCommand mugBetCommand;
@@ -86,7 +86,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             get => this.matchedBet.LayReturns + this.matchedBet.BackReturns;
         }
 
-        public ObservableCollection<AccountLookupItem> Bookmakers
+        public ObservableCollection<BookmakerLookupItem> Bookmakers
         {
             get => bookmakers;
             set
@@ -96,7 +96,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public ObservableCollection<AccountLookupItem> Exchanges
+        public ObservableCollection<BookmakerLookupItem> Exchanges
         {
             get => exchanges;
             private set
@@ -126,7 +126,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public AccountLookupItem BackAccount
+        public BookmakerLookupItem BackAccount
         {
             get { return backAccount; }
             set
@@ -137,7 +137,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public AccountLookupItem LayAccount
+        public BookmakerLookupItem LayAccount
         {
             get { return layAccount; }
             set
@@ -199,7 +199,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateExchanges(IEnumerable<IBettingAccount> exchanges)
         {
-            this.Exchanges = new ObservableCollection<AccountLookupItem>(exchanges.Select(x => new AccountLookupItem(x)));
+            this.Exchanges = new ObservableCollection<BookmakerLookupItem>(exchanges.Select(x => new BookmakerLookupItem(x)));
 
             this.LayAccount =
                 this.Exchanges.FirstOrDefault(x => ReferenceEquals(x.Account, this.matchedBet.LayAccount));
@@ -207,7 +207,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateBookmakers(IEnumerable<IBettingAccount> bookmakers)
         {
-            this.Bookmakers = new ObservableCollection<AccountLookupItem>(bookmakers.Select(x => new AccountLookupItem(x)));
+            this.Bookmakers = new ObservableCollection<BookmakerLookupItem>(bookmakers.Select(x => new BookmakerLookupItem(x)));
 
             this.BackAccount = this.Bookmakers.FirstOrDefault(x => ReferenceEquals(x.Account, this.matchedBet.BackAccount));
         }
