@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
@@ -11,14 +12,24 @@ namespace MatchedBettingAssistant.ViewModel.Account
     {
         private readonly IAccount account;
 
-        public AccountTransactionListViewModel(IAccount account)
+        private bool isBet;
+
+        public AccountTransactionListViewModel(IAccount account, bool isBet)
         {
             this.account = account;
+            this.isBet = isBet;
             CreateTransactions();
             this.RegisterMessages();
         }
 
         public ObservableCollection<AccountTransactionViewModel> Transactions { get; private set; }
+
+        public bool IsBet => this.isBet;
+
+        public int DescriptionWidth
+        {
+            get => this.isBet ? 100 : 200;
+        }
 
         private void RegisterMessages()
         {

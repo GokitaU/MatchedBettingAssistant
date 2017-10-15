@@ -81,7 +81,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Date = DateTime.Today
             };
 
-            var walletSetter = new DepositActionWalletSetter(action);
+            var walletSetter = new DepositActionAccountSetter(action);
 
             TransferFunds(action, walletSetter);
         }
@@ -97,7 +97,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Date = DateTime.Today
             };
 
-            var walletSetter = new WithdrawActionWalletSetter(action);
+            var walletSetter = new WithdrawActionAccountSetter(action);
 
             TransferFunds(action, walletSetter);
         }
@@ -167,10 +167,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// Creates dialog for transferring funds to or from a wallet
         /// </summary>
         /// <param name="action"></param>
-        /// <param name="walletSetter"></param>
-        private void TransferFunds(TransferFundsAccountAction action, ITransferActionWalletSetter walletSetter)
+        /// <param name="accountSetter"></param>
+        private void TransferFunds(TransferFundsAccountAction action, ITransferActionAccountSetter accountSetter)
         {
-            var depositViewModel = new TransferFundsToAccountViewModel(action, this.repository.WalletRepository.GetWallets(), walletSetter);
+            var depositViewModel = new TransferFundsToAccountViewModel(action, this.repository.WalletRepository.GetWallets(), accountSetter);
 
             var okCommand = new UICommand()
             {
@@ -190,7 +190,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
             TransferDialogService.ShowDialog(
                 new List<UICommand>() { okCommand, cancelCommand },
-                walletSetter.ActionDescription,
+                accountSetter.ActionDescription,
                 depositViewModel);
 
 

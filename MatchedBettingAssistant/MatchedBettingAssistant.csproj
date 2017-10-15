@@ -92,18 +92,19 @@
     <Compile Include="ViewModel\Account\OfferTypeLookup.cs" />
     <Compile Include="ViewModel\Account\PlaceBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
-    <Compile Include="ViewModel\Account\DepositActionWalletSetter.cs" />
+    <Compile Include="ViewModel\Account\DepositActionAccountSetter.cs" />
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
-    <Compile Include="ViewModel\Account\ITransferActionWalletSetter.cs" />
+    <Compile Include="ViewModel\Account\ITransferActionAccountSetter.cs" />
     <Compile Include="ViewModel\Account\SelectedBookmakerChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SelectedWalletChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SimpleMatchedBetViewModel.cs" />
     <Compile Include="ViewModel\Account\TransferFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\TransactionsUpdatedMessage.cs" />
+    <Compile Include="ViewModel\Account\WalletButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\WalletManagerViewModel.cs" />
     <Compile Include="ViewModel\Account\WalletNavigationViewModel.cs" />
-    <Compile Include="ViewModel\Account\WithdrawActionWalletSetter.cs" />
+    <Compile Include="ViewModel\Account\WithdrawActionAccountSetter.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\Account\AccountTransactionListView.xaml.cs">
       <DependentUpon>AccountTransactionListView.xaml</DependentUpon>
@@ -145,6 +146,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Account\AccountButtonsView.xaml.cs">
+      <DependentUpon>AccountButtonsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\WalletManagerView.xaml.cs">
       <DependentUpon>WalletManagerView.xaml</DependentUpon>
@@ -202,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account\EditAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\AccountButtonsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

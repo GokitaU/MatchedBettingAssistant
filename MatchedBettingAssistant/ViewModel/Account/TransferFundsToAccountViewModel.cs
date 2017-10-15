@@ -16,16 +16,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// The item representing the source of the funds
         /// </summary>
-        private WalletLookupItem wallet;
+        private AccountLookupItem targetAccount;
 
-        private readonly ITransferActionWalletSetter walletSetter;
+        private readonly ITransferActionAccountSetter accountSetter;
 
-        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IWallet> wallets, ITransferActionWalletSetter walletSetter)
+        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IAccount> accounts, ITransferActionAccountSetter accountSetter)
         {
             this.action = action;
-            this.walletSetter = walletSetter;
-            this.Wallets = new ObservableCollection<WalletLookupItem>(wallets.Select(x=> new WalletLookupItem(x)));
-            this.Wallet = this.Wallets.FirstOrDefault();
+            this.accountSetter = accountSetter;
+            this.Accounts = new ObservableCollection<AccountLookupItem>(accounts.Select(x=> new AccountLookupItem(x)));
+            this.Account = this.Accounts.FirstOrDefault();
             this.Amount = 10;
         }
 
@@ -39,31 +39,31 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public string ActionDescription => this.walletSetter.ActionDescription;
+        public string ActionDescription => this.accountSetter.ActionDescription;
 
         /// <summary>
-        /// List of wallets from which funds can be drawn
+        /// List of accounts from which funds can be drawn
         /// </summary>
-        public ObservableCollection<WalletLookupItem> Wallets { get; }
+        public ObservableCollection<AccountLookupItem> Accounts { get; }
 
         /// <summary>
         /// Name of the account to which funds are deposited
         /// </summary>
-        public string AccountName => walletSetter.AccountName;
+        public string AccountName => accountSetter.AccountName;
 
         /// <summary>
-        /// The wallet from which funds are drawn
+        /// The account from which funds are drawn
         /// </summary>
-        public WalletLookupItem Wallet
+        public AccountLookupItem Account
         {
-            get => wallet;
+            get => targetAccount;
             set
             {
-                this.wallet = value;
+                this.targetAccount = value;
 
-                this.walletSetter.SetWallet(value.Account);
+                this.accountSetter.SetAccount(value.Account);
 
-                RaisePropertyChanged(()=>this.Wallet);
+                RaisePropertyChanged(()=>this.Account);
             }
         }
 

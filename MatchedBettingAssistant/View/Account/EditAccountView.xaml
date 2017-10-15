@@ -33,7 +33,7 @@
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup Header="LayoutGroup">
-                <account:BookmakerButtonsView DataContext="{Binding BookmakerButtons}"/>
+                <account:AccountButtonsView DataContext="{Binding ActionButtons}"/>
             </dxlc:LayoutGroup>
         </dxlc:LayoutControl>
     </Grid>

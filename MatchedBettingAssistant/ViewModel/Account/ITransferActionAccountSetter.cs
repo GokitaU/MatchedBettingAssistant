@@ -3,12 +3,12 @@ using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public interface ITransferActionWalletSetter
+    public interface ITransferActionAccountSetter
     {
         string ActionDescription { get;  }
 
         string AccountName { get; }
 
-        void SetWallet(IAccount account);
+        void SetAccount(IAccount account);
     }
 }

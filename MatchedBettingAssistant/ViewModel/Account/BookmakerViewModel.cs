@@ -50,7 +50,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateTransactions()
         {
-            this.Transactions = new AccountTransactionListViewModel(this.bookmaker);
+            this.Transactions = new AccountTransactionListViewModel(this.bookmaker, true);
         }
     }
 

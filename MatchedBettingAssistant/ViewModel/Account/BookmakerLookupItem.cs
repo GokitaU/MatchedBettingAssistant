@@ -16,4 +16,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
         }
     }
+
+    public class AccountLookupItem : AccountLookupItem<IAccount>
+    {
+        public AccountLookupItem(IAccount account) : base(account)
+        {
+
+        }
+    }
 }

@@ -7,9 +7,9 @@
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             x:Class="MatchedBettingAssistant.View.Account.DepositFundsToBookmakerView"
+             x:Class="MatchedBettingAssistant.View.Account.TransferFundsToAccountView"
              mc:Ignorable="d" 
-             d:DesignHeight="140" d:DesignWidth="300">
+             d:DesignHeight="200" d:DesignWidth="300">
 
     <Grid>
         <dxlc:LayoutControl Orientation="Vertical" >
@@ -25,9 +25,9 @@
                                               IsReadOnly="True"/>
                             </dxlc:LayoutItem>
                             <dxlc:LayoutItem Label="Wallet">
-                                <dxe:ComboBoxEdit ItemsSource="{Binding Wallets}"
+                                <dxe:ComboBoxEdit ItemsSource="{Binding Accounts}"
                                                   DisplayMember="Name"
-                                                  EditValue="{Binding Wallet}"/>
+                                                  EditValue="{Binding Account}"/>
                             </dxlc:LayoutItem>
                         </dxlc:LayoutGroup>
                         <dxlc:LayoutItem Label="Amount">

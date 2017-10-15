@@ -4,11 +4,11 @@ using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class DepositActionWalletSetter : ITransferActionWalletSetter
+    public class DepositActionAccountSetter : ITransferActionAccountSetter
     {
         private TransferFundsAccountAction action;
 
-        public DepositActionWalletSetter(TransferFundsAccountAction action)
+        public DepositActionAccountSetter(TransferFundsAccountAction action)
         {
             this.action = action;
         }
@@ -20,7 +20,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             get { return this.action.Destination?.Name; }
         }
 
-        public void SetWallet(IAccount account)
+        public void SetAccount(IAccount account)
         {
             this.action.Source = account;
         }
