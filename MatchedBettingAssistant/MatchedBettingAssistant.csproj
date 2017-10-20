@@ -281,5 +281,8 @@
     <Resource Include="Assets\Images\icons8-Bank-32.png" />
     <Resource Include="Assets\Images\icons8-Wallet-32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-Delete-16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

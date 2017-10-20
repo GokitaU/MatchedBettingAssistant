@@ -15,12 +15,10 @@
                 <dxlc:LayoutItem Label="Name">
                     <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
                 </dxlc:LayoutItem>
-
                 <dxlc:LayoutGroup>
                     <dxlc:LayoutItem Label="Exchange">
                         <dxe:CheckEdit IsChecked="{Binding IsExchange}"/>
                     </dxlc:LayoutItem>
-
                     <dxlc:LayoutItem Label="Commission">
                         <dxe:TextEdit/>
                     </dxlc:LayoutItem>
@@ -47,10 +45,8 @@
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
             <dxlc:LayoutItem>
-                <account:BookmakerButtonsView DataContext="{Binding BookmakerButtons}"/>
+                <account:AccountButtonsView DataContext="{Binding ActionButtons}"/>
             </dxlc:LayoutItem>
-
-
         </dxlc:LayoutControl>
     </Grid>
 </UserControl>

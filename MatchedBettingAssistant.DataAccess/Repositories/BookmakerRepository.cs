@@ -42,5 +42,7 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
             return new BookmakerDto(newAccount, betTypeRepository, offerTypeRepository);
         }
+
+
     }
 }

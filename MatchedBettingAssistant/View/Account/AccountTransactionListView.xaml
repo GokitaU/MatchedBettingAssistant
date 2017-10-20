@@ -6,11 +6,24 @@
              xmlns:local="clr-namespace:MatchedBettingAssistant.View.Account"
              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Account="clr-namespace:MatchedBettingAssistant.ViewModel.Account"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
     x:Class="MatchedBettingAssistant.View.Account.AccountTransactionListView"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <dxg:GridControl ItemsSource="{Binding Transactions}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <dx:SimpleButton Content="Delete" 
+                         Width="100" 
+                         Glyph="{StaticResource Delete16}" 
+                         HorizontalAlignment="Left"
+                         Command="{Binding DeleteCurrentCommand}"/>
+        <dxg:GridControl ItemsSource="{Binding Transactions}" 
+                         SelectionMode="Row"
+                         SelectedItem="{Binding SelectedItem}"
+                         Grid.Row="1">
             <dxg:GridControl.View>
                 <dxg:TableView AllowEditing="False" AllowGrouping="False" AllowColumnMoving="False" ShowGroupPanel="False" />
             </dxg:GridControl.View>

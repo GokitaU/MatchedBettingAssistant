@@ -8,6 +8,7 @@
     <BitmapImage x:Key="Save" UriSource="Assets/Images/icons8-Save-32.png"/>
     <BitmapImage x:Key="Add" UriSource="Assets/Images/icons8-Add-32.png"/>
     <BitmapImage x:Key="Delete" UriSource="Assets/Images/icons8-Delete-32.png"/>
+    <BitmapImage x:Key="Delete16" UriSource="Assets/Images/icons8-Delete-16.png"/>
     <BitmapImage x:Key="Bank" UriSource="Assets/Images/icons8-Bank-32.png"/>
     <BitmapImage x:Key="Wallets" UriSource="Assets/Images/icons8-Wallet-32.png"/>
 

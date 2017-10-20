@@ -16,11 +16,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             this.account = account;
             this.repository = repository;
-            this.BookmakerButtons = new BookmakerButtonsViewModel(this.account, this.repository)
-            {
-                BonusButtonVisibility = Visibility.Visible,
-                BetButtonVisibility = Visibility.Visible
-            };
+            this.ActionButtons = new BookmakerButtonsViewModel(this.account, this.repository);
             this.RegisterMessages();
         }
 
@@ -75,7 +71,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double PaybackDue => this.account.PaybackDue;
 
-        public BookmakerButtonsViewModel BookmakerButtons { get; }
+        public BookmakerButtonsViewModel ActionButtons { get; }
 
         private void RegisterMessages()
         {

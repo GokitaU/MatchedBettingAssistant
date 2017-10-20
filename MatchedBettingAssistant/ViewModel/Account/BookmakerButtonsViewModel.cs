@@ -15,7 +15,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class BookmakerButtonsViewModel : ViewModelBase
     {
         private readonly IAccount account;
-        private IRepository repository;
+        private readonly IRepository repository;
 
         public IDialogService TransferDialogService => ServiceContainer.GetService<IDialogService>("transferDialog");
         public IDialogService ApplyDialogService => ServiceContainer.GetService<IDialogService>("applyDialog");
@@ -25,50 +25,34 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private DelegateCommand withdrawCommand;
         private DelegateCommand bonusCommand;
         private DelegateCommand betCommand;
-        private Visibility bonusButtonVisibility;
-        private Visibility betButtonVisibility;
 
         public BookmakerButtonsViewModel(IAccount account, IRepository repository)
         {
             this.account = account;
             this.repository = repository;
-            this.BonusButtonVisibility = Visibility.Hidden;
-            this.BetButtonVisibility = Visibility.Hidden;
         }
 
         /// <summary>
         /// Gets the command for depositing funds to account
         /// </summary>
-        public DelegateCommand DepositCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit));
+        public DelegateCommand ButtonOneCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit));
+
+        public string ButtonOneCaption => "Deposit";
 
         /// <summary>
         /// Gets the command for withdrawing funds from account
         /// </summary>
-        public DelegateCommand WithdrawCommand => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw));
+        public DelegateCommand ButtonTwoCommand => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw));
 
-        public DelegateCommand BonusCommand => this.bonusCommand ?? (this.bonusCommand = new DelegateCommand(Bonus));
+        public string ButtonTwoCaption => "Withdraw";
 
-        public DelegateCommand BetCommand => this.betCommand ?? (this.betCommand = new DelegateCommand(Bet));
+        public DelegateCommand ButtonThreeCommand => this.bonusCommand ?? (this.bonusCommand = new DelegateCommand(Bonus));
 
-        public Visibility BonusButtonVisibility
-        {
-            get => bonusButtonVisibility;
-            set
-            {
-                bonusButtonVisibility = value;
-                RaisePropertyChanged(()=>BonusButtonVisibility);
-            }
-        }
+        public string ButtonThreeCaption => "Bonus";
 
-        public Visibility BetButtonVisibility
-        {
-            get => betButtonVisibility;
-            set
-            {
-                betButtonVisibility = value; 
-                RaisePropertyChanged(()=>BetButtonVisibility);
-            }
-        }
+        public DelegateCommand ButtonFourCommand => this.betCommand ?? (this.betCommand = new DelegateCommand(Bet));
+
+        public string ButtonFourCaption => "Bet";
 
         /// <summary>
         /// Initiates the deposit action

@@ -15,10 +15,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public string ActionDescription => "Deposit";
 
-        public string AccountName
-        {
-            get { return this.action.Destination?.Name; }
-        }
+        public string AccountName => this.action.Destination?.Name;
 
         public void SetAccount(IAccount account)
         {

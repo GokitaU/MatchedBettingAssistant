@@ -14,6 +14,15 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private bool isBet;
 
+        private AccountTransactionViewModel selectedItem;
+
+        private DelegateCommand deleteCommand;
+
+        public DelegateCommand DeleteCommand
+        {
+            get => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete));
+        }
+
         public AccountTransactionListViewModel(IAccount account, bool isBet)
         {
             this.account = account;
@@ -26,10 +35,17 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public bool IsBet => this.isBet;
 
-        public int DescriptionWidth
+        public AccountTransactionViewModel SelectedItem
         {
-            get => this.isBet ? 100 : 200;
+            get => this.selectedItem;
+            set
+            {
+                this.selectedItem = value;
+                RaisePropertyChanged(()=>this.SelectedItem);
+            }
         }
+
+        public int DescriptionWidth => this.isBet ? 100 : 200;
 
         private void RegisterMessages()
         {
@@ -47,7 +63,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
             {
                 var transactions = this.account.Transactions.Select(x => new AccountTransactionViewModel(x));
                 this.Transactions = new ObservableCollection<AccountTransactionViewModel>(transactions);
+                this.SelectedItem = this.Transactions.FirstOrDefault();
                 RaisePropertyChanged(()=>Transactions);
+            }
+        }
+
+        private void Delete()
+        {
+            if (this.SelectedItem != null)
+            {
+                
             }
         }
     }
