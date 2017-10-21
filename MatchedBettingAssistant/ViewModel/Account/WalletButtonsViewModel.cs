@@ -89,7 +89,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         private void AddFunds()
         {
-            var action = new ApplyFundsAccountAction()
+            var action = new ApplyFundsAccountAction(this.repository.TransactionRepository)
             {
                 Destination = this.account,
                 Date = DateTime.Today

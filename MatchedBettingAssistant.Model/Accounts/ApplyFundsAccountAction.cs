@@ -8,6 +8,13 @@ namespace MatchedBettingAssistant.Model.Accounts
     /// </summary>
     public class ApplyFundsAccountAction : IAccountAction
     {
+        private readonly ITransactionRepository repository;
+
+        public ApplyFundsAccountAction(ITransactionRepository repository)
+        {
+            this.repository = repository;
+        }
+
         public IAccount Destination { get; set; }
 
         public DateTime Date { get; set; }
@@ -18,13 +25,14 @@ namespace MatchedBettingAssistant.Model.Accounts
 
         public void Apply()
         {
-            var transaction = new FundsTransaction()
-            {
-                TransactionDate = this.Date,
-                Amount = this.Amount,
-                Description = this.Description
-            };
+            var transaction = this.repository.New();
+            transaction.TransactionDate = this.Date;
+            transaction.Amount = this.Amount;
+            transaction.Description = this.Description;
 
+            var detail = this.repository.NewDetail();
+            detail.Profit = 0;
+            detail.AddTransaction(transaction);
             this.Destination.AddTransaction(transaction);
         }
     }
