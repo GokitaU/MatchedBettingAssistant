@@ -41,18 +41,4 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
             return new OfferTypeDto(type);
         }
     }
-
-    public class TransactionRepository : ITransactionRepository
-    {
-
-        public ITransaction New()
-        {
-            return  new TransactionDto(new Transaction() );
-        }
-
-        public ITransactionDetail NewDetail()
-        {
-            return new TransactionDetailDto(new TransactionDetail());
-        }
-    }
 }

@@ -10,5 +10,9 @@ namespace MatchedBettingAssistant.Model.Accounts
         public double PaybackPercent { get; set; }
 
         public double Payback => this.Profit * this.PaybackPercent;
+        public void AddTransaction(ITransaction transaction)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -68,6 +68,7 @@
     <Compile Include="Repositories\BookmakerRepository.cs" />
     <Compile Include="Repositories\OfferTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\WalletRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,8 @@ namespace MatchedBettingAssistant.DataAccess
 
         public DbSet<DataModel.Account> Accounts { get; set; }
 
+        public DbSet<DataModel.TransactionDetail> TransactionDetails { get; set; }
+
         public DbSet<DataModel.BetType> BetTypes { get; set; }
 
         public DbSet<DataModel.OfferType> OfferTypes { get; set; }
@@ -24,7 +26,10 @@ namespace MatchedBettingAssistant.DataAccess
             modelBuilder.Entity<DataModel.Bookmaker>().ToTable("Bookmaker");
             modelBuilder.Entity<DataModel.Wallet>().ToTable("Wallet");
             modelBuilder.Entity<DataModel.Bank>().ToTable("Bank");
-            modelBuilder.Entity<DataModel.Transaction>().HasOptional(a => a.Detail);
+
+            modelBuilder.Entity<DataModel.TransactionDetail>().HasOptional(t => t.BetType);
+            modelBuilder.Entity<DataModel.TransactionDetail>().HasOptional(o => o.OfferType);
+
 
             base.OnModelCreating(modelBuilder);
         }

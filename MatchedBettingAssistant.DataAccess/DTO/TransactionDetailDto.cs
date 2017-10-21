@@ -67,6 +67,14 @@ namespace MatchedBettingAssistant.DataAccess.DTO
         public double Payback => this.Profit * this.PaybackPercent;
 
 
+        public void AddTransaction(ITransaction transaction)
+        {
+            if (transaction is TransactionDto tran)
+            {
+                this.detail.Transactions.Add(tran.Transaction);
+            }
+        }
+
         internal TransactionDetail TransactionDetail => this.detail;
     }
 }

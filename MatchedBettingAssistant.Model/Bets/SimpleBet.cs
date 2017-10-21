@@ -74,7 +74,8 @@ namespace MatchedBettingAssistant.Model.Bets
                     detail.OfferType = this.OfferType;
                     detail.BetType = this.BetType;
                     detail.PaybackPercent = this.Account.PaybackPercent;
-                    this.Transaction.AddDetail(detail);
+                    //this.Transaction.AddDetail(detail);
+                    detail.AddTransaction(this.Transaction);
                 }
             }
         }

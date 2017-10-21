@@ -83,8 +83,10 @@ namespace MatchedBettingAssistant.Model.Bets
             detail.BetType = this.BetType;
             detail.Profit = this.LayReturns + this.BackReturns;
             detail.PaybackPercent = this.BackAccount.PaybackPercent;
-            this.backBet.Transaction.AddDetail(detail);
-            this.layBet.Transaction.AddDetail(detail);
+            detail.AddTransaction(this.layBet.Transaction);
+            detail.AddTransaction(this.backBet.Transaction);
+            //this.backBet.Transaction.AddDetail(detail);
+            //this.layBet.Transaction.AddDetail(detail);
         }
 
         public void Complete()

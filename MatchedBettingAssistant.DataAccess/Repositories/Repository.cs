@@ -27,7 +27,7 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IOfferTypeRepository OfferTypeRepository => new OfferTypeRepository(dbContext);
 
-        public ITransactionRepository TransactionRepository => new TransactionRepository();
+        public ITransactionRepository TransactionRepository => new TransactionRepository(dbContext);
 
 
         public void Save()

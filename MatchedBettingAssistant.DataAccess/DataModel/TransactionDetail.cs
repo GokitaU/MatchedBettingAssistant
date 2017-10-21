@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
@@ -7,9 +9,10 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
     {
         public TransactionDetail()
         {
+            this.Transactions = new Collection<Transaction>();
         }
 
-        public TransactionDetail(ITransactionDetail detail)
+        public TransactionDetail(ITransactionDetail detail) : this()
         {
             this.Profit = detail.Profit;
         }
@@ -17,7 +20,7 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         /// <summary>
         /// Identifier
         /// </summary>
-        public int TransactionDetailId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// The profit of the bet when matching bets are accounted for
@@ -27,6 +30,11 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         public BetType BetType { get; set; }
 
         public OfferType OfferType { get; set; }
+
+        /// <summary>
+        /// The transactions associated with this detail
+        /// </summary>
+        public ICollection<Transaction> Transactions { get; set; }
 
         /// <summary>
         /// The percentage of the profit that should be paid back to the bookie

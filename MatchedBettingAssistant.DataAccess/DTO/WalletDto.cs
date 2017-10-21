@@ -47,11 +47,13 @@ namespace MatchedBettingAssistant.DataAccess.DTO
 
         public void AddTransaction(ITransaction transaction)
         {
-            var transactionDataObject = new Transaction(transaction);
-            this.wallet.Transactions.Add(transactionDataObject);
+            if (transaction is TransactionDto transactionDto)
+            {
+                this.wallet.Transactions.Add(transactionDto.Transaction);
 
-            var dto = new TransactionDto(transactionDataObject);
-            this.transactions.Add(dto);
+                this.transactions.Add(transactionDto);
+
+            }
         }
     }
 }

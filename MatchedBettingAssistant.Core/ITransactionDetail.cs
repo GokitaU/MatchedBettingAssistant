@@ -11,5 +11,7 @@
         double PaybackPercent { get; set; }
 
         double Payback { get; }
+
+        void AddTransaction(ITransaction transaction);
     }
 }

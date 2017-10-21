@@ -22,7 +22,13 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         public double Amount { get; set; }
         public string Description { get; set; }
 
+        public int TransactionDetailId { get; set; }
+
         public virtual TransactionDetail Detail { get; set; }
+
+        public int AccountId { get; set; }
+
+        public Account Account { get; set; }
 
     }
 }
