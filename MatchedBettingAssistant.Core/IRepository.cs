@@ -13,6 +13,9 @@
 
         ITransactionRepository TransactionRepository { get; }
 
+        ISportRepository SportRepository { get; }
+
+        IMarketRepository MarketRepository { get; }
 
         void Create();
         void Save();

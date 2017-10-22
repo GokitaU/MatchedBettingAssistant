@@ -8,6 +8,10 @@
 
         IOfferType OfferType { get; set; }
 
+        ISport Sport { get; set; }
+
+        IMarket Market { get; set; }
+
         double PaybackPercent { get; set; }
 
         double Payback { get; }

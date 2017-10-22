@@ -31,6 +31,15 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
 
         public OfferType OfferType { get; set; }
 
+        public Sport Sport { get; set; }
+
+        public Market Market { get; set; }
+
+        /// <summary>
+        /// Description to cover the entire transaction
+        /// </summary>
+        public string Description { get; set; }
+
         /// <summary>
         /// The transactions associated with this detail
         /// </summary>

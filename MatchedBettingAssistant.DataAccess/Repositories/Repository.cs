@@ -31,6 +31,9 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public ITransactionRepository TransactionRepository => new TransactionRepository(dbContext);
 
+        public ISportRepository SportRepository => new SportRepository(dbContext);
+
+        public IMarketRepository MarketRepository => new MarketRepository(dbContext);
 
         public void Save()
         {

@@ -51,7 +51,9 @@
     <Compile Include="DataModel\Bank.cs" />
     <Compile Include="DataModel\BetType.cs" />
     <Compile Include="DataModel\Bookmaker.cs" />
+    <Compile Include="DataModel\Market.cs" />
     <Compile Include="DataModel\OfferType.cs" />
+    <Compile Include="DataModel\Sport.cs" />
     <Compile Include="DataModel\Transaction.cs" />
     <Compile Include="DataModel\TransactionAccount.cs" />
     <Compile Include="DataModel\TransactionDetail.cs" />
@@ -71,8 +73,10 @@
     <Compile Include="Repositories\BankRepository.cs" />
     <Compile Include="Repositories\BetTypeRepository.cs" />
     <Compile Include="Repositories\BookmakerRepository.cs" />
+    <Compile Include="Repositories\MarketRepository.cs" />
     <Compile Include="Repositories\OfferTypeRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SportRepository.cs" />
     <Compile Include="Repositories\TransactionRepository.cs" />
     <Compile Include="Repositories\WalletRepository.cs" />
   </ItemGroup>

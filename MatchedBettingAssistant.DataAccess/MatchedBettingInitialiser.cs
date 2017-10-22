@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using MatchedBettingAssistant.DataAccess.DataModel;
@@ -15,6 +16,9 @@ namespace MatchedBettingAssistant.DataAccess
 
             var offerTypes = CreateOfferTypes();
             context.OfferTypes.AddRange(offerTypes);
+
+            var sports = CreateSports();
+            context.Sports.AddRange(sports);
 
             var banks = CreateBanks();
             context.Accounts.AddRange(banks);
@@ -54,6 +58,33 @@ namespace MatchedBettingAssistant.DataAccess
             };
 
             return offerTypes;
+        }
+
+        private IEnumerable<Sport> CreateSports()
+        {
+            var football = new Sport()
+            {
+                Name = "Football",
+                Markets = new Collection<Market>()
+                {
+                    new Market() {Name = "Match Odds"},
+                    new Market() {Name = "Correct Score"},
+                    new Market() {Name = "First Scorer"},
+                    new Market() {Name = "Other"}
+                }
+            };
+
+            var sports = new List<Sport>()
+            {
+                new Sport() {Name = "None", Markets = new Collection<Market> { new Market(){Name = "None"}}},
+                football,
+                new Sport() {Name = "Horse Racing", Markets = new Collection<Market>() { new Market() {Name = "Winner" }}},
+                new Sport() {Name = "Golf", Markets = new Collection<Market>() { new Market() {Name = "Winner" }}},
+                new Sport() {Name = "American Sports", Markets = new Collection<Market>() { new Market() {Name = "Any" }}},
+                new Sport() {Name = "Other", Markets = new Collection<Market>() { new Market() {Name = "Any" }}}
+            };
+
+            return sports;
         }
 
         private IEnumerable<DataModel.Wallet> CreateWallets()

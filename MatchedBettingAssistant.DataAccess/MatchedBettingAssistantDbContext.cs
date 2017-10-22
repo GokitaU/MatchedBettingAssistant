@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess
 {
@@ -21,6 +22,10 @@ namespace MatchedBettingAssistant.DataAccess
 
         public DbSet<DataModel.OfferType> OfferTypes { get; set; }
 
+        public DbSet<DataModel.Sport> Sports { get; set; }
+
+        public DbSet<DataModel.Market> Markets { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DataModel.Bookmaker>().ToTable("Bookmaker");
@@ -29,6 +34,8 @@ namespace MatchedBettingAssistant.DataAccess
 
             modelBuilder.Entity<DataModel.TransactionDetail>().HasOptional(t => t.BetType);
             modelBuilder.Entity<DataModel.TransactionDetail>().HasOptional(o => o.OfferType);
+            modelBuilder.Entity<DataModel.TransactionDetail>().HasOptional(s => s.Sport);
+            modelBuilder.Entity<DataModel.TransactionDetail>().HasOptional(m => m.Market);
 
 
             base.OnModelCreating(modelBuilder);
