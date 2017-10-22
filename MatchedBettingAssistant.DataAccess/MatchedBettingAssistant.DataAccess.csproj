@@ -55,6 +55,8 @@
     <Compile Include="DataModel\Transaction.cs" />
     <Compile Include="DataModel\TransactionDetail.cs" />
     <Compile Include="DataModel\Wallet.cs" />
+    <Compile Include="DTO\AccountDto.cs" />
+    <Compile Include="DTO\BankDto.cs" />
     <Compile Include="DTO\BetTypeDto.cs" />
     <Compile Include="DTO\BookmakerDto.cs" />
     <Compile Include="DTO\OfferTypeDto.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="MatchedBettingAssistantDbContext.cs" />
     <Compile Include="MatchedBettingInitialiser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BankRepository.cs" />
     <Compile Include="Repositories\BetTypeRepository.cs" />
     <Compile Include="Repositories\BookmakerRepository.cs" />
     <Compile Include="Repositories\OfferTypeRepository.cs" />

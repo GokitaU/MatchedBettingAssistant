@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBank.cs" />
+    <Compile Include="IBankRepository.cs" />
     <Compile Include="IBetType.cs" />
     <Compile Include="IBetTypeRepository.cs" />
     <Compile Include="IBookmakerRepository.cs" />

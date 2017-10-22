@@ -9,19 +9,4 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
         }
     }
-
-    public class WalletLookupItem : AccountLookupItem<IWallet>
-    {
-        public WalletLookupItem(IWallet account) : base(account)
-        {
-        }
-    }
-
-    public class AccountLookupItem : AccountLookupItem<IAccount>
-    {
-        public AccountLookupItem(IAccount account) : base(account)
-        {
-
-        }
-    }
 }

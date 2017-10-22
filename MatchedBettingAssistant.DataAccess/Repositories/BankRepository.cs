@@ -6,29 +6,29 @@ using MatchedBettingAssistant.DataAccess.DTO;
 
 namespace MatchedBettingAssistant.DataAccess.Repositories
 {
-    public class WalletRepository : IWalletRepository
+    public class BankRepository : IBankRepository
     {
         private readonly MatchedBettingAssistantDbContext dataContext;
 
-        public WalletRepository(MatchedBettingAssistantDbContext dataContext)
+        public BankRepository(MatchedBettingAssistantDbContext dataContext)
         {
             this.dataContext = dataContext;
         }
 
-        public IEnumerable<IWallet> GetWallets()
+        public IEnumerable<IBank> GetAccounts()
         {
-            var wallets = this.dataContext.Accounts.OfType<DataModel.Wallet>()
+            var wallets = this.dataContext.Accounts.OfType<DataModel.Bank>()
                 .Include(x => x.Transactions)
                 .Include(x => x.Transactions.Select(d => d.Detail)).ToList();
-            return new List<IWallet>(wallets.Select(x => new WalletDto(x))); 
+            return new List<IBank>(wallets.Select(x => new BankDto(x)));
         }
 
-        public IWallet New()
+        public IBank New()
         {
-            var newWallet = new DataModel.Wallet();
-            this.dataContext.Accounts.Add(newWallet);
+            var newAccount = new DataModel.Bank();
+            this.dataContext.Accounts.Add(newAccount);
 
-            return new WalletDto(newWallet);
+            return new BankDto(newAccount);
         }
     }
 }

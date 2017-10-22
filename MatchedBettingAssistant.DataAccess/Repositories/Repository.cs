@@ -23,6 +23,8 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
 
         public IWalletRepository WalletRepository => new WalletRepository(dbContext);
 
+        public IBankRepository BankRepository => new BankRepository(dbContext);
+
         public IBetTypeRepository BetTypeRepository => new BetTypeRepository(dbContext);
 
         public IOfferTypeRepository OfferTypeRepository => new OfferTypeRepository(dbContext);

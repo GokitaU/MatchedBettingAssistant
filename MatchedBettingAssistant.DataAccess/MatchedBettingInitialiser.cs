@@ -16,11 +16,16 @@ namespace MatchedBettingAssistant.DataAccess
             var offerTypes = CreateOfferTypes();
             context.OfferTypes.AddRange(offerTypes);
 
-            var bookmakers = CreateBookmakers(betTypes, offerTypes);
+            var banks = CreateBanks();
+            context.Accounts.AddRange(banks);
+
+            
+            var bookmakers = CreateBookmakers(betTypes, offerTypes, banks);
             context.Accounts.AddRange(bookmakers);
 
             var wallets = CreateWallets();
             context.Accounts.AddRange(wallets);
+
 
             context.SaveChanges();
             base.Seed(context);
@@ -64,7 +69,23 @@ namespace MatchedBettingAssistant.DataAccess
             return wallets;
         }
 
-        private IEnumerable<DataModel.Bookmaker> CreateBookmakers(IEnumerable<BetType> betTypes, IEnumerable<OfferType> offerTypes)
+        private IEnumerable<DataModel.Bank> CreateBanks()
+        {
+            var bank = new DataModel.Bank()
+            {
+                Name = "No Lay Accumulator",
+                StartingBalance = 100.00
+            };
+
+            var banks = new List<DataModel.Bank>() {bank};
+
+            return banks;
+        }
+
+        private IEnumerable<DataModel.Bookmaker> CreateBookmakers(
+                                            IEnumerable<BetType> betTypes, 
+                                            IEnumerable<OfferType> offerTypes, 
+                                            IEnumerable<Bank> banks)
         {
             var bookmakers = new List<DataModel.Bookmaker>();
 
@@ -135,7 +156,9 @@ namespace MatchedBettingAssistant.DataAccess
 
             bookmakers.Add(paddyPower);
 
+            var bank = banks.FirstOrDefault();
 
+            bank?.Transactions.Add(backTransaction);
 
             return bookmakers;
         }

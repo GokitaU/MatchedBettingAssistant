@@ -13,6 +13,9 @@
         <DataTemplate DataType="{x:Type viewmodel:WalletManagerViewModel}">
             <account:AccountManagerView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:BankManagerViewModel}">
+            <account:AccountManagerView/>
+        </DataTemplate>
     </dx:DXWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -39,7 +42,7 @@
                                Glyph="{StaticResource Wallets}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarButtonItem Content="Banks"
-                               Command="{Binding NoCommand}"
+                               Command="{Binding BanksCommand}"
                                Glyph="{StaticResource Bank}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarItemLinkSeparator/>

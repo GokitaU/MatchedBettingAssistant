@@ -21,6 +21,7 @@ namespace MatchedBettingAssistant.ViewModel
         private DelegateCommand walletsCommand;
         private DelegateCommand bookmakersCommand;
 
+        private DelegateCommand banksCommand;
 
 
         public MainWindowViewModel()
@@ -41,6 +42,7 @@ namespace MatchedBettingAssistant.ViewModel
         public DelegateCommand AddCommand => this.addCommand ?? (this.addCommand = new DelegateCommand(Add, IsConnected));
         public DelegateCommand BookmakersCommand => this.bookmakersCommand ?? (this.bookmakersCommand = new DelegateCommand(Bookmakers, IsConnected));
         public DelegateCommand WalletsCommand => this.walletsCommand ?? (this.walletsCommand = new DelegateCommand(Wallets, IsConnected));
+        public DelegateCommand BanksCommand => this.banksCommand ?? (this.banksCommand = new DelegateCommand(Banks, IsConnected));
 
         public ViewModelBase CurrentViewModel
         {
@@ -79,6 +81,7 @@ namespace MatchedBettingAssistant.ViewModel
             this.DeleteCommand.RaiseCanExecuteChanged();
             this.BookmakersCommand.RaiseCanExecuteChanged();
             this.WalletsCommand.RaiseCanExecuteChanged();
+            this.BanksCommand.RaiseCanExecuteChanged();
         }
 
         private void Connect()
@@ -119,6 +122,11 @@ namespace MatchedBettingAssistant.ViewModel
         private void Wallets()
         {
             this.CurrentViewModel = new WalletManagerViewModel(this.repository);
+        }
+
+        private void Banks()
+        {
+            this.CurrentViewModel = new BankManagerViewModel(this.repository);
         }
     }
 }

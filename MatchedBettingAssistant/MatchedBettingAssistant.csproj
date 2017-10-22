@@ -79,6 +79,10 @@
     <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
+    <Compile Include="ViewModel\Account\BankLookupItem.cs" />
+    <Compile Include="ViewModel\Account\BankManagerViewModel.cs" />
+    <Compile Include="ViewModel\Account\BankNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Account\BankViewModel.cs" />
     <Compile Include="ViewModel\Account\BasicBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BetTypeLookup.cs" />
     <Compile Include="ViewModel\Account\BetViewModel.cs" />
@@ -87,6 +91,7 @@
     <Compile Include="ViewModel\Account\BookmakerNameChangedMessage.cs" />
     <Compile Include="ViewModel\Account\BookmakerNavigationViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerViewModel.cs" />
+    <Compile Include="ViewModel\Account\EditBankViewModel.cs" />
     <Compile Include="ViewModel\Account\IAddsEntity.cs" />
     <Compile Include="ViewModel\Account\IDeletesEntity.cs" />
     <Compile Include="ViewModel\Account\OfferTypeLookup.cs" />
@@ -95,6 +100,7 @@
     <Compile Include="ViewModel\Account\DepositActionAccountSetter.cs" />
     <Compile Include="ViewModel\Account\EditBookmakerViewModel.cs" />
     <Compile Include="ViewModel\Account\ITransferActionAccountSetter.cs" />
+    <Compile Include="ViewModel\Account\SelectedBankChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SelectedBookmakerChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SelectedWalletChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SimpleMatchedBetViewModel.cs" />
@@ -102,6 +108,7 @@
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\TransactionsUpdatedMessage.cs" />
     <Compile Include="ViewModel\Account\WalletButtonsViewModel.cs" />
+    <Compile Include="ViewModel\Account\WalletLookupItem.cs" />
     <Compile Include="ViewModel\Account\WalletManagerViewModel.cs" />
     <Compile Include="ViewModel\Account\WalletNavigationViewModel.cs" />
     <Compile Include="ViewModel\Account\WithdrawActionAccountSetter.cs" />
@@ -130,6 +137,9 @@
     </Compile>
     <Compile Include="View\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Account\EditBankView.xaml.cs">
+      <DependentUpon>EditBankView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Account\EditBookmakerView.xaml.cs">
       <DependentUpon>EditBookmakerView.xaml</DependentUpon>
@@ -190,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Account\AccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account\EditBankView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

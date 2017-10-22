@@ -4,6 +4,14 @@ using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
+    public class AccountLookupItem : AccountLookupItem<IAccount>
+    {
+        public AccountLookupItem(IAccount account) : base(account)
+        {
+
+        }
+    }
+
     public class AccountLookupItem<T> : ViewModelBase where T: IAccount
     {
         private readonly T account;
