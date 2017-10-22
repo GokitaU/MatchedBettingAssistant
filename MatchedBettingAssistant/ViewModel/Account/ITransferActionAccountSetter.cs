@@ -9,6 +9,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         string AccountName { get; }
 
-        void SetAccount(IAccount account);
+        void SetAccount(ITransactionAccount account);
     }
 }

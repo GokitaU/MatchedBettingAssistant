@@ -2,7 +2,7 @@
 
 namespace MatchedBettingAssistant.Model.Accounts
 {
-    public class Wallet : Account, IWallet
+    public class Wallet : TransactionAccount, IWallet
     {
         public Wallet(IWallet baseAccount) : base(baseAccount)
         {

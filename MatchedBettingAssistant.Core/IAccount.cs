@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MatchedBettingAssistant.Core
+﻿namespace MatchedBettingAssistant.Core
 {
     /// <summary>
     /// Interface for classes that represent methods of payment such as
@@ -14,17 +12,6 @@ namespace MatchedBettingAssistant.Core
 
         double StartingBalance { get; set; }
 
-        /// <summary>
-        /// Gets the current balance of this bookmaker
-        /// </summary>
         double Balance { get; }
-
-        /// <summary>
-        /// Adds a transaction to the account
-        /// </summary>
-        /// <param name="transaction">the transaction to be applied</param>
-        void AddTransaction(ITransaction transaction);
-
-        IEnumerable<ITransaction> Transactions { get; }
     }
 }

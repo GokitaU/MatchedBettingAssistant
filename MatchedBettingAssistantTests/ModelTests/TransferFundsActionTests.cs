@@ -9,8 +9,8 @@ namespace MatchedBettingAssistant.Model.Tests.ModelTests
     [TestClass]
     public class TransferFundsActionTests
     {
-        private Mock<IAccount> source;
-        private Mock<IAccount> destination;
+        private Mock<ITransactionAccount> source;
+        private Mock<ITransactionAccount> destination;
         private Mock<ITransactionRepository> repository;
 
         private const double tolerance = 0.001;
@@ -18,8 +18,8 @@ namespace MatchedBettingAssistant.Model.Tests.ModelTests
         [TestInitialize]
         public void Setup()
         {
-            this.source = new Mock<IAccount>();
-            this.destination = new Mock<IAccount>();
+            this.source = new Mock<ITransactionAccount>();
+            this.destination = new Mock<ITransactionAccount>();
             this.repository = new Mock<ITransactionRepository>();
             this.repository.Setup(x => x.New()).Returns(new FundsTransaction());
         }

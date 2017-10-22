@@ -82,6 +82,8 @@
     <Compile Include="ViewModel\Account\BankLookupItem.cs" />
     <Compile Include="ViewModel\Account\BankManagerViewModel.cs" />
     <Compile Include="ViewModel\Account\BankNavigationViewModel.cs" />
+    <Compile Include="ViewModel\Account\BankTransactionListViewModel.cs" />
+    <Compile Include="ViewModel\Account\BankTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\BankViewModel.cs" />
     <Compile Include="ViewModel\Account\BasicBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BetTypeLookup.cs" />

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MatchedBettingAssistant.Core;
+﻿using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.Model.Accounts
 {
@@ -44,31 +42,6 @@ namespace MatchedBettingAssistant.Model.Accounts
             set => this.baseAccount.StartingBalance = value;
         }
 
-        /// <inheritdoc />
-        /// <summary>
-        /// Gets the current balance of this bookmaker
-        /// </summary>
-        public virtual double Balance
-        {
-            get
-            {
-                return this.StartingBalance + (baseAccount.Transactions?.Sum(x => x.Amount) ?? 0);
-            }
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Adds a transaction to the account
-        /// </summary>
-        /// <param name="transaction">the transaction to be applied</param>
-        public virtual void AddTransaction(ITransaction transaction)
-        {
-            this.baseAccount.AddTransaction(transaction);
-        }
-
-        public IEnumerable<ITransaction> Transactions
-        {
-            get { return this.baseAccount.Transactions; }
-        }
+        public abstract double Balance { get; }
     }
 }

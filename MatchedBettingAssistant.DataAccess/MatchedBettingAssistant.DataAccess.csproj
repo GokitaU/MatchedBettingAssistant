@@ -53,6 +53,7 @@
     <Compile Include="DataModel\Bookmaker.cs" />
     <Compile Include="DataModel\OfferType.cs" />
     <Compile Include="DataModel\Transaction.cs" />
+    <Compile Include="DataModel\TransactionAccount.cs" />
     <Compile Include="DataModel\TransactionDetail.cs" />
     <Compile Include="DataModel\Wallet.cs" />
     <Compile Include="DTO\AccountDto.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="DTO\BetTypeDto.cs" />
     <Compile Include="DTO\BookmakerDto.cs" />
     <Compile Include="DTO\OfferTypeDto.cs" />
+    <Compile Include="DTO\TransactionAccountDto.cs" />
     <Compile Include="DTO\TransactionDetailDto.cs" />
     <Compile Include="DTO\TransactionDto.cs" />
     <Compile Include="DTO\WalletDto.cs" />

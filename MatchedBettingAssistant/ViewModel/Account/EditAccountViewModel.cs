@@ -15,10 +15,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class EditAccountViewModel : ViewModelBase
     {
-        private readonly IAccount account;
+        private readonly ITransactionAccount account;
         private IRepository repository;
 
-        public EditAccountViewModel(IAccount account, IRepository repository)
+        public EditAccountViewModel(ITransactionAccount account, IRepository repository)
         {
             this.account = account;
             this.repository = repository;

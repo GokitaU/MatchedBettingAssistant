@@ -26,9 +26,9 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
 
         public virtual TransactionDetail Detail { get; set; }
 
-        public int AccountId { get; set; }
+        public int TransactionAccountId { get; set; }
 
-        public Account Account { get; set; }
+        public TransactionAccount Account { get; set; }
 
     }
 }

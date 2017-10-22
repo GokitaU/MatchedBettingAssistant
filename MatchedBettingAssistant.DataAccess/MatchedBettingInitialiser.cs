@@ -155,11 +155,6 @@ namespace MatchedBettingAssistant.DataAccess
             paddyPower.Transactions.Add(backTransaction);
 
             bookmakers.Add(paddyPower);
-
-            var bank = banks.FirstOrDefault();
-
-            bank?.Transactions.Add(backTransaction);
-
             return bookmakers;
         }
     }

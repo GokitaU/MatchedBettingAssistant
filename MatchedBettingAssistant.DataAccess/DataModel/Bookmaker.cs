@@ -4,7 +4,7 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
-    public class Bookmaker : Account
+    public class Bookmaker : TransactionAccount
     {
         public Bookmaker()
         {

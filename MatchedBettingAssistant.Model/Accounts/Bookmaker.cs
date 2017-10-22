@@ -2,7 +2,7 @@
 
 namespace MatchedBettingAssistant.Model.Accounts
 {
-    public class Bookmaker : Account, IBettingAccount
+    public class Bookmaker : TransactionAccount, IBettingAccount
     {
         private readonly IBettingAccount baseAccount;
 

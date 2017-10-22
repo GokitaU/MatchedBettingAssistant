@@ -6,7 +6,7 @@ using MatchedBettingAssistant.DataAccess.DataModel;
 namespace MatchedBettingAssistant.DataAccess.DTO
 { 
 
-    public class BookmakerDto : AccountDto, IBettingAccount
+    public class BookmakerDto : TransactionAccountDto, IBettingAccount
     {
         private readonly DataModel.Bookmaker bookmaker;
 

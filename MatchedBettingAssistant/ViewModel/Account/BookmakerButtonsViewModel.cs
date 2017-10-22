@@ -14,7 +14,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class BookmakerButtonsViewModel : ViewModelBase
     {
-        private readonly IAccount account;
+        private readonly ITransactionAccount account;
         private readonly IRepository repository;
 
         public IDialogService TransferDialogService => ServiceContainer.GetService<IDialogService>("transferDialog");
@@ -26,7 +26,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private DelegateCommand bonusCommand;
         private DelegateCommand betCommand;
 
-        public BookmakerButtonsViewModel(IAccount account, IRepository repository)
+        public BookmakerButtonsViewModel(ITransactionAccount account, IRepository repository)
         {
             this.account = account;
             this.repository = repository;

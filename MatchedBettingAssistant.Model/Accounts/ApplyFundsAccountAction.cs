@@ -15,7 +15,7 @@ namespace MatchedBettingAssistant.Model.Accounts
             this.repository = repository;
         }
 
-        public IAccount Destination { get; set; }
+        public ITransactionAccount Destination { get; set; }
 
         public DateTime Date { get; set; }
 

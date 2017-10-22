@@ -10,7 +10,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private EditBankViewModel editViewModel;
 
-        private AccountTransactionListViewModel transactions;
+        private BankTransactionListViewModel transactions;
 
 
         public BankViewModel(IBank bank, IRepository repository)
@@ -31,7 +31,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public AccountTransactionListViewModel Transactions
+        public BankTransactionListViewModel Transactions
         {
             get => this.transactions;
             set
@@ -48,7 +48,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateTransactions()
         {
-            this.Transactions = new AccountTransactionListViewModel(this.bank, false);
+            this.Transactions = new BankTransactionListViewModel(this.bank);
         }
     }
 }

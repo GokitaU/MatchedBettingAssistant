@@ -1,20 +1,16 @@
-using System.Collections.Generic;
-using System.Linq;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess.DTO
 {
-    public class AccountDto : IAccount
+    public abstract class AccountDto : IAccount
     {
 
         private readonly DataModel.Account wallet;
-        private readonly IList<ITransaction> transactions;
 
-        public AccountDto(Account bank)
+        protected AccountDto(Account bank)
         {
             this.wallet = bank;
-            this.transactions = new List<ITransaction>(this.wallet.Transactions.Select(x => new TransactionDto(x)));
         }
 
 
@@ -36,19 +32,6 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             set => this.wallet.StartingBalance = value;
         }
 
-        public double Balance => this.wallet.Balance;
-
-        public IEnumerable<ITransaction> Transactions => transactions;
-
-        public void AddTransaction(ITransaction transaction)
-        {
-            if (transaction is TransactionDto transactionDto)
-            {
-                this.wallet.Transactions.Add(transactionDto.Transaction);
-
-                this.transactions.Add(transactionDto);
-
-            }
-        }
+        public abstract double Balance { get; }
     }
 }

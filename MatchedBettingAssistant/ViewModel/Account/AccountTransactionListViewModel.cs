@@ -10,7 +10,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class AccountTransactionListViewModel : ViewModelBase
     {
-        private readonly IAccount account;
+        private readonly ITransactionAccount account;
 
         private bool isBet;
 
@@ -18,12 +18,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private DelegateCommand deleteCommand;
 
-        public DelegateCommand DeleteCommand
-        {
-            get => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete));
-        }
-
-        public AccountTransactionListViewModel(IAccount account, bool isBet)
+        public AccountTransactionListViewModel(ITransactionAccount account, bool isBet)
         {
             this.account = account;
             this.isBet = isBet;
@@ -46,6 +41,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         }
 
         public int DescriptionWidth => this.isBet ? 100 : 200;
+        public DelegateCommand DeleteCommand => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete));
 
         private void RegisterMessages()
         {

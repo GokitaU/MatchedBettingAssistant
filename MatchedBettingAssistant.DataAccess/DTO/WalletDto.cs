@@ -5,7 +5,7 @@ using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess.DTO
 {
-    public class WalletDto : AccountDto, IWallet
+    public class WalletDto : TransactionAccountDto, IWallet
     {
         public WalletDto(Wallet bank) : base(bank)
         {

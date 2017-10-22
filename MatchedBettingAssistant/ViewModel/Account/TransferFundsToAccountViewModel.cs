@@ -20,7 +20,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private readonly ITransferActionAccountSetter accountSetter;
 
-        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<IAccount> accounts, ITransferActionAccountSetter accountSetter)
+        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<ITransactionAccount> accounts, ITransferActionAccountSetter accountSetter)
         {
             this.action = action;
             this.accountSetter = accountSetter;

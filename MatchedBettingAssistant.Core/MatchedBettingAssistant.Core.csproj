@@ -51,6 +51,7 @@
     <Compile Include="IOfferTypeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ITransaction.cs" />
+    <Compile Include="ITransactionAccount.cs" />
     <Compile Include="ITransactionDetail.cs" />
     <Compile Include="IWallet.cs" />
     <Compile Include="IWalletRepository.cs" />

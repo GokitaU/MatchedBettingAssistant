@@ -9,10 +9,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class WalletButtonsViewModel : ViewModelBase
     {
-        private readonly IAccount account;
+        private readonly ITransactionAccount account;
         private readonly IRepository repository;
 
-        public WalletButtonsViewModel(IAccount account, IRepository repository)
+        public WalletButtonsViewModel(ITransactionAccount account, IRepository repository)
         {
             this.account = account;
             this.repository = repository;
@@ -135,7 +135,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             TransferFunds(action, accountSetter, accounts);
         }
 
-        private void TransferFunds(TransferFundsAccountAction action, ITransferActionAccountSetter accountSetter, IEnumerable<IAccount> accounts)
+        private void TransferFunds(TransferFundsAccountAction action, ITransferActionAccountSetter accountSetter, IEnumerable<ITransactionAccount> accounts)
         {
             var depositViewModel = new TransferFundsToAccountViewModel(action, accounts, accountSetter);
 

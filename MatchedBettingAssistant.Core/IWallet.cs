@@ -1,6 +1,6 @@
 ﻿namespace MatchedBettingAssistant.Core
 {
-    public interface IWallet : IAccount
+    public interface IWallet : ITransactionAccount
     {
         
     }

@@ -4,9 +4,9 @@ using MatchedBettingAssistant.Model;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class AccountLookupItem : AccountLookupItem<IAccount>
+    public class AccountLookupItem : AccountLookupItem<ITransactionAccount>
     {
-        public AccountLookupItem(IAccount account) : base(account)
+        public AccountLookupItem(ITransactionAccount account) : base(account)
         {
 
         }

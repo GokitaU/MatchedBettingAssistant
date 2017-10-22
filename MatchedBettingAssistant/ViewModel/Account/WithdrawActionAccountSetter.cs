@@ -20,7 +20,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             get { return this.action.Source?.Name; }
         }
 
-        public void SetAccount(IAccount account)
+        public void SetAccount(ITransactionAccount account)
         {
             this.action.Destination = account;
         }
