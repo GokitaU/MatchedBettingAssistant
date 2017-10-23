@@ -49,13 +49,15 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             var betTypes = this.repository.BetTypeRepository.GetBetTypes();
             var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes();
+            var sports = this.repository.SportRepository.GetSports().ToList();
+            var markets = this.repository.MarketRepository.GetMarkets().ToList();
 
             var basicBet = new SimpleBet(this.repository.TransactionRepository)
             {
                 Account = account,
                 Date = DateTime.Today
             };
-            this.CurrentBet = new BasicBetViewModel(basicBet, betTypes, offerTypes);
+            this.CurrentBet = new BasicBetViewModel(basicBet, betTypes, offerTypes, sports, markets);
         }
 
         private void CreateSimpleMatchedBet()
@@ -64,6 +66,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
             var exchanges = this.repository.BookmakerRepository.GetAccounts().Where(x => x.IsExchange).ToList();
             var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes().ToList();
             var betTypes = this.repository.BetTypeRepository.GetBetTypes().ToList();
+            var sports = this.repository.SportRepository.GetSports().ToList();
+            var markets = this.repository.MarketRepository.GetMarkets().ToList();
 
             var simpleMatchedBet = new SimpleMatchedBet(this.repository.TransactionRepository)
             {
@@ -71,9 +75,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 LayAccount = exchanges.FirstOrDefault(),
                 Date = DateTime.Today,
                 BetType = betTypes.FirstOrDefault(),
-                OfferType = offerTypes.FirstOrDefault()
+                OfferType = offerTypes.FirstOrDefault(),
+                Sport = sports.FirstOrDefault(),
+                Market = markets.FirstOrDefault()
             };
-            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges, betTypes, offerTypes);
+            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges, betTypes, offerTypes, sports, markets);
         }
     }
 }

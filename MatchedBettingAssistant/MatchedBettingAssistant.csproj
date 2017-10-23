@@ -96,6 +96,8 @@
     <Compile Include="ViewModel\Account\EditBankViewModel.cs" />
     <Compile Include="ViewModel\Account\IAddsEntity.cs" />
     <Compile Include="ViewModel\Account\IDeletesEntity.cs" />
+    <Compile Include="ViewModel\Account\Lookup.cs" />
+    <Compile Include="ViewModel\Account\MarketLookup.cs" />
     <Compile Include="ViewModel\Account\OfferTypeLookup.cs" />
     <Compile Include="ViewModel\Account\PlaceBetViewModel.cs" />
     <Compile Include="ViewModel\Account\BookmakerButtonsViewModel.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="ViewModel\Account\SelectedBookmakerChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SelectedWalletChangedMessage.cs" />
     <Compile Include="ViewModel\Account\SimpleMatchedBetViewModel.cs" />
+    <Compile Include="ViewModel\Account\SportLookup.cs" />
     <Compile Include="ViewModel\Account\TransferFundsToAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\TransactionsUpdatedMessage.cs" />

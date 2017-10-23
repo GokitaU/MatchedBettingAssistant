@@ -7,6 +7,7 @@
              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:Serialization="clr-namespace:DevExpress.Xpf.LayoutControl.Serialization;assembly=DevExpress.Xpf.LayoutControl.v17.1"
              x:Class="MatchedBettingAssistant.View.Account.SimpleMatchedBetView"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="500">
@@ -20,16 +21,30 @@
                 <dxlc:LayoutItem Label="Profit/Loss">
                     <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}" IsReadOnly="True" MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True" />
                 </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="Bet Type">
-                    <dxe:ComboBoxEdit ItemsSource="{Binding BetTypes}"
-                                      DisplayMember="Name"
-                                      EditValue="{Binding BetType}"/>
-                </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="Offer Type">
-                    <dxe:ComboBoxEdit ItemsSource="{Binding OfferTypes}"
-                                      DisplayMember="Name"
-                                      EditValue="{Binding OfferType}"/>
-                </dxlc:LayoutItem>
+                <dxlc:LayoutGroup dx:ScrollViewerTouchBehavior.IsEnabled="True" Serialization:SerializableItem.TypeName="LayoutGroup">
+                    <dxlc:LayoutItem Label="Bet Type">
+                        <dxe:ComboBoxEdit ItemsSource="{Binding BetTypes}"
+                                          DisplayMember="Name"
+                                          EditValue="{Binding BetType}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Offer Type">
+                        <dxe:ComboBoxEdit ItemsSource="{Binding OfferTypes}"
+                                          DisplayMember="Name"
+                                          EditValue="{Binding OfferType}"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup dx:ScrollViewerTouchBehavior.IsEnabled="True" Serialization:SerializableItem.TypeName="LayoutGroup">
+                    <dxlc:LayoutItem Label="Sport">
+                        <dxe:ComboBoxEdit ItemsSource="{Binding Sports}"
+                                          DisplayMember="Name"
+                                          EditValue="{Binding Sport}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Market">
+                        <dxe:ComboBoxEdit ItemsSource="{Binding Markets}"
+                                          DisplayMember="Name"
+                                          EditValue="{Binding Market}"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
                 <dxlc:LayoutItem Label="Description">
                     <dxe:TextEdit EditValue="{Binding Description}"/>
                 </dxlc:LayoutItem>
@@ -57,18 +72,15 @@
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup>
-                <dxlc:LayoutGroup Header="LayoutGroup"
-                    Orientation="Horizontal">
-                    <dxlc:LayoutItem>
-                        <dx:SimpleButton Content="Mug" Command="{Binding MugBetCommand}"/>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem>
-                        <dx:SimpleButton Content="Qualifier" Command="{Binding QualifyingBetCommand}"/>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem>
-                        <dx:SimpleButton Content="Bonus" Command="{Binding BonusBetCommand}"/>
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
+                <dxlc:LayoutItem>
+                    <dx:SimpleButton Content="Mug" Command="{Binding MugBetCommand}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem>
+                    <dx:SimpleButton Content="Qualifier" Command="{Binding QualifyingBetCommand}"/>
+                </dxlc:LayoutItem>
+                <dxlc:LayoutItem>
+                    <dx:SimpleButton Content="Bonus" Command="{Binding BonusBetCommand}"/>
+                </dxlc:LayoutItem>
 
 
             </dxlc:LayoutGroup>

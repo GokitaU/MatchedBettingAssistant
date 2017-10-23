@@ -46,6 +46,10 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public IOfferType OfferType { get; set; }
 
+        public ISport Sport { get; set; }
+
+        public IMarket Market { get; set; }
+
         /// <summary>
         /// Places the bet and creates the transaction
         /// </summary>
@@ -74,7 +78,8 @@ namespace MatchedBettingAssistant.Model.Bets
                     detail.OfferType = this.OfferType;
                     detail.BetType = this.BetType;
                     detail.PaybackPercent = this.Account.PaybackPercent;
-                    //this.Transaction.AddDetail(detail);
+                    detail.Sport = this.Sport;
+                    detail.Market = this.Market;
                     detail.AddTransaction(this.Transaction);
                 }
             }

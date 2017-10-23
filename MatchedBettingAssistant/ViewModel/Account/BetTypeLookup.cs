@@ -1,18 +1,12 @@
-﻿using MatchedBettingAssistant.Core;
+﻿using DevExpress.Data.Helpers;
+using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class BetTypeLookup
+    public class BetTypeLookup : Lookup<IBetType>
     {
-        private IBetType betType;
-
-        public BetTypeLookup(IBetType betType)
+        public BetTypeLookup(IBetType lookup) : base(lookup)
         {
-            this.betType = betType;
         }
-
-        public string Name => this.betType.Name;
-
-        internal IBetType BetType => this.betType;
     }
 }

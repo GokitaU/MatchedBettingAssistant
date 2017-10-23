@@ -26,6 +26,12 @@
                                               DisplayMember="Name"
                                               EditValue="{Binding OfferType}"/>
                         </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Sport">
+                            <dxe:ComboBoxEdit/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Market">
+                            <dxe:ComboBoxEdit/>
+                        </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Profit/Loss" ToolTip="Amount returned on completion">
                             <dxe:TextEdit EditValue="{Binding Returns}" MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
                         </dxlc:LayoutItem>

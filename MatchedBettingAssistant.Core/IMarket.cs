@@ -1,9 +1,6 @@
 ﻿namespace MatchedBettingAssistant.Core
 {
-    public interface IMarket
+    public interface IMarket : ILookup
     {
-        int Id { get; set; }
-
-        string Name { get; set; }
     }
 }

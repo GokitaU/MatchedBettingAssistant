@@ -16,12 +16,20 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private readonly SimpleBet bet;
         private BetTypeLookup betType;
         private OfferTypeLookup offerType;
+        private SportLookup sportLookup;
+        private MarketLookup marketLookup;
 
-        public BasicBetViewModel(SimpleBet bet, IEnumerable<IBetType> betTypes, IEnumerable<IOfferType> offerTypes)
+        public BasicBetViewModel(SimpleBet bet, 
+                                 IEnumerable<IBetType> betTypes, 
+                                 IEnumerable<IOfferType> offerTypes,
+                                 IEnumerable<ISport> sports,
+                                 IEnumerable<IMarket> markets)
         {
             this.bet = bet;
             this.BetTypes = betTypes.Select(x => new BetTypeLookup(x));
             this.OfferTypes = offerTypes.Select(x => new OfferTypeLookup(x));
+            this.Sports = sports.Select(x => new SportLookup(x));
+            this.Markets = markets.Select(x => new MarketLookup(x));
         }
 
         /// <summary>
@@ -61,7 +69,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.betType = value;
-                this.bet.BetType = value?.BetType;
+                this.bet.BetType = value?.Model;
 
                 RaisePropertyChanged(() => this.BetType);
             }
@@ -73,8 +81,29 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.offerType = value;
-                this.bet.OfferType = offerType?.OfferType;
+                this.bet.OfferType = offerType?.Model;
                 RaisePropertyChanged(()=>this.OfferType);
+            }
+        }
+
+        public SportLookup Sport
+        {
+            get => this.sportLookup;
+            set
+            {
+                this.sportLookup = value;
+                this.bet.Sport = sportLookup?.Model;
+                RaisePropertyChanged(() => this.Sport);
+            }
+        }
+        public MarketLookup Market
+        {
+            get => this.marketLookup;
+            set
+            {
+                this.marketLookup = value;
+                this.bet.Market = marketLookup?.Model;
+                RaisePropertyChanged(() => this.Market);
             }
         }
 
@@ -88,6 +117,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public IEnumerable<BetTypeLookup> BetTypes { get; }
 
         public IEnumerable<OfferTypeLookup> OfferTypes { get; }
+
+        public IEnumerable<SportLookup> Sports { get; }
+
+        public IEnumerable<MarketLookup> Markets { get; }
 
         /// <summary>
         /// Gets or sets the return

@@ -17,10 +17,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private BookmakerLookupItem layAccount;
         private BetTypeLookup betType;
         private OfferTypeLookup offerType;
+        private SportLookup sportLookup;
+        private MarketLookup marketLookup;
+
         private ObservableCollection<BookmakerLookupItem> bookmakers;
         private ObservableCollection<BookmakerLookupItem> exchanges;
         private ObservableCollection<BetTypeLookup> betTypes;
         private ObservableCollection<OfferTypeLookup> offerTypes;
+        private ObservableCollection<SportLookup> sports;
+        private ObservableCollection<MarketLookup> markets;
+
         private DelegateCommand mugBetCommand;
         private DelegateCommand qualifyingBetCommand;
         private DelegateCommand bonusBetCommand;
@@ -29,13 +35,17 @@ namespace MatchedBettingAssistant.ViewModel.Account
                                          IEnumerable<IBettingAccount> bookmakers, 
                                          IEnumerable<IBettingAccount> exchanges,
                                          IEnumerable<IBetType> betTypes,
-                                         IEnumerable<IOfferType> offerTypes)
+                                         IEnumerable<IOfferType> offerTypes,
+                                         IEnumerable<ISport> sports,
+                                         IEnumerable<IMarket> markets)
         {
             this.matchedBet = matchedBet;
             CreateBookmakers(bookmakers);
             CreateExchanges(exchanges);
             CreateBetTypes(betTypes);
             CreateOfferTypes(offerTypes);
+            CreateSports(sports);
+            CreateMarkets(markets);
         }
 
 
@@ -108,7 +118,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public ObservableCollection<BetTypeLookup> BetTypes
         {
-            get { return betTypes; }
+            get => betTypes;
             private set
             {
                 this.betTypes = value;
@@ -118,11 +128,31 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public ObservableCollection<OfferTypeLookup> OfferTypes
         {
-            get { return offerTypes; }
+            get => offerTypes;
             private set
             {
                 this.offerTypes = value;
                 this.RaisePropertyChanged(()=>OfferTypes);
+            }
+        }
+
+        public ObservableCollection<SportLookup> Sports
+        {
+            get => sports;
+            set
+            {
+                this.sports = value;
+                RaisePropertyChanged(()=>Sports);
+            }
+        }
+
+        public ObservableCollection<MarketLookup> Markets
+        {
+            get => markets;
+            set
+            {
+                this.markets = value;
+                RaisePropertyChanged(()=>Markets);
             }
         }
 
@@ -154,7 +184,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.betType = value;
-                this.matchedBet.BetType = value?.BetType;
+                this.matchedBet.BetType = value?.Model;
                 RaisePropertyChanged(()=>BetType);
             }
         }
@@ -165,11 +195,32 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.offerType = value;
-                this.matchedBet.OfferType = value?.OfferType;
+                this.matchedBet.OfferType = value?.Model;
                 RaisePropertyChanged(()=>OfferType);
             }
         }
 
+        public SportLookup Sport
+        {
+            get => this.sportLookup;
+            set
+            {
+                this.sportLookup = value;
+                this.matchedBet.Sport = value?.Model;
+                RaisePropertyChanged(()=>this.Sport);
+            }
+        }
+
+        public MarketLookup Market
+        {
+            get => this.marketLookup;
+            set
+            {
+                this.marketLookup = value;
+                this.matchedBet.Market = value?.Model;
+                RaisePropertyChanged(()=>Market);
+            }
+        }
         public string Description
         {
             get => this.matchedBet.Description;
@@ -217,14 +268,29 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             this.OfferTypes = new ObservableCollection<OfferTypeLookup>(offerTypes.Select(x => new OfferTypeLookup(x)));
 
-            this.OfferType = this.OfferTypes.FirstOrDefault(x => ReferenceEquals(x.OfferType, this.matchedBet.OfferType));
+            this.OfferType = this.OfferTypes.FirstOrDefault(x => ReferenceEquals(x.Model, this.matchedBet.OfferType));
         }
 
         private void CreateBetTypes(IEnumerable<IBetType> betTypes)
         {
             this.BetTypes = new ObservableCollection<BetTypeLookup>(betTypes.Select(x => new BetTypeLookup(x)));
 
-            this.BetType = this.BetTypes.FirstOrDefault(x => ReferenceEquals(x.BetType, this.matchedBet.BetType));
+            this.BetType = this.BetTypes.FirstOrDefault(x => ReferenceEquals(x.Model, this.matchedBet.BetType));
+        }
+
+        private void CreateSports(IEnumerable<ISport> sports)
+        {
+            this.Sports = new ObservableCollection<SportLookup>(sports.Select(x => new SportLookup(x)));
+
+            this.Sport = this.Sports.FirstOrDefault(x => ReferenceEquals(x.Model, this.matchedBet.Sport));
+        }
+
+        private void CreateMarkets(IEnumerable<IMarket> markets)
+        {
+            this.Markets = new ObservableCollection<MarketLookup>(markets.Select(x => new MarketLookup(x)));
+
+            this.Market = this.Markets.FirstOrDefault(x => ReferenceEquals(x.Model, this.matchedBet.Market));
+
         }
 
         private void MugBet()

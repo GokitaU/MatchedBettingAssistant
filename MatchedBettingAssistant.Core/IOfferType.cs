@@ -1,9 +1,6 @@
 ﻿namespace MatchedBettingAssistant.Core
 {
-    public interface IOfferType
+    public interface IOfferType : ILookup
     {
-        int Id { get; set; }
-
-        string Name { get; set; }
     }
 }

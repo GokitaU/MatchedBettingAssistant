@@ -1,9 +1,6 @@
 ﻿namespace MatchedBettingAssistant.Core
 {
-    public interface IBetType
+    public interface IBetType : ILookup
     {
-        int Id { get; set; }
-
-        string Name { get; set; }
     }
 }

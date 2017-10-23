@@ -2,9 +2,9 @@
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class OfferTypeLookup : Lookup<IOfferType>
+    public class MarketLookup : Lookup<IMarket>
     {
-        public OfferTypeLookup(IOfferType offerType) : base(offerType)
+        public MarketLookup(IMarket lookup) : base(lookup)
         {
         }
     }
