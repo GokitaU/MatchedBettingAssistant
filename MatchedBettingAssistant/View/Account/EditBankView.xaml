@@ -35,7 +35,7 @@
                     </dxlc:LayoutItem>
                     <dxlc:LayoutItem Label="Points Balance">
                         <dxe:TextEdit Text="{Binding PointsBalance, Mode=OneWay}"
-                                      MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                                      MaskType="Numeric" Mask="N2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
             </dxlc:LayoutGroup>

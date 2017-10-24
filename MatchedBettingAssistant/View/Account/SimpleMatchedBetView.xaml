@@ -45,6 +45,11 @@
                                           EditValue="{Binding Market}"/>
                     </dxlc:LayoutItem>
                 </dxlc:LayoutGroup>
+                <dxlc:LayoutItem Label="Bank">
+                    <dxe:ComboBoxEdit ItemsSource="{Binding Banks}"
+                                      DisplayMember="Name"
+                                      EditValue="{Binding Bank}"/>
+                </dxlc:LayoutItem>
                 <dxlc:LayoutItem Label="Description">
                     <dxe:TextEdit EditValue="{Binding Description}"/>
                 </dxlc:LayoutItem>

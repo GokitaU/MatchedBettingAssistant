@@ -7,5 +7,7 @@ namespace MatchedBettingAssistant.Core
         double PointValue { get; set; }
 
         IList<ITransactionDetail> Transactions { get;  }
+
+        void AddTransaction(ITransactionDetail transaction);
     }
 }

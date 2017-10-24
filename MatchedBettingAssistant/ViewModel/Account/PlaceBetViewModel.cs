@@ -8,10 +8,26 @@ using MatchedBettingAssistant.Model.Bets;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
+    public class BetLookup : ViewModelBase
+    {
+        public BetLookup(string name, Func<BetViewModel> createViewModel)
+        {
+            Name = name;
+            CreateViewModel = createViewModel;
+        }
+
+
+        public string Name { get; }
+
+        public Func<BetViewModel> CreateViewModel { get; }
+    }
+
     public class PlaceBetViewModel : ViewModelBase
     {
         private readonly IBettingAccount account;
         private BetViewModel currentBet;
+        private List<BetLookup> bets;
+        private BetLookup selectedBet;
 
         private readonly IRepository repository;
 
@@ -19,7 +35,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             this.account = account;
             this.repository = repository;
-            CreateSimpleMatchedBet();
+            CreateBets();
         }
 
         /// <summary>
@@ -40,12 +56,30 @@ namespace MatchedBettingAssistant.ViewModel.Account
             get { return 1; }
         }
 
+        public List<BetLookup> Bets
+        {
+            get { return bets; }
+        }
+
+        public BetLookup SelectedBet
+        {
+            get => this.selectedBet;
+            set
+            {
+                this.selectedBet = value;
+
+                this.CurrentBet = this.selectedBet.CreateViewModel();
+
+                RaisePropertyChanged(()=>SelectedBet);
+            }
+        }
+
         public void Commit()
         {
             this.CurrentBet.Commit(); 
         }
 
-        private void CreateSimpleBackBet()
+        private BetViewModel CreateSimpleBackBet()
         {
             var betTypes = this.repository.BetTypeRepository.GetBetTypes();
             var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes();
@@ -57,13 +91,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Account = account,
                 Date = DateTime.Today
             };
-            this.CurrentBet = new BasicBetViewModel(basicBet, betTypes, offerTypes, sports, markets);
+            return new BasicBetViewModel(basicBet, betTypes, offerTypes, sports, markets);
         }
 
-        private void CreateSimpleMatchedBet()
+        private BetViewModel CreateSimpleMatchedBet()
         {
             var bookies = new List<IBettingAccount>() {this.account};
             var exchanges = this.repository.BookmakerRepository.GetAccounts().Where(x => x.IsExchange).ToList();
+            var banks = this.repository.BankRepository.GetAccounts().ToList();
             var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes().ToList();
             var betTypes = this.repository.BetTypeRepository.GetBetTypes().ToList();
             var sports = this.repository.SportRepository.GetSports().ToList();
@@ -79,7 +114,18 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Sport = sports.FirstOrDefault(),
                 Market = markets.FirstOrDefault()
             };
-            this.CurrentBet = new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges, betTypes, offerTypes, sports, markets);
+            return new SimpleMatchedBetViewModel(simpleMatchedBet, bookies, exchanges, banks, betTypes, offerTypes, sports, markets);
+        }
+
+        private void CreateBets()
+        {
+            this.bets = new List<BetLookup>()
+            {
+                new BetLookup("Back Bet", CreateSimpleBackBet),
+                new BetLookup("Matched Bet", CreateSimpleMatchedBet)
+            };
+
+            this.SelectedBet = this.bets.First();
         }
     }
 }

@@ -131,6 +131,7 @@ namespace MatchedBettingAssistant.DataAccess
 
             var blankDetail = new TransactionDetail()
             {
+                Date = DateTime.Today,
                 Profit =  0.00,
             };
             var betfairTransaction = new Transaction()
@@ -158,6 +159,7 @@ namespace MatchedBettingAssistant.DataAccess
 
             var detail = new TransactionDetail()
             {
+                Date = DateTime.Today,
                 Profit = 1.00,
                 PaybackPercent = 0.10,
                 BetType = betType,

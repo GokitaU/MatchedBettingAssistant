@@ -5,7 +5,7 @@ using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.DataAccess.DTO
 {
-    public class BankDto : AccountDto, IBank
+    public class BankDto : AccountDto, IBank, ILookup
     {
         private readonly DataModel.Bank bank;
         private readonly IList<ITransactionDetail> transactions;

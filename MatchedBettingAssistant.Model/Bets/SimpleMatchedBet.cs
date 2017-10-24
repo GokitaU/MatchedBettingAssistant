@@ -66,6 +66,8 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public IMarket Market { get; set; }
 
+        public IBank Bank { get; set; }
+
         public string Description
         {
             get => this.backBet.Description;
@@ -83,6 +85,8 @@ namespace MatchedBettingAssistant.Model.Bets
 
             //create transaction detail bet
             var detail = this.repository.NewDetail();
+            detail.Date = this.Date;
+            detail.Description = CreateDescription();
             detail.OfferType = this.OfferType;
             detail.BetType = this.BetType;
             detail.Sport = this.Sport;
@@ -91,6 +95,17 @@ namespace MatchedBettingAssistant.Model.Bets
             detail.PaybackPercent = this.BackAccount.PaybackPercent;
             detail.AddTransaction(this.layBet.Transaction);
             detail.AddTransaction(this.backBet.Transaction);
+
+            Bank?.AddTransaction(detail);
+        }
+
+        private string CreateDescription()
+        {
+            if (this.BetType != null)
+            {
+                return $"{this.BetType?.Name} bet at {this.BackAccount?.Name}";
+            }
+            return $"{this.BackAccount?.Name} bet";
         }
 
         public void Complete()

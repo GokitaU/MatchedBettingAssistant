@@ -31,6 +31,7 @@ namespace MatchedBettingAssistant.Model.Accounts
             transaction.Description = this.Description;
 
             var detail = this.repository.NewDetail();
+            detail.Date = this.Date;
             detail.Profit = 0;
             detail.AddTransaction(transaction);
             this.Destination.AddTransaction(transaction);

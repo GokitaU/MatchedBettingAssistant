@@ -33,6 +33,7 @@ namespace MatchedBettingAssistant.Model.Accounts
             deposit.Description = GetDepositDescription();
 
             var detail = this.repository.NewDetail();
+            detail.Date = this.Date;
             detail.AddTransaction(withdraw);
             detail.AddTransaction(deposit);
 

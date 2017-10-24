@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using DevExpress.Mvvm;
+using DevExpress.Mvvm.POCO;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Bets;
@@ -19,6 +20,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private OfferTypeLookup offerType;
         private SportLookup sportLookup;
         private MarketLookup marketLookup;
+        private BankLookupItem bankLookup;
 
         private ObservableCollection<BookmakerLookupItem> bookmakers;
         private ObservableCollection<BookmakerLookupItem> exchanges;
@@ -26,6 +28,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private ObservableCollection<OfferTypeLookup> offerTypes;
         private ObservableCollection<SportLookup> sports;
         private ObservableCollection<MarketLookup> markets;
+        private ObservableCollection<BankLookupItem> banks;
 
         private DelegateCommand mugBetCommand;
         private DelegateCommand qualifyingBetCommand;
@@ -34,6 +37,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public SimpleMatchedBetViewModel(SimpleMatchedBet matchedBet, 
                                          IEnumerable<IBettingAccount> bookmakers, 
                                          IEnumerable<IBettingAccount> exchanges,
+                                         IEnumerable<IBank> banks,
                                          IEnumerable<IBetType> betTypes,
                                          IEnumerable<IOfferType> offerTypes,
                                          IEnumerable<ISport> sports,
@@ -42,6 +46,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.matchedBet = matchedBet;
             CreateBookmakers(bookmakers);
             CreateExchanges(exchanges);
+            CreateBanks(banks);
             CreateBetTypes(betTypes);
             CreateOfferTypes(offerTypes);
             CreateSports(sports);
@@ -116,6 +121,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        public ObservableCollection<BankLookupItem> Banks
+        {
+            get => banks;
+            set
+            {
+                this.banks = value;
+                RaisePropertyChanged(()=>Banks);
+            }
+        }
+
         public ObservableCollection<BetTypeLookup> BetTypes
         {
             get => betTypes;
@@ -153,6 +168,18 @@ namespace MatchedBettingAssistant.ViewModel.Account
             {
                 this.markets = value;
                 RaisePropertyChanged(()=>Markets);
+            }
+        }
+
+        public BankLookupItem Bank
+        {
+            get => this.bankLookup;
+            set
+            {
+                this.bankLookup = value;
+                this.matchedBet.Bank = value?.Account;
+
+                RaisePropertyChanged(()=>Bank);
             }
         }
 
@@ -263,6 +290,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.BackAccount = this.Bookmakers.FirstOrDefault(x => ReferenceEquals(x.Account, this.matchedBet.BackAccount));
         }
 
+        private void CreateBanks(IEnumerable<IBank> banks)
+        {
+            this.Banks = new ObservableCollection<BankLookupItem>(banks.Select(x => new BankLookupItem(x)));
+
+            this.Bank = this.Banks.FirstOrDefault(x => ReferenceEquals(x.Account, this.matchedBet.Bank));
+        }
 
         private void CreateOfferTypes(IEnumerable<IOfferType> offerTypes)
         {

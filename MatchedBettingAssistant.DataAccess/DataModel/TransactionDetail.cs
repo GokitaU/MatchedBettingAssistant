@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using MatchedBettingAssistant.Core;
@@ -21,6 +22,8 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         /// Identifier
         /// </summary>
         public int Id { get; set; }
+
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// The profit of the bet when matching bets are accounted for

@@ -1,4 +1,5 @@
-﻿using DevExpress.Mvvm;
+﻿using System;
+using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.ViewModel.Account
@@ -13,5 +14,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
         }
 
         public double Profit => this.detail.Profit;
+
+        public DateTime Date => this.detail.Date;
+
+        public string Description => this.detail.Description;
     }
 }

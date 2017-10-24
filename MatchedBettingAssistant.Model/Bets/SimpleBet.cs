@@ -74,6 +74,7 @@ namespace MatchedBettingAssistant.Model.Bets
                 if (this.Transaction.Detail == null)
                 {
                     var detail = this.transactionRepository.NewDetail();
+                    detail.Date = this.Date;
                     detail.Profit = this.Returns;
                     detail.OfferType = this.OfferType;
                     detail.BetType = this.BetType;

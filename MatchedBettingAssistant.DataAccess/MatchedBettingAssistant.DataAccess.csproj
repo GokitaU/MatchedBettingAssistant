@@ -62,7 +62,9 @@
     <Compile Include="DTO\BankDto.cs" />
     <Compile Include="DTO\BetTypeDto.cs" />
     <Compile Include="DTO\BookmakerDto.cs" />
+    <Compile Include="DTO\MarketDto.cs" />
     <Compile Include="DTO\OfferTypeDto.cs" />
+    <Compile Include="DTO\SportDto.cs" />
     <Compile Include="DTO\TransactionAccountDto.cs" />
     <Compile Include="DTO\TransactionDetailDto.cs" />
     <Compile Include="DTO\TransactionDto.cs" />

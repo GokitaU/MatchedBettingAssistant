@@ -17,6 +17,12 @@
         <DataTemplate DataType="{x:Type account:EditBankViewModel}">
             <local:EditBankView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type account:AccountTransactionListViewModel}">
+            <local:AccountTransactionListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type account:BankTransactionListViewModel}">
+            <local:BankTransactionListView/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,7 +30,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ContentPresenter Content="{Binding EditViewModel}"/>        
-        <local:AccountTransactionListView Grid.Row="1"
-                                          DataContext="{Binding Transactions}"/>
+        <ContentPresenter Grid.Row="1" Content="{Binding Transactions}"/>
     </Grid>
 </UserControl>
