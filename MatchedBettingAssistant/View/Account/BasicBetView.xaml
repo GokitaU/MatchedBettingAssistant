@@ -27,10 +27,19 @@
                                               EditValue="{Binding OfferType}"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Sport">
-                            <dxe:ComboBoxEdit/>
+                            <dxe:ComboBoxEdit ItemsSource="{Binding Sports}"
+                                              DisplayMember="Name"
+                                              EditValue="{Binding Sport}"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Market">
-                            <dxe:ComboBoxEdit/>
+                            <dxe:ComboBoxEdit ItemsSource="{Binding Markets}"
+                                              DisplayMember="Name"
+                                              EditValue="{Binding Market}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem Label="Bank">
+                            <dxe:ComboBoxEdit ItemsSource="{Binding Banks}"
+                                              DisplayMember="Name"
+                                              EditValue="{Binding Bank}"/>
                         </dxlc:LayoutItem>
                         <dxlc:LayoutItem Label="Profit/Loss" ToolTip="Amount returned on completion">
                             <dxe:TextEdit EditValue="{Binding Returns}" MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>

@@ -41,6 +41,7 @@ namespace MatchedBettingAssistant.Model.Bets
         /// </summary>
         public ITransaction Transaction { get; private set; }
 
+        public IBank Bank { get; set; }
 
         public IBetType BetType { get; set; }
 
@@ -82,6 +83,8 @@ namespace MatchedBettingAssistant.Model.Bets
                     detail.Sport = this.Sport;
                     detail.Market = this.Market;
                     detail.AddTransaction(this.Transaction);
+
+                    Bank?.AddTransaction(detail);
                 }
             }
         }

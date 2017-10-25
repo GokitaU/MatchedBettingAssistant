@@ -18,14 +18,17 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private OfferTypeLookup offerType;
         private SportLookup sportLookup;
         private MarketLookup marketLookup;
+        private BankLookupItem bankLookup;
 
         public BasicBetViewModel(SimpleBet bet, 
+                                 IEnumerable<IBank> banks,
                                  IEnumerable<IBetType> betTypes, 
                                  IEnumerable<IOfferType> offerTypes,
                                  IEnumerable<ISport> sports,
                                  IEnumerable<IMarket> markets)
         {
             this.bet = bet;
+            this.Banks = banks.Select(x => new BankLookupItem(x));
             this.BetTypes = betTypes.Select(x => new BetTypeLookup(x));
             this.OfferTypes = offerTypes.Select(x => new OfferTypeLookup(x));
             this.Sports = sports.Select(x => new SportLookup(x));
@@ -60,6 +63,19 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 this.bet.Description = value;
 
                 RaisePropertyChanged(() => this.Description);
+            }
+        }
+
+        public BankLookupItem Bank
+        {
+            get => this.bankLookup;
+            set
+            {
+                this.bankLookup = value;
+
+                this.bet.Bank = value?.Account;
+
+                RaisePropertyChanged(()=>Bank);
             }
         }
 
@@ -122,6 +138,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public IEnumerable<MarketLookup> Markets { get; }
 
+        public IEnumerable<BankLookupItem> Banks { get; }
+
         /// <summary>
         /// Gets or sets the return
         /// </summary>
@@ -147,7 +165,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             if (this.CanPlaceBet)
             {
                 this.bet.Place();
-
+                this.bet.Complete();
                 Messenger.Default.Send(new TransactionsUpdatedMessage());
             }
         }

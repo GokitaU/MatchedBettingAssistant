@@ -81,6 +81,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private BetViewModel CreateSimpleBackBet()
         {
+            var banks = this.repository.BankRepository.GetAccounts();
             var betTypes = this.repository.BetTypeRepository.GetBetTypes();
             var offerTypes = this.repository.OfferTypeRepository.GetOfferTypes();
             var sports = this.repository.SportRepository.GetSports().ToList();
@@ -91,7 +92,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 Account = account,
                 Date = DateTime.Today
             };
-            return new BasicBetViewModel(basicBet, betTypes, offerTypes, sports, markets);
+            return new BasicBetViewModel(basicBet, banks, betTypes, offerTypes, sports, markets);
         }
 
         private BetViewModel CreateSimpleMatchedBet()
