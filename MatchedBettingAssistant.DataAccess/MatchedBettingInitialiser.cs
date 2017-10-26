@@ -20,15 +20,15 @@ namespace MatchedBettingAssistant.DataAccess
             var sports = CreateSports();
             context.Sports.AddRange(sports);
 
-            var banks = CreateBanks();
-            context.Accounts.AddRange(banks);
+            //var banks = CreateBanks();
+            //context.Accounts.AddRange(banks);
 
             
-            var bookmakers = CreateBookmakers(betTypes, offerTypes, banks);
-            context.Accounts.AddRange(bookmakers);
+            //var bookmakers = CreateBookmakers(betTypes, offerTypes, banks);
+            //context.Accounts.AddRange(bookmakers);
 
-            var wallets = CreateWallets();
-            context.Accounts.AddRange(wallets);
+            //var wallets = CreateWallets();
+            //context.Accounts.AddRange(wallets);
 
 
             context.SaveChanges();
@@ -43,6 +43,7 @@ namespace MatchedBettingAssistant.DataAccess
                 new BetType() {Name = "Accumulator"},
                 new BetType() {Name = "Casino"},
                 new BetType() {Name = "Bingo"},
+                new BetType() {Name= "Other"}
             };
 
             return betTypes;
@@ -52,9 +53,10 @@ namespace MatchedBettingAssistant.DataAccess
         {
             var offerTypes = new List<OfferType>()
             {
-                new OfferType() { Name = "None", IsBonusOffer = false},
-                new OfferType() { Name = "Qualifier", IsBonusOffer = true},
-                new OfferType() { Name="Bonus", IsBonusOffer = true}
+                new OfferType() { Name = "None", IsBonusOffer = false, ExcludeFromPayback=true},
+                new OfferType() { Name = "Qualifier", IsBonusOffer = true, ExcludeFromPayback=false},
+                new OfferType() { Name="Bonus", IsBonusOffer = true, ExcludeFromPayback=false},
+                new OfferType() { Name = "Mug Bet", IsBonusOffer=false, ExcludeFromPayback=false }
             };
 
             return offerTypes;

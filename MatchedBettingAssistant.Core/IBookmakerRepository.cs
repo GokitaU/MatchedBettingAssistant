@@ -11,6 +11,10 @@ namespace MatchedBettingAssistant.Core
         IEnumerable<IBettingAccount> GetAccounts();
 
         IBettingAccount New();
+
+        int Count();
+
+        int Count(int excluding);
     }
 
     public interface ITransactionRepository
@@ -19,4 +23,6 @@ namespace MatchedBettingAssistant.Core
 
         ITransactionDetail NewDetail();
     }
+
+    
 }

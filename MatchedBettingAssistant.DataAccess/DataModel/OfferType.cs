@@ -10,5 +10,11 @@
         /// Whether this offer type counts as a bonus
         /// </summary>
         public bool IsBonusOffer { get; set; }
+
+        /// <summary>
+        /// Gets whether bets of this type should be
+        /// excluded from payback
+        /// </summary>
+        public bool ExcludeFromPayback { get; set; }
     }
 }

@@ -35,14 +35,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// Gets the command for depositing funds to account
         /// </summary>
-        public DelegateCommand ButtonOneCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit));
+        public DelegateCommand ButtonOneCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit, CanWithdrawAndDeposit));
 
         public string ButtonOneCaption => "Deposit";
 
         /// <summary>
         /// Gets the command for withdrawing funds from account
         /// </summary>
-        public DelegateCommand ButtonTwoCommand => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw));
+        public DelegateCommand ButtonTwoCommand => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw, CanWithdrawAndDeposit));
 
         public string ButtonTwoCaption => "Withdraw";
 
@@ -53,6 +53,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public DelegateCommand ButtonFourCommand => this.betCommand ?? (this.betCommand = new DelegateCommand(Bet));
 
         public string ButtonFourCaption => "Bet";
+
+        private bool CanWithdrawAndDeposit()
+        {
+            //need at least one wallet 
+            return this.repository.WalletRepository.Count()> 0;
+        }
 
         /// <summary>
         /// Initiates the deposit action

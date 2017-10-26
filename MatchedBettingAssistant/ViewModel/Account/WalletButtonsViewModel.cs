@@ -27,13 +27,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private DelegateCommand transferCommand;
         private DelegateCommand addFundsCommand;
 
-        public DelegateCommand ButtonOneCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit));
+        public DelegateCommand ButtonOneCommand => this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit, CanWithdrawAndDeposit));
 
         public string ButtonOneCaption { get; } = "Deposit";
 
         public DelegateCommand ButtonTwoCommand
         {
-            get => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw));
+            get => this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw, CanWithdrawAndDeposit));
         }
 
         public string ButtonTwoCaption { get; } = "Withdraw";
@@ -47,10 +47,21 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public DelegateCommand ButtonFourCommand
         {
-            get => this.transferCommand ?? (this.transferCommand = new DelegateCommand(Transfer));
+            get => this.transferCommand ?? (this.transferCommand = new DelegateCommand(Transfer, CanTransfer));
         }
 
         public string ButtonFourCaption { get; } = "Transfer";
+
+        private bool CanWithdrawAndDeposit()
+        {
+            //need at least one wallet 
+            return this.repository.BookmakerRepository.Count() > 0;
+        }
+
+        private bool CanTransfer()
+        {
+            return this.repository.WalletRepository.Count(this.account.Id) > 0;
+        }
 
         /// <summary>
         /// Deposit funds from a betting account

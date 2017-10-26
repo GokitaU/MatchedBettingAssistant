@@ -7,5 +7,8 @@ namespace MatchedBettingAssistant.Core
         IEnumerable<IWallet> GetWallets();
 
         IWallet New();
+        int Count();
+
+        int Count(int excluding);
     }
 }

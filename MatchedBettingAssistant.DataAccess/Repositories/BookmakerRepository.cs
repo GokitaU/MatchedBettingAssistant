@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.DataAccess.DataModel;
 using MatchedBettingAssistant.DataAccess.DTO;
 
 namespace MatchedBettingAssistant.DataAccess.Repositories
@@ -15,6 +16,16 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
         public BookmakerRepository(MatchedBettingAssistantDbContext dataContext)
         {
             this.dataContext = dataContext;
+        }
+
+        public int Count()
+        {
+            return dataContext.Accounts.OfType<Bookmaker>().Count();
+        }
+
+        public int Count(int excluding)
+        {
+            return dataContext.Accounts.OfType<Bookmaker>().Count(x => x.Id != excluding);
         }
 
         public IEnumerable<IBettingAccount> GetAccounts()
