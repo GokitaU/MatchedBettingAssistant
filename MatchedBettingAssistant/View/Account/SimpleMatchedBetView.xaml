@@ -10,7 +10,7 @@
              xmlns:Serialization="clr-namespace:DevExpress.Xpf.LayoutControl.Serialization;assembly=DevExpress.Xpf.LayoutControl.v17.1"
              x:Class="MatchedBettingAssistant.View.Account.SimpleMatchedBetView"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="500">
+             d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
         <dxlc:LayoutControl Orientation="Vertical" >
             <dxlc:LayoutGroup Header="Result" View="GroupBox" Orientation="Vertical">
@@ -53,6 +53,10 @@
                 <dxlc:LayoutItem Label="Description">
                     <dxe:TextEdit EditValue="{Binding Description}"/>
                 </dxlc:LayoutItem>
+                <dxlc:LayoutItem Label="Settled">
+                    <dxe:ToggleSwitch HorizontalAlignment="Left"
+                                      IsChecked="{Binding IsSettled}"/>
+                </dxlc:LayoutItem>
             </dxlc:LayoutGroup>
             <dxlc:LayoutGroup Orientation="Horizontal">
                 <dxlc:LayoutGroup Header="Back" View="GroupBox" Orientation="Vertical">
@@ -89,6 +93,9 @@
 
 
             </dxlc:LayoutGroup>
+            <dxlc:LayoutItem Label="Notes" LabelPosition="Top">
+                <dxe:TextEdit TextWrapping="Wrap" Height="50"/>
+            </dxlc:LayoutItem>
 
         </dxlc:LayoutControl>
     </Grid>

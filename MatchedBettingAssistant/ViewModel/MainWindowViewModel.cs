@@ -23,10 +23,9 @@ namespace MatchedBettingAssistant.ViewModel
 
         private DelegateCommand banksCommand;
 
-
         public MainWindowViewModel()
         {
-            
+            RegisterMessages();
         }
 
         public MainWindowViewModel(IRepository repository)
@@ -37,12 +36,12 @@ namespace MatchedBettingAssistant.ViewModel
         public DelegateCommand ConnectCommand => this.connectCommand ?? (this.connectCommand = new DelegateCommand(Connect, IsNotConnected));
         public DelegateCommand ConnectAndCreateCommand => this.connectAndCreateCommand ??
                                                           (this.connectAndCreateCommand = new DelegateCommand(ConnectAndCreate, IsConnected));
-        public DelegateCommand SaveCommand => this.saveCommand ?? (this.saveCommand = new DelegateCommand(Save, IsConnected));
-        public DelegateCommand DeleteCommand => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete, IsConnected));
+        public DelegateCommand SaveCommand => this.saveCommand ?? (this.saveCommand = new DelegateCommand(Save, IsModified));
+        public DelegateCommand DeleteCommand => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete, false));
         public DelegateCommand AddCommand => this.addCommand ?? (this.addCommand = new DelegateCommand(Add, IsConnected));
-        public DelegateCommand BookmakersCommand => this.bookmakersCommand ?? (this.bookmakersCommand = new DelegateCommand(Bookmakers, IsConnected));
-        public DelegateCommand WalletsCommand => this.walletsCommand ?? (this.walletsCommand = new DelegateCommand(Wallets, IsConnected));
-        public DelegateCommand BanksCommand => this.banksCommand ?? (this.banksCommand = new DelegateCommand(Banks, IsConnected));
+        public DelegateCommand BookmakersCommand => this.bookmakersCommand ?? (this.bookmakersCommand = new DelegateCommand(Bookmakers, TypeEnabled));
+        public DelegateCommand WalletsCommand => this.walletsCommand ?? (this.walletsCommand = new DelegateCommand(Wallets, TypeEnabled));
+        public DelegateCommand BanksCommand => this.banksCommand ?? (this.banksCommand = new DelegateCommand(Banks, TypeEnabled));
 
         public ViewModelBase CurrentViewModel
         {
@@ -53,6 +52,16 @@ namespace MatchedBettingAssistant.ViewModel
 
                 this.RaisePropertyChanged(()=>this.CurrentViewModel);
             }
+        }
+
+        private bool TypeEnabled()
+        {
+            return this.IsConnected() && !IsModified();
+        }
+
+        private bool IsModified()
+        {
+            return this.repository?.IsModified() ?? false;
         }
 
         private bool IsConnected()
@@ -84,6 +93,16 @@ namespace MatchedBettingAssistant.ViewModel
             this.BanksCommand.RaiseCanExecuteChanged();
         }
 
+        private void RegisterMessages()
+        {
+            Messenger.Default.Register<ModelUpdated>(this, ModelUpdated);
+        }
+
+        private void ModelUpdated(ModelUpdated message)
+        {
+            CheckEnabledCommands();
+        }
+
         private void Connect()
         {
             this.repository = new Repository();
@@ -95,6 +114,8 @@ namespace MatchedBettingAssistant.ViewModel
         private void Save()
         {
             this.repository?.Save();
+
+            CheckEnabledCommands();
         }
 
 

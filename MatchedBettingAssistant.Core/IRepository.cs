@@ -1,4 +1,6 @@
-﻿namespace MatchedBettingAssistant.Core
+﻿using MatchedBettingAssistant.Core.Repositories;
+
+namespace MatchedBettingAssistant.Core
 {
     public interface IRepository
     {
@@ -16,6 +18,8 @@
         ISportRepository SportRepository { get; }
 
         IMarketRepository MarketRepository { get; }
+
+        bool IsModified();
 
         void Create();
         void Save();

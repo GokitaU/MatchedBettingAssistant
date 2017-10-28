@@ -30,5 +30,7 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
 
         public TransactionAccount Account { get; set; }
 
+
+
     }
 }

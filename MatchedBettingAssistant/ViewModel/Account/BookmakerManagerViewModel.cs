@@ -5,6 +5,11 @@ using MatchedBettingAssistant.DataAccess.DataModel;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
+    public class ModelUpdated
+    {
+        
+    }
+
     public class BookmakerManagerViewModel : ViewModelBase, IAddsEntity, IDeletesEntity
     {
         private readonly IRepository repository;
@@ -21,7 +26,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public BookmakerNavigationViewModel NavigationViewModel
         {
-            get { return navigationViewModel; }
+            get => navigationViewModel;
             private set
             {
                 this.navigationViewModel = value;
@@ -56,12 +61,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void RegisterMessages()
         {
-            Messenger.Default.Register< SelectedBookmakerChangedMessage>(this, BookmakerChanged);
+            Messenger.Default.Register< SelectedBookmakerChangedMessage>(this, BookmakerNameChanged);
         }
 
-        private void BookmakerChanged(SelectedBookmakerChangedMessage message)
+        private void BookmakerNameChanged(SelectedBookmakerChangedMessage message)
         {
             this.EditViewModel = new BookmakerViewModel(message.Bookmaker, this.repository);
+
         }
     }
 }

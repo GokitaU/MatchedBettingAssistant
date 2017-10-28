@@ -1,4 +1,5 @@
 ﻿using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 using MatchedBettingAssistant.DataAccess.DataModel;
 using MatchedBettingAssistant.DataAccess.DTO;
 

@@ -20,6 +20,8 @@ namespace MatchedBettingAssistant.Core
 
         double PaybackPercent { get; set; }
 
+        bool IsSettled { get; set; }
+
         double Payback { get; }
 
         void AddTransaction(ITransaction transaction);

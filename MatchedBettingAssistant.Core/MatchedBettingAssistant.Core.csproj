@@ -41,25 +41,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBank.cs" />
-    <Compile Include="IBankRepository.cs" />
+    <Compile Include="Repositories\IBankRepository.cs" />
     <Compile Include="IBetType.cs" />
-    <Compile Include="IBetTypeRepository.cs" />
-    <Compile Include="IBookmakerRepository.cs" />
+    <Compile Include="Repositories\IBetTypeRepository.cs" />
+    <Compile Include="Repositories\IBookmakerRepository.cs" />
     <Compile Include="IAccount.cs" />
     <Compile Include="IBettingAccount.cs" />
     <Compile Include="IMarket.cs" />
-    <Compile Include="IMarketRepository.cs" />
+    <Compile Include="Repositories\IMarketRepository.cs" />
     <Compile Include="IOfferType.cs" />
-    <Compile Include="IOfferTypeRepository.cs" />
+    <Compile Include="Repositories\IOfferTypeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISport.cs" />
-    <Compile Include="ISportRepository.cs" />
+    <Compile Include="Repositories\ISportRepository.cs" />
     <Compile Include="ITransaction.cs" />
     <Compile Include="ITransactionAccount.cs" />
     <Compile Include="ITransactionDetail.cs" />
     <Compile Include="IWallet.cs" />
-    <Compile Include="IWalletRepository.cs" />
+    <Compile Include="Repositories\ITransactionRepository.cs" />
+    <Compile Include="Repositories\IWalletRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitOfWork\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

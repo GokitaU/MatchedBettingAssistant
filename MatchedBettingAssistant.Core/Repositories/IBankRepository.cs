@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MatchedBettingAssistant.Core
+namespace MatchedBettingAssistant.Core.Repositories
 {
     public interface IBankRepository
     {

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
@@ -7,6 +9,7 @@ using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
+
     public class EditBookmakerViewModel : ViewModelBase
     {
         private readonly IBettingAccount account;
@@ -41,9 +44,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.account.StartingBalance = value;
-                RaisePropertyChanged(() => this.StartingBalance);
+                EntityPropertyChanged(() => this.StartingBalance);
             }
         }
+
+
 
         public bool IsExchange
         {
@@ -51,7 +56,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.account.IsExchange = value;
-                RaisePropertyChanged(()=>this.IsExchange);
+                EntityPropertyChanged(()=>this.IsExchange);
             }
         }
 
@@ -61,7 +66,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.account.CommissionPercent = value;
-                RaisePropertyChanged(()=>this.CommissionPercent);
+                EntityPropertyChanged(()=>this.CommissionPercent);
             }
         }
 
@@ -85,5 +90,12 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.RaisePropertyChanged(() => this.Profit);
             this.RaisePropertyChanged(() => this.PaybackDue);
         }
+
+        private void EntityPropertyChanged<T>(Expression<Func<T>> expression)
+        {
+            RaisePropertyChanged(expression);
+            Messenger.Default.Send(new ModelUpdated());
+        }
+        
     }
 }

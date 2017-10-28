@@ -1,5 +1,6 @@
 using System;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.Model.Bets
@@ -68,6 +69,8 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public IBank Bank { get; set; }
 
+        public bool IsSettled { get; set; }
+
         public string Description
         {
             get => this.backBet.Description;
@@ -85,6 +88,15 @@ namespace MatchedBettingAssistant.Model.Bets
 
             //create transaction detail bet
             var detail = this.repository.NewDetail();
+            SetDetailProperties(detail);
+            detail.AddTransaction(this.layBet.Transaction);
+            detail.AddTransaction(this.backBet.Transaction);
+
+            Bank?.AddTransaction(detail);
+        }
+
+        private void SetDetailProperties(ITransactionDetail detail)
+        {
             detail.Date = this.Date;
             detail.Description = CreateDescription();
             detail.OfferType = this.OfferType;
@@ -93,10 +105,6 @@ namespace MatchedBettingAssistant.Model.Bets
             detail.Market = this.Market;
             detail.Profit = this.LayReturns + this.BackReturns;
             detail.PaybackPercent = this.BackAccount.PaybackPercent;
-            detail.AddTransaction(this.layBet.Transaction);
-            detail.AddTransaction(this.backBet.Transaction);
-
-            Bank?.AddTransaction(detail);
         }
 
         private string CreateDescription()
@@ -112,6 +120,10 @@ namespace MatchedBettingAssistant.Model.Bets
         {
             this.backBet.Complete();
             this.layBet.Complete();
+        }
+
+        public void Update()
+        {
         }
     }
 }

@@ -13,5 +13,6 @@ namespace MatchedBettingAssistant.Core
         ITransactionDetail Detail { get; }
 
         void AddDetail(ITransactionDetail detail);
+
     }
 }

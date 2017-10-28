@@ -46,6 +46,12 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             set => this.detail.Profit = value;
         }
 
+        public bool IsSettled
+        {
+            get => this.detail.IsSettled;
+            set => this.detail.IsSettled = value;
+        }
+
         public IBetType BetType
         {
             get => this.betType;

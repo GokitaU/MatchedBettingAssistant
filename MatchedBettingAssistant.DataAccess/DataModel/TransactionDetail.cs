@@ -44,6 +44,11 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         public string Description { get; set; }
 
         /// <summary>
+        /// Notes for the transaction
+        /// </summary>
+        public string Notes { get; set; }
+
+        /// <summary>
         /// The transactions associated with this detail
         /// </summary>
         public ICollection<Transaction> Transactions { get; set; }
@@ -56,5 +61,10 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public double Payback => this.Profit * this.PaybackPercent;
+
+        /// <summary>
+        /// Whether the transaction is completed.
+        /// </summary>
+        public bool IsSettled { get; set; }
     }
 }

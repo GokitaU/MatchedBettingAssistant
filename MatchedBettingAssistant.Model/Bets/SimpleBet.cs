@@ -1,5 +1,6 @@
 ﻿using System;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 using MatchedBettingAssistant.Model.Accounts;
 
 namespace MatchedBettingAssistant.Model.Bets
@@ -52,6 +53,11 @@ namespace MatchedBettingAssistant.Model.Bets
         public IMarket Market { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool IsSettled { get; set; }
+
+        /// <summary>
         /// Places the bet and creates the transaction
         /// </summary>
         public void Place()
@@ -75,18 +81,28 @@ namespace MatchedBettingAssistant.Model.Bets
                 if (this.Transaction.Detail == null)
                 {
                     var detail = this.transactionRepository.NewDetail();
-                    detail.Date = this.Date;
-                    detail.Profit = this.Returns;
-                    detail.OfferType = this.OfferType;
-                    detail.BetType = this.BetType;
-                    detail.PaybackPercent = this.Account.PaybackPercent;
-                    detail.Sport = this.Sport;
-                    detail.Market = this.Market;
+                    SetDetailProperties(detail);
                     detail.AddTransaction(this.Transaction);
 
                     Bank?.AddTransaction(detail);
                 }
+                else
+                {
+                    SetDetailProperties(this.Transaction.Detail);
+                }
             }
+        }
+
+        private void SetDetailProperties(ITransactionDetail detail)
+        {
+            detail.Date = this.Date;
+            detail.Profit = this.Returns;
+            detail.OfferType = this.OfferType;
+            detail.BetType = this.BetType;
+            detail.PaybackPercent = this.Account.PaybackPercent;
+            detail.Sport = this.Sport;
+            detail.Market = this.Market;
+            detail.IsSettled = this.IsSettled;
         }
     }
 }

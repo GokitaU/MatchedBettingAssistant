@@ -1,5 +1,6 @@
 ﻿using System;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 
 namespace MatchedBettingAssistant.Model.Accounts
 {
@@ -29,8 +30,8 @@ namespace MatchedBettingAssistant.Model.Accounts
             transaction.TransactionDate = this.Date;
             transaction.Amount = this.Amount;
             transaction.Description = this.Description;
-
             var detail = this.repository.NewDetail();
+            detail.IsSettled = true;
             detail.Date = this.Date;
             detail.Profit = 0;
             detail.AddTransaction(transaction);

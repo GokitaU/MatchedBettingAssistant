@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 using MatchedBettingAssistant.DataAccess.DTO;
 
 namespace MatchedBettingAssistant.DataAccess.Repositories

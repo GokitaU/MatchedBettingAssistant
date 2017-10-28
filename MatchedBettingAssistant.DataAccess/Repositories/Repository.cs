@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity.Infrastructure;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 
 namespace MatchedBettingAssistant.DataAccess.Repositories
 {
@@ -34,6 +35,11 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
         public ISportRepository SportRepository => new SportRepository(dbContext);
 
         public IMarketRepository MarketRepository => new MarketRepository(dbContext);
+
+        public bool IsModified()
+        {
+            return this.dbContext.ChangeTracker.HasChanges();
+        }
 
         public void Save()
         {
