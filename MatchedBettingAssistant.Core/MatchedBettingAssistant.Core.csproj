@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBank.cs" />
+    <Compile Include="ITransactionDetailDisplay.cs" />
     <Compile Include="Repositories\IBankRepository.cs" />
     <Compile Include="IBetType.cs" />
     <Compile Include="Repositories\IBetTypeRepository.cs" />

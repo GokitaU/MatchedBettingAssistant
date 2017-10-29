@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Core.Repositories;
 
@@ -9,33 +10,63 @@ namespace MatchedBettingAssistant.Model.Accounts
     /// </summary>
     public class ApplyFundsAccountAction : IAccountAction
     {
-        private readonly ITransactionRepository repository;
+        private readonly ITransactionDetail detail;
 
-        public ApplyFundsAccountAction(ITransactionRepository repository)
+        public ApplyFundsAccountAction(ITransactionDetail detail)
         {
-            this.repository = repository;
+            this.detail = detail;
         }
+
+        public ITransactionDetail Detail => this.detail;
 
         public ITransactionAccount Destination { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date
+        {
+            get => detail.Date;
+            set
+            {
+                this.detail.Date = value;
 
-        public string Description { get; set; }
+                if (this.detail.BackTransaction != null)
+                {
+                    this.detail.BackTransaction.TransactionDate = value;
+                }
+            }
+        }
 
-        public double Amount { get; set; }
+        public string Description
+        {
+            get => this.detail.Description;
+            set
+            {
+                this.detail.Description = value;
+                if (this.detail.BackTransaction != null)
+                {
+                    this.detail.BackTransaction.Description = value;
+                }
+            }
+        }
+
+        public double Amount
+        {
+            get => this.detail.BackTransaction?.Amount ?? 0;
+            set
+            {
+                if (this.detail.BackTransaction != null)
+                {
+                    this.detail.BackTransaction.Amount = value;
+                }
+            }
+        }
 
         public void Apply()
         {
-            var transaction = this.repository.New();
-            transaction.TransactionDate = this.Date;
-            transaction.Amount = this.Amount;
-            transaction.Description = this.Description;
-            var detail = this.repository.NewDetail();
-            detail.IsSettled = true;
-            detail.Date = this.Date;
-            detail.Profit = 0;
-            detail.AddTransaction(transaction);
-            this.Destination.AddTransaction(transaction);
+            this.detail.IsSettled = true;
+
+            this.Destination.AddTransaction(this.detail.BackTransaction);
         }
+
+
     }
 }

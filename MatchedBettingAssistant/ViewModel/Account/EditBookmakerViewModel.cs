@@ -48,15 +48,20 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-
-
         public bool IsExchange
         {
             get => this.account.IsExchange;
             set
             {
                 this.account.IsExchange = value;
+
+                if (this.IsExchange)
+                {
+                    this.PaybackPercent = 0;
+                }
+
                 EntityPropertyChanged(()=>this.IsExchange);
+                RaisePropertyChanged(()=> this.PaybackPercentVisibility);
             }
         }
 
@@ -70,6 +75,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        public double PaybackPercent
+        {
+            get => this.account.PaybackPercent;
+            set
+            {
+                this.account.PaybackPercent = value;
+                EntityPropertyChanged(()=>this.PaybackPercent);
+            }
+        }
+
         public double Balance => this.account.Balance;
 
         public double Profit => this.account.Profit;
@@ -77,6 +92,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public double PaybackDue => this.account.PaybackDue;
 
         public BookmakerButtonsViewModel ActionButtons { get; }
+
+        public Visibility PaybackPercentVisibility
+        {
+            get => this.IsExchange ? Visibility.Hidden : Visibility.Visible;
+        }
 
         private void RegisterMessages()
         {

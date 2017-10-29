@@ -53,6 +53,7 @@ namespace MatchedBettingAssistant.Model.Bets
                 if (this.detail.BackTransaction != null)
                 {
                     this.detail.BackTransaction.Amount = value;
+                    this.detail.Profit = value;
                 }                
             }
         }
@@ -119,13 +120,14 @@ namespace MatchedBettingAssistant.Model.Bets
         /// </summary>
         public void Place()
         {
-            if (this.Transaction == null)
+            if (string.IsNullOrEmpty(this.Description))
             {
-                this.Account.AddTransaction(this.Transaction);
-
-                this.Bank?.AddTransaction(detail);
-
+                this.Description = $"Bet at {this.Account?.Name}";
             }
+
+            this.Account?.AddTransaction(this.detail.BackTransaction);
+
+            this.Bank?.AddTransaction(detail);
         }
 
         public void Complete()

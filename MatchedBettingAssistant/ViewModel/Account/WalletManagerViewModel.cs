@@ -13,9 +13,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public WalletManagerViewModel(IRepository repository)
         {
             this.repository = repository;
+            this.RegisterMessages();
+
             this.navigationViewModel = new WalletNavigationViewModel(this.repository.WalletRepository);
 
-            this.RegisterMessages();
         }
 
         public WalletNavigationViewModel NavigationViewModel

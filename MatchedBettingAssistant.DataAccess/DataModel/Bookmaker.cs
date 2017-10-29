@@ -39,11 +39,13 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
             get
             {
                 var totalOwed = this.Transactions
-                    .Where(x => x.Detail?.OfferType?.IsBonusOffer ?? false)
-                    .Sum(x => x.Detail?.Payback ?? 0);
+                    .Where(x => (x.Detail?.OfferType?.IsBonusOffer ?? false)
+                                && (x.Detail?.OfferType?.ExcludeFromPayback ?? false) == false)
+                    .Sum(x => x.Detail.Profit  * this.PayBackPercent);
 
                 var totalPaid = this.Transactions
-                    .Where(x => (x.Detail?.OfferType?.IsBonusOffer ?? false) == false)
+                    .Where(x => (x.Detail?.OfferType?.IsBonusOffer ?? true) == false  && 
+                                (x.Detail?.OfferType.ExcludeFromPayback?? true)== false)
                     .Sum(x => x.Detail?.Profit ?? 0);
 
                 return totalOwed + totalPaid;

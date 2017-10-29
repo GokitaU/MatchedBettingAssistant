@@ -10,11 +10,7 @@ namespace MatchedBettingAssistant.Model.Accounts
         public double Amount { get; set; }
         public string Description { get; set; }
 
-        public ITransactionDetail Detail { get; private set; }
+        public ITransactionDetailDisplay Detail { get; private set; }
 
-        public void AddDetail(ITransactionDetail detail)
-        {
-            this.Detail = detail;
-        }
     }
 }

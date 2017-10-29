@@ -87,6 +87,7 @@ namespace MatchedBettingAssistant.Model.Accounts
                 this.detail.BackTransaction.Description = this.GetWithdrawDescription();
                 this.detail.LayTransaction.Description = this.GetDepositDescription();
             }
+            this.detail.Profit = 0;
             this.detail.IsSettled = true;
             this.Source?.AddTransaction(this.detail.BackTransaction);
             this.Destination?.AddTransaction(this.detail.LayTransaction);

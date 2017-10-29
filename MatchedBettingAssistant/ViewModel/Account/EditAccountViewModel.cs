@@ -16,7 +16,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
     public class EditAccountViewModel : ViewModelBase
     {
         private readonly ITransactionAccount account;
-        private IRepository repository;
+        private readonly IRepository repository;
 
         public EditAccountViewModel(ITransactionAccount account, IRepository repository)
         {
@@ -36,7 +36,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 this.account.Name = value;
+
                 RaisePropertyChanged(()=>this.Name);
+
+                Messenger.Default.Send(new WalletNameChangedMessage(this.account));
+
             }
         }
 
@@ -50,6 +54,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             {
                 this.account.StartingBalance = value;
                 RaisePropertyChanged(()=>this.StartingBalance);
+                UpdateBalance();
             }
         }
 
@@ -63,10 +68,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private void RegisterMessages()
         {
             Messenger.Default.Register<TransactionsUpdatedMessage>(this, UpdateBalance);
-
         }
 
         private void UpdateBalance(TransactionsUpdatedMessage obj)
+        {
+            UpdateBalance();
+        }
+
+        private void UpdateBalance()
         {
             this.RaisePropertyChanged(() => this.Balance);
         }

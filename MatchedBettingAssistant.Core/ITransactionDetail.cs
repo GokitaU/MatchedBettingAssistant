@@ -4,6 +4,8 @@ namespace MatchedBettingAssistant.Core
 {
     public interface ITransactionDetail
     {
+        int Id { get; set; }
+
         DateTime Date { get; set; }
 
         string Description { get; set; }

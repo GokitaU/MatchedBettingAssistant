@@ -116,6 +116,7 @@
     <Compile Include="ViewModel\Account\WalletButtonsViewModel.cs" />
     <Compile Include="ViewModel\Account\WalletLookupItem.cs" />
     <Compile Include="ViewModel\Account\WalletManagerViewModel.cs" />
+    <Compile Include="ViewModel\Account\WalletNameChangedMessage.cs" />
     <Compile Include="ViewModel\Account\WalletNavigationViewModel.cs" />
     <Compile Include="ViewModel\Account\WithdrawActionAccountSetter.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

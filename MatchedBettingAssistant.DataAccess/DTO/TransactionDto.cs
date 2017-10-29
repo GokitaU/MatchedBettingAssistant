@@ -7,13 +7,19 @@ namespace MatchedBettingAssistant.DataAccess.DTO
     public class TransactionDto : ITransaction
     {
         private readonly DataModel.Transaction transaction;
-        private ITransactionDetail detail;
+        private ITransactionDetailDisplay detail;
 
 
         public TransactionDto(Transaction transaction)
+            : this(transaction, transaction.Detail)
+        {
+        }
+
+        public TransactionDto(Transaction transaction, TransactionDetail detailDisplay)
         {
             this.transaction = transaction;
 
+            this.detail = new TransactionDetailDisplayDto(detailDisplay); ;
         }
 
         public DateTime TransactionDate
@@ -34,23 +40,10 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             set => this.transaction.Description = value;
         }
 
-        public ITransactionDetail Detail
+        public ITransactionDetailDisplay Detail
         {
             get => this.detail;
-            set
-            {
-                AddDetail(value);
-                this.detail = value;
-            }
-        }
-
-        public void AddDetail(ITransactionDetail detail)
-        {
-            if (detail is TransactionDetailDto transactionDetailDto)
-            {
-                this.transaction.Detail = transactionDetailDto.TransactionDetail;
-                this.detail = transactionDetailDto;
-            }
+            private set => this.detail = value;
         }
 
         internal Transaction Transaction => this.transaction;

@@ -18,6 +18,12 @@ namespace MatchedBettingAssistant.DataAccess.DTO
         private ITransaction backTransaction;
         private ITransaction layTransaction;
 
+        public int Id
+        {
+            get => this.detail.Id;
+            set { this.detail.Id = value; }
+        }
+
         public TransactionDetailDto(TransactionDetail detail)
         {
             this.detail = detail;
@@ -146,7 +152,7 @@ namespace MatchedBettingAssistant.DataAccess.DTO
 
                 this.detail.Transactions.Add(transaction);
 
-                this.backTransaction = new TransactionDto(transaction);
+                this.backTransaction = new TransactionDto(transaction, this.TransactionDetail);
             }
 
             return this.BackTransaction;
@@ -160,7 +166,7 @@ namespace MatchedBettingAssistant.DataAccess.DTO
 
                 this.detail.Transactions.Add(transaction);
 
-                this.layTransaction = new TransactionDto(transaction);
+                this.layTransaction = new TransactionDto(transaction, this.TransactionDetail);
             }
 
             return LayTransaction;

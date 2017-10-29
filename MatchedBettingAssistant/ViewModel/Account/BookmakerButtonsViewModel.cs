@@ -102,13 +102,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public void Bonus()
         {
-            var action = new ApplyFundsAccountAction(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+
+            var action = new ApplyFundsAccountAction(detail)
             {
                 Destination = this.account,
                 Date = DateTime.Today
             };
 
-            var applyFunds = new ApplyFundsToAccountViewModel(action);
+            var applyFunds = new ApplyFundsToAccountViewModel(action, this.repository.TransactionRepository);
 
             var okCommand = new UICommand()
             {

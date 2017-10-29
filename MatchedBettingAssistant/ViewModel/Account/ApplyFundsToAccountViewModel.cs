@@ -1,5 +1,7 @@
 ﻿using System;
 using DevExpress.Mvvm;
+using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Accounts;
 
@@ -7,11 +9,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class ApplyFundsToAccountViewModel : ViewModelBase
     {
+        private readonly ITransactionRepository repository;
+
         private readonly ApplyFundsAccountAction action;
 
-        public ApplyFundsToAccountViewModel(ApplyFundsAccountAction action)
+        public ApplyFundsToAccountViewModel(ApplyFundsAccountAction action, ITransactionRepository repository)
         {
             this.action = action;
+            this.repository = repository;
         }
 
         public DateTime TransactionDate
@@ -52,10 +57,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public void Commit()
         {
             this.action.Apply();
+            this.repository.AddDetail(this.action.Detail);
 
             Messenger.Default.Send(new TransactionsUpdatedMessage());
         }
-
 
     }
 }

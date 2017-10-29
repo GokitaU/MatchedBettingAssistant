@@ -34,7 +34,11 @@ namespace MatchedBettingAssistant.Model.Bets
         public double BackReturns
         {
             get => this.detail.BackTransaction.Amount;
-            set => this.detail.BackTransaction.Amount = value;
+            set
+            {
+                this.detail.BackTransaction.Amount = value;
+                SetProfit();
+            }
         }
 
         public IBettingAccount LayAccount { get; set; }
@@ -42,7 +46,17 @@ namespace MatchedBettingAssistant.Model.Bets
         public double LayReturns
         {
             get => this.detail.LayTransaction.Amount;
-            set => this.detail.LayTransaction.Amount = value;
+            set
+            {
+                this.detail.LayTransaction.Amount = value;
+                SetProfit();
+            }
+        }
+
+        public double Profit
+        {
+            get => this.detail.Profit;
+            private set => this.detail.Profit = value;
         }
 
         public IOfferType OfferType
@@ -96,7 +110,7 @@ namespace MatchedBettingAssistant.Model.Bets
             }
             this.BackAccount?.AddTransaction(this.detail.BackTransaction);
             this.LayAccount?.AddTransaction(this.detail.LayTransaction);
-
+            
             Bank?.AddTransaction(detail);
         }
 
@@ -116,6 +130,11 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public void Update()
         {
+        }
+
+        private void SetProfit()
+        {
+            this.Profit = this.LayReturns + this.BackReturns;
         }
     }
 }

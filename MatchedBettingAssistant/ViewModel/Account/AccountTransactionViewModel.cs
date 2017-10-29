@@ -20,10 +20,10 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public string Description => transaction.Description;
 
-        public string BetType => transaction.Detail?.BetType?.Name;
+        public string BetType => transaction.Detail?.BetType;
 
-        public string OfferType => transaction.Detail?.OfferType?.Name;
+        public string OfferType => transaction.Detail?.OfferType;
 
-        public double Profit => transaction.Detail?.Profit ?? this.Amount;
+        public double Profit => transaction.Detail?.Profit ?? 0;
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="DTO\OfferTypeDto.cs" />
     <Compile Include="DTO\SportDto.cs" />
     <Compile Include="DTO\TransactionAccountDto.cs" />
+    <Compile Include="DTO\TransactionDetailDisplayDto.cs" />
     <Compile Include="DTO\TransactionDetailDto.cs" />
     <Compile Include="DTO\TransactionDto.cs" />
     <Compile Include="DTO\WalletDto.cs" />
