@@ -5,6 +5,7 @@
         ITransaction New();
 
         ITransactionDetail NewDetail();
+        void AddDetail(ITransactionDetail detail);
     }
 
     

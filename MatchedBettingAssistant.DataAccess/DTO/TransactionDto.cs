@@ -13,10 +13,7 @@ namespace MatchedBettingAssistant.DataAccess.DTO
         public TransactionDto(Transaction transaction)
         {
             this.transaction = transaction;
-            if (this.transaction.Detail != null)
-            {
-                this.detail = new TransactionDetailDto(transaction.Detail);      
-            }
+
         }
 
         public DateTime TransactionDate

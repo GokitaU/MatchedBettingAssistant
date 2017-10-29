@@ -4,4 +4,9 @@
     {
         void Add();
     }
+
+    public interface IRollsBack
+    {
+        void Refresh();
+    }
 }

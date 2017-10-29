@@ -3,7 +3,7 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class BankManagerViewModel : ViewModelBase
+    public class BankManagerViewModel : AccountManagerViewModel
     {
         private readonly IRepository repository;
 
@@ -40,15 +40,20 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public void Add()
+        public override void Add()
         {
             var bank = this.repository.BankRepository.New();
             bank.Name = "New Bank";
             this.NavigationViewModel.Add(bank);
         }
 
-        public void DeleteCurrent()
+        public override void DeleteCurrent()
         {
+        }
+
+        public override void Refresh()
+        {
+            this.NavigationViewModel = new BankNavigationViewModel(this.repository.BankRepository);
         }
 
         private void RegisterMessages()

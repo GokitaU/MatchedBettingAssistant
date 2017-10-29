@@ -7,104 +7,97 @@ namespace MatchedBettingAssistant.Model.Bets
 {
     public class SimpleMatchedBet
     {
-        private ITransactionRepository repository;
+        private ITransactionDetail detail;
 
-        private ISimpleBet backBet;
-
-        private ISimpleBet layBet;
-
-        private DateTime date;
-
-        public SimpleMatchedBet(ITransactionRepository repository)
+        public SimpleMatchedBet(ITransactionDetail detail)
         {
-            this.repository = repository;
-            this.backBet = new SimpleBet(repository);
-            this.layBet = new SimpleBet(repository);
+            this.detail = detail;
         }
+
+        public ITransactionDetail Detail => this.detail;
 
         public DateTime Date
         {
-            get => this.date;
+            get => this.detail.Date;
             set
             {
-                this.date = value;
+                this.detail.Date = value;
 
-                this.backBet.Date = value;
+                this.detail.BackTransaction.TransactionDate = value;
 
-                this.layBet.Date = value;
+                this.detail.LayTransaction.TransactionDate = value;
             }
         }
 
-        public IBettingAccount BackAccount
-        {
-            get => this.backBet.Account;
-            set => this.backBet.Account = value;
-        }
+        public IBettingAccount BackAccount { get; set; }
 
         public double BackReturns
         {
-            get => this.backBet.Returns;
-            set => this.backBet.Returns = value;
+            get => this.detail.BackTransaction.Amount;
+            set => this.detail.BackTransaction.Amount = value;
         }
 
-        public IBettingAccount LayAccount
-        {
-            get => this.layBet.Account;
-            set => this.layBet.Account = value;
-        }
+        public IBettingAccount LayAccount { get; set; }
 
         public double LayReturns
         {
-            get => this.layBet.Returns;
-            set => this.layBet.Returns = value;
+            get => this.detail.LayTransaction.Amount;
+            set => this.detail.LayTransaction.Amount = value;
         }
 
-        public IOfferType OfferType { get; set; }
+        public IOfferType OfferType
+        {
+            get => this.detail.OfferType;
+            set => this.detail.OfferType = value;
+        }
 
-        public IBetType BetType { get; set; }
+        public IBetType BetType
+        {
+            get => this.detail.BetType;
+            set => this.detail.BetType = value;
+        }
 
-        public ISport Sport { get; set; }
+        public ISport Sport
+        {
+            get => this.detail.Sport;
+            set => this.detail.Sport = value;
+        }
 
-        public IMarket Market { get; set; }
+        public IMarket Market
+        {
+            get => this.detail.Market;
+            set => this.detail.Market = value;
+        }
 
         public IBank Bank { get; set; }
 
-        public bool IsSettled { get; set; }
+        public bool IsSettled
+        {
+            get => this.detail.IsSettled;
+            set => this.detail.IsSettled = value;
+        }
 
         public string Description
         {
-            get => this.backBet.Description;
+            get => this.detail.Description;
             set
             {
-                this.backBet.Description = value;
-                this.layBet.Description = value;
+                this.detail.Description = value;
+                this.detail.BackTransaction.Description = value;
+                this.detail.BackTransaction.Description = value;
             }
         }
 
         public void Place()
         {
-            this.backBet.Place();
-            this.layBet.Place();
-
-            //create transaction detail bet
-            var detail = this.repository.NewDetail();
-            SetDetailProperties(detail);
-            detail.AddTransaction(this.layBet.Transaction);
-            detail.AddTransaction(this.backBet.Transaction);
+            if (string.IsNullOrEmpty(this.Description))
+            {
+                this.Description = this.CreateDescription();
+            }
+            this.BackAccount?.AddTransaction(this.detail.BackTransaction);
+            this.LayAccount?.AddTransaction(this.detail.LayTransaction);
 
             Bank?.AddTransaction(detail);
-        }
-
-        private void SetDetailProperties(ITransactionDetail detail)
-        {
-            detail.Date = this.Date;
-            detail.Description = CreateDescription();
-            detail.OfferType = this.OfferType;
-            detail.BetType = this.BetType;
-            detail.Sport = this.Sport;
-            detail.Market = this.Market;
-            detail.Profit = this.LayReturns + this.BackReturns;
-            detail.PaybackPercent = this.BackAccount.PaybackPercent;
         }
 
         private string CreateDescription()
@@ -118,8 +111,7 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public void Complete()
         {
-            this.backBet.Complete();
-            this.layBet.Complete();
+
         }
 
         public void Update()

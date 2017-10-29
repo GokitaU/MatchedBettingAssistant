@@ -56,6 +56,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
             var bookies = this.bookmakerRepository.GetAccounts();
 
             this.accounts = new ObservableCollection<BookmakerLookupItem>(bookies.Select(x => new BookmakerLookupItem(x)));
+
+            this.SelectedAccount = this.accounts.FirstOrDefault();
         }
 
         private void BookmakerNameChanged(BookmakerNameChangedMessage message)

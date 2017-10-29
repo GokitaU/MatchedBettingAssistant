@@ -32,6 +32,10 @@
                                Command="{Binding SaveCommand}"
                                Glyph="{StaticResource Save}"
                                BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
+            <dxb:BarButtonItem Content="Undo"
+                               Command="{Binding UndoCommand}"
+                               Glyph="{StaticResource Undo}"
+                               BarItemDisplayMode="ContentAndGlyph" Alignment="Default"/>
             <dxb:BarItemLinkSeparator/>
             <dxb:BarButtonItem Content="Bookies"
                                Command="{Binding BookmakersCommand}"

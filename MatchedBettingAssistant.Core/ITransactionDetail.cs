@@ -23,7 +23,24 @@ namespace MatchedBettingAssistant.Core
         bool IsSettled { get; set; }
 
         double Payback { get; }
+        ITransaction BackTransaction { get; }
 
+        ITransaction LayTransaction { get; }
+
+        /// <summary>
+        /// Adds an existing transaction
+        /// </summary>
+        /// <param name="transaction"></param>
         void AddTransaction(ITransaction transaction);
+
+        /// <summary>
+        /// Creates a new transaction and adds it
+        /// </summary>
+        /// <returns></returns>
+        ITransaction CreateBackTransaction();
+
+        ITransaction CreateLayTransaction();
+
+
     }
 }

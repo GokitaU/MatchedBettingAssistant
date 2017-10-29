@@ -23,6 +23,8 @@ namespace MatchedBettingAssistant.Core
 
         void Create();
         void Save();
+
+        void Undo();
     }
 
 }

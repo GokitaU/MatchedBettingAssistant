@@ -10,7 +10,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         
     }
 
-    public class BookmakerManagerViewModel : ViewModelBase, IAddsEntity, IDeletesEntity
+    public class BookmakerManagerViewModel : AccountManagerViewModel
     {
         private readonly IRepository repository;
 
@@ -47,16 +47,22 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// Adds a new bookmaker
         /// </summary>
-        public void Add()
+        public override void Add()
         {
             var bookmaker = this.repository.BookmakerRepository.New();
             bookmaker.Name = "New Bookmaker";
             this.navigationViewModel.Add(bookmaker);
         }
 
-        public void DeleteCurrent()
+        public override void DeleteCurrent()
         {
             
+        }
+
+        public override void Refresh()
+        {
+            this.NavigationViewModel = new BookmakerNavigationViewModel(this.repository.BookmakerRepository);
+
         }
 
         private void RegisterMessages()
@@ -69,5 +75,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.EditViewModel = new BookmakerViewModel(message.Bookmaker, this.repository);
 
         }
+
+
     }
 }

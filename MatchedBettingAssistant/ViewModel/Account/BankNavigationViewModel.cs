@@ -18,7 +18,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         {
             this.bankRepository = bankRepository;
 
-            CreateWallets();
+            CreateBanks();
 
             RegisterMessages();
         }
@@ -49,11 +49,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.SelectedAccount = wallet;
         }
 
-        private void CreateWallets()
+        private void CreateBanks()
         {
             var bookies = this.bankRepository.GetAccounts();
 
             this.lookupItems = new ObservableCollection<BankLookupItem>(bookies.Select(x => new BankLookupItem(x)));
+
+            this.SelectedAccount = this.lookupItems.FirstOrDefault();
         }
 
         private void RegisterMessages()

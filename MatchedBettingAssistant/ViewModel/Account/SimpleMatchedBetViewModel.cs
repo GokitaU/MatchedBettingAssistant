@@ -53,7 +53,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
             CreateMarkets(markets);
         }
 
-
         public DateTime Date
         {
             get => this.matchedBet.Date;
@@ -261,6 +260,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 RaisePropertyChanged(() => this.Description);
             }
         }
+
+        internal override ITransactionDetail Detail => this.matchedBet.Detail;
 
         public DelegateCommand MugBetCommand => this.mugBetCommand ?? (this.mugBetCommand = new DelegateCommand(MugBet));
 

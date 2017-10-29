@@ -16,6 +16,7 @@ namespace MatchedBettingAssistant.ViewModel
         private DelegateCommand connectCommand;
         private DelegateCommand connectAndCreateCommand;
         private DelegateCommand saveCommand;
+        private DelegateCommand undoCommand;
         private DelegateCommand addCommand;
         private DelegateCommand deleteCommand;
         private DelegateCommand walletsCommand;
@@ -37,11 +38,13 @@ namespace MatchedBettingAssistant.ViewModel
         public DelegateCommand ConnectAndCreateCommand => this.connectAndCreateCommand ??
                                                           (this.connectAndCreateCommand = new DelegateCommand(ConnectAndCreate, IsConnected));
         public DelegateCommand SaveCommand => this.saveCommand ?? (this.saveCommand = new DelegateCommand(Save, IsModified));
+        public DelegateCommand UndoCommand => this.undoCommand ?? (this.undoCommand = new DelegateCommand(Undo, IsModified));
         public DelegateCommand DeleteCommand => this.deleteCommand ?? (this.deleteCommand = new DelegateCommand(Delete, false));
         public DelegateCommand AddCommand => this.addCommand ?? (this.addCommand = new DelegateCommand(Add, IsConnected));
         public DelegateCommand BookmakersCommand => this.bookmakersCommand ?? (this.bookmakersCommand = new DelegateCommand(Bookmakers, TypeEnabled));
         public DelegateCommand WalletsCommand => this.walletsCommand ?? (this.walletsCommand = new DelegateCommand(Wallets, TypeEnabled));
         public DelegateCommand BanksCommand => this.banksCommand ?? (this.banksCommand = new DelegateCommand(Banks, TypeEnabled));
+
 
         public ViewModelBase CurrentViewModel
         {
@@ -86,6 +89,7 @@ namespace MatchedBettingAssistant.ViewModel
         {
             this.ConnectCommand.RaiseCanExecuteChanged();
             this.SaveCommand.RaiseCanExecuteChanged();
+            this.UndoCommand.RaiseCanExecuteChanged();
             this.AddCommand.RaiseCanExecuteChanged();
             this.DeleteCommand.RaiseCanExecuteChanged();
             this.BookmakersCommand.RaiseCanExecuteChanged();
@@ -117,7 +121,17 @@ namespace MatchedBettingAssistant.ViewModel
 
             CheckEnabledCommands();
         }
+        private void Undo()
+        {
+            this.repository?.Undo();
 
+            if (this.CurrentViewModel is IRollsBack refreshable)
+            {
+                refreshable.Refresh();
+                this.RaisePropertyChanged(()=>CurrentViewModel);     
+            }
+            CheckEnabledCommands();
+        }
 
         private void Delete()
         {

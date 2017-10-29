@@ -65,7 +65,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public void Deposit()
         {
-            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
+
+            var action = new TransferFundsAccountAction(detail)
             {
                 Destination = this.account,
                 Date = DateTime.Today
@@ -81,7 +85,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public void Withdraw()
         {
-            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
+
+            var action = new TransferFundsAccountAction(detail)
             {
                 Source = this.account,
                 Date = DateTime.Today
@@ -160,7 +168,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <param name="accountSetter"></param>
         private void TransferFunds(TransferFundsAccountAction action, ITransferActionAccountSetter accountSetter)
         {
-            var depositViewModel = new TransferFundsToAccountViewModel(action, this.repository.WalletRepository.GetWallets(), accountSetter);
+            var wallets = this.repository.WalletRepository.GetWallets();
+            var depositViewModel = new TransferFundsToAccountViewModel(action, wallets, accountSetter, this.repository.TransactionRepository);
 
             var okCommand = new UICommand()
             {
@@ -182,8 +191,6 @@ namespace MatchedBettingAssistant.ViewModel.Account
                 new List<UICommand>() { okCommand, cancelCommand },
                 accountSetter.ActionDescription,
                 depositViewModel);
-
-
         }
 
         

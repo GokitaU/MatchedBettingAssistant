@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.Core.Repositories;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Accounts;
 
@@ -20,10 +21,16 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private readonly ITransferActionAccountSetter accountSetter;
 
-        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, IEnumerable<ITransactionAccount> accounts, ITransferActionAccountSetter accountSetter)
+        private readonly ITransactionRepository repository;
+
+        public TransferFundsToAccountViewModel(TransferFundsAccountAction action, 
+                                                IEnumerable<ITransactionAccount> accounts, 
+                                                ITransferActionAccountSetter accountSetter,
+                                                ITransactionRepository repository)
         {
             this.action = action;
             this.accountSetter = accountSetter;
+            this.repository = repository;
             this.Accounts = new ObservableCollection<AccountLookupItem>(accounts.Select(x=> new AccountLookupItem(x)));
             this.Account = this.Accounts.FirstOrDefault();
             this.Amount = 10;
@@ -86,7 +93,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public void Commit()
         {
             this.action.Apply();
-
+            this.repository.AddDetail(this.action.Detail);
             Messenger.Default.Send(new TransactionsUpdatedMessage());
         }
 

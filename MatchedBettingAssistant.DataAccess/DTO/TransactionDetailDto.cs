@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Threading;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.DataAccess.DataModel;
 
@@ -13,6 +15,9 @@ namespace MatchedBettingAssistant.DataAccess.DTO
         private ISport sport;
         private IMarket market;
 
+        private ITransaction backTransaction;
+        private ITransaction layTransaction;
+
         public TransactionDetailDto(TransactionDetail detail)
         {
             this.detail = detail;
@@ -26,6 +31,8 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             {
                 this.offerType = new OfferTypeDto(detail.OfferType);             
             }
+
+            CreateTransactions();
         }
 
         public DateTime Date
@@ -122,6 +129,63 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             }
         }
 
+        public ITransaction CreateTransaction()
+        {
+            var transaction = new Transaction();
+
+            this.detail.Transactions.Add(transaction);
+
+            return new TransactionDto(transaction);
+        }
+
+        public ITransaction CreateBackTransaction()
+        {
+            if (this.detail.Transactions.Count == 0)
+            {
+                var transaction = new Transaction();
+
+                this.detail.Transactions.Add(transaction);
+
+                this.backTransaction = new TransactionDto(transaction);
+            }
+
+            return this.BackTransaction;
+        }
+
+        public ITransaction CreateLayTransaction()
+        {
+            if (this.detail.Transactions.Count == 1)
+            {
+                var transaction = new Transaction();
+
+                this.detail.Transactions.Add(transaction);
+
+                this.layTransaction = new TransactionDto(transaction);
+            }
+
+            return LayTransaction;
+        }
+
+        public ITransaction BackTransaction => this.backTransaction;
+
+        public ITransaction LayTransaction => this.layTransaction;
+
         internal TransactionDetail TransactionDetail => this.detail;
+
+        private void CreateTransactions()
+        {
+            var count = this.detail.Transactions.Count;
+
+            if (count > 0)
+            {
+                this.backTransaction = new TransactionDto(this.detail.Transactions.ElementAt(0));
+
+                if (count == 2)
+                {
+                    this.layTransaction = new TransactionDto(this.detail.Transactions.ElementAt(1));
+                }
+            }
+
+        }
     }
 }

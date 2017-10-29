@@ -76,6 +76,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Account\AccountLookupItem.cs" />
+    <Compile Include="ViewModel\Account\AccountManagerViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionListViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountTransactionViewModel.cs" />
     <Compile Include="ViewModel\Account\ApplyFundsToAccountViewModel.cs" />
@@ -309,6 +310,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\icons8-Delete-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\icons8-undo-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

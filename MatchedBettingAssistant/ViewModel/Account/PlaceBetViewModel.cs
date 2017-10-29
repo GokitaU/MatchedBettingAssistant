@@ -51,15 +51,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public double Returns
-        {
-            get { return 1; }
-        }
+        public double Returns => 1;
 
-        public List<BetLookup> Bets
-        {
-            get { return bets; }
-        }
+        public List<BetLookup> Bets => bets;
 
         public BetLookup SelectedBet
         {
@@ -77,6 +71,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public void Commit()
         {
             this.CurrentBet.Commit(); 
+
+            this.repository.TransactionRepository.AddDetail(this.CurrentBet.Detail);
         }
 
         private BetViewModel CreateSimpleBackBet()
@@ -87,7 +83,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
             var sports = this.repository.SportRepository.GetSports().ToList();
             var markets = this.repository.MarketRepository.GetMarkets().ToList();
 
-            var basicBet = new SimpleBet(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            var basicBet = new SimpleBet(detail)
             {
                 Account = account,
                 Date = DateTime.Today
@@ -105,7 +103,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
             var sports = this.repository.SportRepository.GetSports().ToList();
             var markets = this.repository.MarketRepository.GetMarkets().ToList();
 
-            var simpleMatchedBet = new SimpleMatchedBet(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
+
+            var simpleMatchedBet = new SimpleMatchedBet(detail)
             {
                 BackAccount = this.account,
                 LayAccount = exchanges.FirstOrDefault(),

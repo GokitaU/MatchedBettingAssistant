@@ -20,9 +20,21 @@ namespace MatchedBettingAssistant.Model.Accounts
         public bool IsSettled { get; set; }
 
         public double Payback => this.Profit * this.PaybackPercent;
+        public ITransaction BackTransaction { get; }
+        public ITransaction LayTransaction { get; }
         public void AddTransaction(ITransaction transaction)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public ITransaction CreateBackTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ITransaction CreateLayTransaction()
+        {
+            throw new NotImplementedException();
         }
     }
 }

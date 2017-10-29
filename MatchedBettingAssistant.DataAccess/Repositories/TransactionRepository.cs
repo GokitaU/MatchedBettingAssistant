@@ -23,9 +23,15 @@ namespace MatchedBettingAssistant.DataAccess.Repositories
         {
             var detail = new TransactionDetail();
 
-            this.context.TransactionDetails.Add(detail);
-
             return new TransactionDetailDto(detail);
+        }
+
+        public void AddDetail(ITransactionDetail detail)
+        {
+            if (detail is TransactionDetailDto detailDto)
+            {
+                this.context.TransactionDetails.Add(detailDto.TransactionDetail);
+            }
         }
     }
 }

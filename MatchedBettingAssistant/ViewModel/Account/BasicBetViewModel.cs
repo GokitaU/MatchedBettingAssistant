@@ -156,6 +156,8 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        internal override ITransactionDetail Detail => this.bet.Detail;
+
 
         /// <summary>
         /// Commits the bet

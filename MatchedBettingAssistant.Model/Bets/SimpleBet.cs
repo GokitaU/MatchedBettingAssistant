@@ -10,32 +10,69 @@ namespace MatchedBettingAssistant.Model.Bets
     /// </summary>
     public class SimpleBet : ISimpleBet
     {
-        private ITransactionRepository transactionRepository;
+        private ITransactionDetail detail;
 
-        public SimpleBet(ITransactionRepository transactionRepository)
+        public SimpleBet(ITransactionDetail detail)
         {
-            this.transactionRepository = transactionRepository;
+            this.detail = detail;
         }
+
+        public ITransactionDetail Detail => this.detail;
 
         /// <summary>
         /// The betting account on which the bet was made
         /// </summary>
         public IBettingAccount Account { get; set; }
 
+
         /// <summary>
         /// The date of the bet
         /// </summary>
-        public DateTime Date { get; set; }
+        public DateTime Date
+        {
+            get => this.detail.Date;
+            set
+            {
+                this.detail.Date = value;
+
+                if (this.detail.BackTransaction != null)
+                {
+                    this.detail.BackTransaction.TransactionDate = value;
+                }
+            }
+        }
 
         /// <summary>
         /// The amount the bet returned
         /// </summary>
-        public double Returns { get; set; }
+        public double Returns
+        {
+            get => this.detail.BackTransaction?.Amount ?? 0;
+            set
+            {
+                if (this.detail.BackTransaction != null)
+                {
+                    this.detail.BackTransaction.Amount = value;
+                }                
+            }
+        }
 
         /// <summary>
         /// A description for this bet
         /// </summary>
-        public string Description { get; set; }
+        public string Description
+        {
+            get => this.detail.Description;
+            set
+            {
+                this.detail.Description = value;
+
+                if (this.detail.BackTransaction != null)
+                {
+                    this.detail.BackTransaction.Description = value;
+                }
+            }
+        }
 
         /// <summary>
         /// The transaction created by this bet
@@ -44,18 +81,38 @@ namespace MatchedBettingAssistant.Model.Bets
 
         public IBank Bank { get; set; }
 
-        public IBetType BetType { get; set; }
+        public IBetType BetType
+        {
+            get => this.detail.BetType;
+            set => this.detail.BetType = value;
+        }
 
-        public IOfferType OfferType { get; set; }
+        public IOfferType OfferType
+        {
+            get => this.detail.OfferType;
+            set => this.detail.OfferType = value;
+        }
 
-        public ISport Sport { get; set; }
+        public ISport Sport
+        {
+            get => this.detail.Sport;
+            set => this.detail.Sport = value;
+        }
 
-        public IMarket Market { get; set; }
+        public IMarket Market
+        {
+            get => this.detail.Market;
+            set => this.detail.Market = value;
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        public bool IsSettled { get; set; }
+        public bool IsSettled
+        {
+            get => this.detail.IsSettled;
+            set => this.detail.IsSettled = value;
+        }
 
         /// <summary>
         /// Places the bet and creates the transaction
@@ -64,33 +121,30 @@ namespace MatchedBettingAssistant.Model.Bets
         {
             if (this.Transaction == null)
             {
-                var transaction = transactionRepository.New();
-                transaction.TransactionDate = Date;
-                transaction.Amount = this.Returns;
-                transaction.Description = this.Description;
-                this.Transaction = transaction;
-
                 this.Account.AddTransaction(this.Transaction);
+
+                this.Bank?.AddTransaction(detail);
+
             }
         }
 
         public void Complete()
         {
-            if (this.Transaction != null)
-            {
-                if (this.Transaction.Detail == null)
-                {
-                    var detail = this.transactionRepository.NewDetail();
-                    SetDetailProperties(detail);
-                    detail.AddTransaction(this.Transaction);
+            //if (this.Transaction != null)
+            //{
+            //    if (this.Transaction.Detail == null)
+            //    {
+            //        var detail = this.transactionRepository.NewDetail();
+            //        SetDetailProperties(detail);
+            //        detail.AddTransaction(this.Transaction);
 
-                    Bank?.AddTransaction(detail);
-                }
-                else
-                {
-                    SetDetailProperties(this.Transaction.Detail);
-                }
-            }
+            //        Bank?.AddTransaction(detail);
+            //    }
+            //    else
+            //    {
+            //        SetDetailProperties(this.Transaction.Detail);
+            //    }
+            //}
         }
 
         private void SetDetailProperties(ITransactionDetail detail)

@@ -68,7 +68,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         private void Deposit()
         {
-            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
+
+            var action = new TransferFundsAccountAction(detail)
             {
                 Destination = this.account,
                 Date = DateTime.Today
@@ -84,7 +88,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         private void Withdraw()
         {
-            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
+
+            var action = new TransferFundsAccountAction(detail)
             {
                 Source = this.account,
                 Date = DateTime.Today
@@ -135,7 +143,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         private void Transfer()
         {
-            var action = new TransferFundsAccountAction(this.repository.TransactionRepository)
+            var detail = this.repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
+
+            var action = new TransferFundsAccountAction(detail)
             {
                 Destination = this.account,
                 Date = DateTime.Today
@@ -148,7 +160,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void TransferFunds(TransferFundsAccountAction action, ITransferActionAccountSetter accountSetter, IEnumerable<ITransactionAccount> accounts)
         {
-            var depositViewModel = new TransferFundsToAccountViewModel(action, accounts, accountSetter);
+            var depositViewModel = new TransferFundsToAccountViewModel(action, accounts, accountSetter, this.repository.TransactionRepository);
 
             var okCommand = new UICommand()
             {
