@@ -11,6 +11,6 @@ namespace MatchedBettingAssistant.Model.Accounts
         public string Description { get; set; }
 
         public ITransactionDetailDisplay Detail { get; private set; }
-
+        public bool IncludeInProfit { get; set; }
     }
 }

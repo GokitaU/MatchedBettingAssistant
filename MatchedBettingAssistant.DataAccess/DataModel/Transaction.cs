@@ -30,7 +30,7 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
 
         public TransactionAccount Account { get; set; }
 
-
+        public bool IncludeInProfit { get; set; }
 
     }
 }

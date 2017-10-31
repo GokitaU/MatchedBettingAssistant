@@ -53,7 +53,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateBookmakers()
         {
-            var bookies = this.bookmakerRepository.GetAccounts();
+            var bookies = this.bookmakerRepository.GetAccounts().OrderBy(x => x.Name);
 
             this.accounts = new ObservableCollection<BookmakerLookupItem>(bookies.Select(x => new BookmakerLookupItem(x)));
 

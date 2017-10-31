@@ -6,6 +6,16 @@ using MatchedBettingAssistant.Core;
 
 namespace MatchedBettingAssistant.DataAccess.DataModel
 {
+    public enum TransactionType
+    {
+        Unknown,
+        StandardBet,
+        MatchedBet,
+        Deposit,
+        Withdrawal,
+        FundsAllocation
+    }
+
     public class TransactionDetail
     {
         public TransactionDetail()
@@ -22,6 +32,8 @@ namespace MatchedBettingAssistant.DataAccess.DataModel
         /// Identifier
         /// </summary>
         public int Id { get; set; }
+
+        public TransactionType TransactionType { get; set; }
 
         public DateTime Date { get; set; }
 

@@ -40,6 +40,12 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             set => this.transaction.Description = value;
         }
 
+        public bool IncludeInProfit
+        {
+            get => this.transaction.IncludeInProfit;
+            set => this.transaction.IncludeInProfit = value;
+        }
+
         public ITransactionDetailDisplay Detail
         {
             get => this.detail;

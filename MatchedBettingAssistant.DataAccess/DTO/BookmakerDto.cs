@@ -35,7 +35,21 @@ namespace MatchedBettingAssistant.DataAccess.DTO
             set => this.bookmaker.PayBackPercent = value;
         }
 
+        public bool LimitedAccount
+        {
+            get => this.bookmaker.LimitedAccount;
+            set => this.bookmaker.LimitedAccount = value;
+        }
+
+        public bool CompletedNewAccountOffer
+        {
+            get => this.bookmaker.CompletedNewAccountOffer;
+            set => this.bookmaker.CompletedNewAccountOffer = value;
+        }
+
         public double Profit => this.bookmaker.Profit;
+
+        public double AccountProfit => this.bookmaker.AccountProfit;
 
         public double PaybackDue => this.bookmaker.PaybackDue;
     }

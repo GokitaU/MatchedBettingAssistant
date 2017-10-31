@@ -124,6 +124,7 @@ namespace MatchedBettingAssistant.Model.Bets
             {
                 this.Description = $"Bet at {this.Account?.Name}";
             }
+            this.detail.BackTransaction.IncludeInProfit = true;
 
             this.Account?.AddTransaction(this.detail.BackTransaction);
 

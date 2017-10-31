@@ -51,7 +51,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         private void CreateWallets()
         {
-            var bookies = this.walletRepository.GetWallets();
+            var bookies = this.walletRepository.GetWallets().OrderBy(x => x.Name);
 
             this.lookupItems = new ObservableCollection<WalletLookupItem>(bookies.Select(x => new WalletLookupItem(x)));
 

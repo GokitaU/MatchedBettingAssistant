@@ -8,8 +8,14 @@
 
         double Profit { get; }
 
+        double AccountProfit { get; }
+
         double PaybackPercent { get; set; }
 
         double PaybackDue { get; }
+
+        bool LimitedAccount { get; set; }
+
+        bool CompletedNewAccountOffer { get; set; }
     }
 }

@@ -12,5 +12,9 @@ namespace MatchedBettingAssistant.Core
 
         ITransactionDetailDisplay Detail { get; }
 
+        /// <summary>
+        /// Transaction is a bet and affects bookmaker profit/loss
+        /// </summary>
+        bool IncludeInProfit { get; set; }
     }
 }

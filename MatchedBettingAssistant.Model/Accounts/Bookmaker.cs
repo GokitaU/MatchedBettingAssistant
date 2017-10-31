@@ -28,6 +28,11 @@ namespace MatchedBettingAssistant.Model.Accounts
             get => this.baseAccount.Profit;
         }
 
+        public double AccountProfit
+        {
+            get => this.baseAccount.AccountProfit;
+        }
+
         public double PaybackPercent
         {
             get => this.baseAccount.PaybackPercent;
@@ -38,5 +43,8 @@ namespace MatchedBettingAssistant.Model.Accounts
         {
             get => this.baseAccount.PaybackDue;
         }
+
+        public bool LimitedAccount { get; set; }
+        public bool CompletedNewAccountOffer { get; set; }
     }
 }
