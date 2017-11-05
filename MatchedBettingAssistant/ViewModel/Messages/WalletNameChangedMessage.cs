@@ -1,6 +1,6 @@
 ﻿using MatchedBettingAssistant.Core;
 
-namespace MatchedBettingAssistant.ViewModel.Account
+namespace MatchedBettingAssistant.ViewModel.Messages
 {
     public class WalletNameChangedMessage
     {

@@ -2,36 +2,47 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Windows;
+using DevExpress.Data.Helpers;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Accounts;
+using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
 
-    public class EditBookmakerViewModel : ViewModelBase
+    public class EditBookmakerViewModel : ViewModelBase, IAddsEntity, IRefreshable
     {
-        private readonly IBettingAccount account;
+        private IBettingAccount account;
         private readonly IRepository repository;
 
-        public EditBookmakerViewModel(IBettingAccount account, IRepository repository)
+        public EditBookmakerViewModel(IRepository repository)
         {
-            this.account = account;
             this.repository = repository;
             this.RegisterMessages();
             this.ActionButtons = new BookmakerButtonsViewModel(this.account, this.repository);
         }
 
+        public IAccount Account
+        {
+            get => this.account;
+            set
+            {
+                this.account = value as IBettingAccount;
+                RaisePropertyChanged(()=>Account);
+            }
+        }
+
         public string Name
         {
-            get => this.account.Name;
+            get => this.account?.Name;
             set
             {
                 this.account.Name = value;
                 RaisePropertyChanged(() => this.Name);
 
-                Messenger.Default.Send(new BookmakerNameChangedMessage(this.account));
+                Messenger.Default.Send(new AccountNameChangedMessage(this.account));
             }
         }
 
@@ -40,7 +51,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public double StartingBalance
         {
-            get => this.account.StartingBalance;
+            get => this.account?.StartingBalance ?? 0;
             set
             {
                 this.account.StartingBalance = value;
@@ -51,7 +62,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public bool IsExchange
         {
-            get => this.account.IsExchange;
+            get => this.account?.IsExchange ?? false;
             set
             {
                 this.account.IsExchange = value;
@@ -68,7 +79,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double CommissionPercent
         {
-            get => this.account.CommissionPercent;
+            get => this.account?.CommissionPercent ?? 0;
             set
             {
                 this.account.CommissionPercent = value;
@@ -78,7 +89,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double PaybackPercent
         {
-            get => this.account.PaybackPercent;
+            get => this.account?.PaybackPercent ?? 0;
             set
             {
                 this.account.PaybackPercent = value;
@@ -89,7 +100,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public bool LimitedAccount
         {
-            get => this.account.LimitedAccount;
+            get => this.account?.LimitedAccount ?? false;
             set
             {
                 if (this.account.LimitedAccount == value)
@@ -103,7 +114,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public bool CompletedNewAccountOffer
         {
-            get => this.account.CompletedNewAccountOffer;
+            get => this.account?.CompletedNewAccountOffer ?? false;
             set
             {
                 if (this.account.CompletedNewAccountOffer == value)
@@ -115,13 +126,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public double Balance => this.account.Balance;
+        public double Balance => this.account?.Balance ?? 0;
 
-        public double AccountProfit => this.account.AccountProfit;
+        public double AccountProfit => this.account?.AccountProfit ?? 0;
 
-        public double Profit => this.account.Profit;
+        public double Profit => this.account?.Profit ?? 0;
 
-        public double PaybackDue => this.account.PaybackDue;
+        public double PaybackDue => this.account?.PaybackDue ?? 0;
 
         public BookmakerButtonsViewModel ActionButtons { get; }
 
@@ -151,8 +162,32 @@ namespace MatchedBettingAssistant.ViewModel.Account
         private void EntityPropertyChanged<T>(Expression<Func<T>> expression)
         {
             RaisePropertyChanged(expression);
-            Messenger.Default.Send(new ModelUpdated());
+            Messenger.Default.Send(new ModelSaveStatusChangedMessage());
         }
-        
+
+        public void Add()
+        {
+            this.Account = this.repository.BookmakerRepository.New();
+            this.Name = "New Bookmaker";
+            Refresh();
+
+            Messenger.Default.Send(new AccountAddedMessage(this.account));
+        }
+
+        public void Refresh()
+        {
+            this.RaisePropertyChanged(() => Name);
+            this.RaisePropertyChanged(() => IsExchange);
+            this.RaisePropertyChanged(() => StartingBalance);
+            this.RaisePropertyChanged(() => CommissionPercent);
+            this.RaisePropertyChanged(() => LimitedAccount);
+            this.RaisePropertyChanged(() => CompletedNewAccountOffer);
+            this.RaisePropertyChanged(() => PaybackPercent);
+            this.RaisePropertyChanged(() => Balance);
+            this.RaisePropertyChanged(() => AccountProfit);
+            this.RaisePropertyChanged(() => Profit);
+            this.RaisePropertyChanged(() => PaybackDue);
+
+        }
     }
 }

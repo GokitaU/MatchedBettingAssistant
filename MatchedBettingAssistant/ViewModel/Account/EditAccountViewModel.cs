@@ -10,6 +10,7 @@ using DevExpress.Xpf.Editors.Internal;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
 using MatchedBettingAssistant.Model.Accounts;
+using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {

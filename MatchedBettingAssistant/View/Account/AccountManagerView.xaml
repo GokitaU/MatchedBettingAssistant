@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <local:AccountNavigationView DataContext="{Binding NavigationViewModel}"/>
-        <local:AccountView DataContext="{ Binding EditViewModel}"
+        <local:AccountView DataContext="{ Binding AccountViewModel}"
                            Grid.Column="1"/>
     </Grid>
 </UserControl>

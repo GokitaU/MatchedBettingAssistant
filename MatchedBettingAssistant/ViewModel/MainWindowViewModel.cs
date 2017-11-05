@@ -2,6 +2,7 @@
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.DataAccess.Repositories;
 using MatchedBettingAssistant.ViewModel.Account;
+using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel
 {
@@ -99,10 +100,10 @@ namespace MatchedBettingAssistant.ViewModel
 
         private void RegisterMessages()
         {
-            Messenger.Default.Register<ModelUpdated>(this, ModelUpdated);
+            Messenger.Default.Register<ModelSaveStatusChangedMessage>(this, ModelUpdated);
         }
 
-        private void ModelUpdated(ModelUpdated message)
+        private void ModelUpdated(ModelSaveStatusChangedMessage message)
         {
             CheckEnabledCommands();
         }
@@ -112,7 +113,7 @@ namespace MatchedBettingAssistant.ViewModel
             this.repository = new Repository();
             this.isConnected = true;
             CheckEnabledCommands();
-            this.CurrentViewModel = new BookmakerManagerViewModel(this.repository);
+            Bookmakers();
         }
 
         private void Save()
@@ -151,7 +152,14 @@ namespace MatchedBettingAssistant.ViewModel
 
         private void Bookmakers()
         {
-            this.CurrentViewModel = new BookmakerManagerViewModel(this.repository);
+            var navigationViewModel = new AccountNavigationViewModel(this.repository.BookmakerRepository.GetAccounts());
+            var editViewModel = new EditBookmakerViewModel(this.repository);
+            var accountViewModel = new AccountManagerViewModel()
+            {
+                NavigationViewModel = navigationViewModel,
+                EditViewModel = editViewModel
+            };
+            this.CurrentViewModel = accountViewModel;
         }
 
         private void Wallets()

@@ -5,6 +5,7 @@ using System.Windows;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Model;
+using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {

@@ -1,9 +1,10 @@
 ﻿using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
+using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class WalletManagerViewModel : AccountManagerViewModel
+    public class WalletManagerViewModel : ViewModelBase
     {
         private readonly IRepository repository;
 
@@ -40,18 +41,18 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public override void Add()
+        public void Add()
         {
             var wallet = this.repository.WalletRepository.New();
             wallet.Name = "New Wallet";
             this.NavigationViewModel.Add(wallet);
         }
 
-        public override void DeleteCurrent()
+        public void DeleteCurrent()
         {
         }
 
-        public override void Refresh()
+        public void Refresh()
         {
             this.NavigationViewModel = new WalletNavigationViewModel(this.repository.WalletRepository);
         }

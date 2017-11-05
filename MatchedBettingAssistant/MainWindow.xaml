@@ -7,7 +7,7 @@
     xmlns:viewmodel="clr-namespace:MatchedBettingAssistant.ViewModel.Account"
     Title="Matched Betting Assistant" Height="800" Width="1024">
     <dx:DXWindow.Resources>
-        <DataTemplate DataType="{x:Type viewmodel:BookmakerManagerViewModel}">
+        <DataTemplate DataType="{x:Type viewmodel:AccountManagerViewModel}">
             <account:AccountManagerView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel:WalletManagerViewModel}">

@@ -3,6 +3,7 @@ using System.Linq;
 using DevExpress.Mvvm;
 using MatchedBettingAssistant.Core;
 using MatchedBettingAssistant.Core.Repositories;
+using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
