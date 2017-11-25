@@ -4,7 +4,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class AccountManagerViewModel : ViewModelBase, IAddsEntity, IDeletesEntity, IRollsBack
     {
-        private ViewModelBase navigationViewModel;
+        private AccountNavigationViewModel navigationViewModel;
         private AccountViewModel accountViewModel;
 
         public AccountManagerViewModel()
@@ -12,12 +12,18 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.AccountViewModel = new AccountViewModel();
         }
 
-        public ViewModelBase NavigationViewModel
+        public AccountManagerViewModel(AccountViewModel account)
+        {
+            this.AccountViewModel = account;
+        }
+
+        public AccountNavigationViewModel NavigationViewModel
         {
             get => navigationViewModel;
             set
             {
                 this.navigationViewModel = value;
+                
                 RaisePropertyChanged(() => NavigationViewModel);
             }
         }
@@ -32,7 +38,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
-        public ViewModelBase EditViewModel
+        public EditAccountViewModel EditViewModel
         {
             get => this.AccountViewModel?.EditViewModel;
             set
@@ -41,6 +47,11 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
                 RaisePropertyChanged(()=>EditViewModel);
             }
+        }
+
+        public void Unregister()
+        {
+            this.AccountViewModel.Unregister();
         }
 
         public void Add()
@@ -58,5 +69,9 @@ namespace MatchedBettingAssistant.ViewModel.Account
             
         }
 
+        public void SelectFirst()
+        {
+            this.NavigationViewModel.SelectFirst();
+        }
     }
 }

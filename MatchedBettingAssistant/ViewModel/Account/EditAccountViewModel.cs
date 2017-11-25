@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using DevExpress.Data.Helpers;
 using DevExpress.Mvvm;
 using DevExpress.Xpf.Editors.Internal;
 using MatchedBettingAssistant.Core;
@@ -14,18 +16,26 @@ using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-    public class EditAccountViewModel : ViewModelBase
+    public abstract class EditAccountViewModel : ViewModelBase, IAddsEntity, IRefreshable
     {
-        private readonly ITransactionAccount account;
-        private readonly IRepository repository;
+        private ITransactionAccount account;
 
-        public EditAccountViewModel(ITransactionAccount account, IRepository repository)
+        protected EditAccountViewModel(IRepository repository)
         {
-            this.account = account;
-            this.repository = repository;
-            this.ActionButtons = new WalletButtonsViewModel(this.account, this.repository);
+            this.Repository = repository;
 
             this.RegisterMessages();
+        }
+
+        public IAccount Account
+        {
+            get => this.account;
+            set
+            {
+                this.account = value as ITransactionAccount;
+                RaisePropertyChanged(() => Account);
+                Refresh();
+            }
         }
 
         /// <summary>
@@ -33,14 +43,14 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public string Name
         {
-            get => this.account.Name;
+            get => this.account?.Name;
             set
             {
                 this.account.Name = value;
 
                 RaisePropertyChanged(()=>this.Name);
 
-                Messenger.Default.Send(new WalletNameChangedMessage(this.account));
+                Messenger.Default.Send(new AccountNameChangedMessage(this.account));
 
             }
         }
@@ -50,7 +60,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// </summary>
         public double StartingBalance
         {
-            get => this.account.StartingBalance;
+            get => this.account?.StartingBalance ?? 0;
             set
             {
                 this.account.StartingBalance = value;
@@ -62,9 +72,34 @@ namespace MatchedBettingAssistant.ViewModel.Account
         /// <summary>
         /// Gets the current balance
         /// </summary>
-        public double Balance => this.account.Balance;
+        public double Balance => this.account?.Balance ?? 0;
 
-        public WalletButtonsViewModel ActionButtons { get; }
+        public void Add()
+        {
+            New();
+
+            Refresh();
+
+            Messenger.Default.Send(new AccountAddedMessage(this.account));
+        }
+
+        protected abstract void New();
+
+        protected IRepository Repository { get; }
+
+        public virtual void Refresh()
+        {
+            this.RaisePropertyChanged(() => Name);
+            this.RaisePropertyChanged(() => StartingBalance);
+            this.RaisePropertyChanged(() => Balance);
+
+        }
+
+        protected void EntityPropertyChanged<T>(Expression<Func<T>> expression)
+        {
+            RaisePropertyChanged(expression);
+            Messenger.Default.Send(new ModelSaveStatusChangedMessage());
+        }
 
         private void RegisterMessages()
         {

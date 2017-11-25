@@ -26,11 +26,17 @@ namespace MatchedBettingAssistant.ViewModel.Account
             set
             {
                 selectedAccount = value;
+                Messenger.Default.Send(new SelectedAccountChangedMessage(this.selectedAccount?.Account));
                 RaisePropertyChanged(()=>SelectedAccount);
             }
         }
 
         public ObservableCollection<AccountLookupItem> Accounts => this.accounts;
+
+        public void SelectFirst()
+        {
+            this.SelectedAccount = this.Accounts.FirstOrDefault();
+        }
 
         private void CreateAccounts(IEnumerable<ITransactionAccount> transactionAccounts)
         {

@@ -11,4 +11,14 @@ namespace MatchedBettingAssistant.ViewModel.Messages
         public IBettingAccount Bookmaker { get; }
 
     }
+
+    public class SelectedAccountChangedMessage
+    {
+        public SelectedAccountChangedMessage(IAccount account)
+        {
+            Account = account;
+        }
+
+        public IAccount Account { get; }
+    }
 }

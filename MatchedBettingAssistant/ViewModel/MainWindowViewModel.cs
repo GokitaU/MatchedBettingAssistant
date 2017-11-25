@@ -12,7 +12,7 @@ namespace MatchedBettingAssistant.ViewModel
         private IRepository repository;
         private bool isConnected;
 
-        private ViewModelBase currentViewModel;
+        private AccountManagerViewModel currentViewModel;
 
         private DelegateCommand connectCommand;
         private DelegateCommand connectAndCreateCommand;
@@ -47,11 +47,13 @@ namespace MatchedBettingAssistant.ViewModel
         public DelegateCommand BanksCommand => this.banksCommand ?? (this.banksCommand = new DelegateCommand(Banks, TypeEnabled));
 
 
-        public ViewModelBase CurrentViewModel
+        public AccountManagerViewModel CurrentViewModel
         {
             get => currentViewModel;
             set
             {
+                currentViewModel?.Unregister();
+
                 currentViewModel = value;
 
                 this.RaisePropertyChanged(()=>this.CurrentViewModel);
@@ -159,17 +161,28 @@ namespace MatchedBettingAssistant.ViewModel
                 NavigationViewModel = navigationViewModel,
                 EditViewModel = editViewModel
             };
+            accountViewModel.SelectFirst();
             this.CurrentViewModel = accountViewModel;
         }
 
         private void Wallets()
         {
-            this.CurrentViewModel = new WalletManagerViewModel(this.repository);
+            var navigationViewModel = new AccountNavigationViewModel(this.repository.WalletRepository.GetWallets());
+            var editViewModel = new EditWalletViewModel(this.repository);
+            
+            var accountViewModel = new AccountManagerViewModel()
+            {
+                NavigationViewModel = navigationViewModel,
+                EditViewModel = editViewModel,
+                
+            };
+            accountViewModel.SelectFirst();
+            this.CurrentViewModel = accountViewModel;
         }
 
         private void Banks()
         {
-            this.CurrentViewModel = new BankManagerViewModel(this.repository);
+            //this.CurrentViewModel = new BankManagerViewModel(this.repository);
         }
     }
 }

@@ -12,64 +12,86 @@
     <Grid>
         <dxlc:LayoutControl Orientation="Vertical">
             <dxlc:LayoutGroup View="Tabs">
-            <dxlc:LayoutGroup Header="Details" 
-                              View="GroupBox" Orientation="Vertical">
-                <dxlc:LayoutItem Label="Name">
-                    <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
-                </dxlc:LayoutItem>
-                <dxlc:LayoutGroup dx:ScrollViewerTouchBehavior.IsEnabled="True" Serialization:SerializableItem.TypeName="LayoutGroup">
-                    <dxlc:LayoutItem Label="Exchange">
-                        <dxe:CheckEdit IsChecked="{Binding IsExchange}"/>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="Commission">
-                        <dxe:TextEdit EditValue="{Binding CommissionPercent, Mode=TwoWay}"
-                                      MaskType="Numeric" Mask="p2" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup Header="LayoutGroup" Orientation="Horizontal">
-                    <dxlc:LayoutItem Label="Starting Balance">
-                        <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"
-                                          MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="Balance">
-                        <dxe:TextEdit Text="{Binding Balance, Mode=OneWay}"
-                                          MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup>
-                    <dxlc:LayoutItem Label="Account Profit">
-                        <dxe:TextEdit Text="{Binding AccountProfit, Mode=OneWay}"
-                            MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="Bonus Profit">
-                        <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}"
-                                      MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
-                <dxlc:LayoutGroup dx:ScrollViewerTouchBehavior.IsEnabled="True" Serialization:SerializableItem.TypeName="LayoutGroup">
-                    <dxlc:LayoutItem Label="Payback Percent">
-                        <dxe:TextEdit EditValue="{Binding PaybackPercent, Mode=TwoWay}"
-                                MaskType="Numeric" Mask="p2" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                    <dxlc:LayoutItem Label="Payback Due" Visibility="{Binding PaybackPercentVisibility}">
-                        <dxe:TextEdit Text="{Binding PaybackDue, Mode=OneWay}"
-                            MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
-                    </dxlc:LayoutItem>
-                </dxlc:LayoutGroup>
-            </dxlc:LayoutGroup>
-            <dxlc:LayoutGroup Header="Account Status">
-                <dxlc:LayoutItem Label="New Account Offer Completed">
-                    <dxe:CheckEdit IsChecked="{Binding CompletedNewAccountOffer}"/>
-                </dxlc:LayoutItem>
-                <dxlc:LayoutItem Label="Limited Account">
-                    <dxe:CheckEdit IsChecked="{Binding IsLimited}"/>
-                </dxlc:LayoutItem>
-            </dxlc:LayoutGroup>                
-            </dxlc:LayoutGroup>
+                <dxlc:LayoutGroup Header="Details" 
+                                  Orientation="Vertical">
+                    <dxlc:LayoutGroup Header="Details" 
+                                      View="GroupBox" 
+                                      Orientation="Vertical">
+                        <dxlc:LayoutItem Label="Name">
+                            <dxe:TextEdit EditValue="{Binding Name, Mode=TwoWay}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutGroup >
+                            <dxlc:LayoutItem Label="Exchange">
+                                <dxe:CheckEdit IsChecked="{Binding IsExchange}"/>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Commission">
+                                <dxe:TextEdit EditValue="{Binding CommissionPercent, Mode=TwoWay}"
+                                              MaskType="Numeric" Mask="p2" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                        <dxlc:LayoutGroup Header="LayoutGroup" Orientation="Horizontal">
+                            <dxlc:LayoutItem Label="Starting Balance">
+                                <dxe:TextEdit EditValue="{Binding StartingBalance, Mode=TwoWay}"
+                                                  MaskType="Numeric" Mask="C2" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Balance">
+                                <dxe:TextEdit Text="{Binding Balance, Mode=OneWay}"
+                                                  MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                        <dxlc:LayoutGroup>
+                            <dxlc:LayoutItem Label="Account Profit">
+                                <dxe:TextEdit Text="{Binding AccountProfit, Mode=OneWay}"
+                                    MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Bonus Profit">
+                                <dxe:TextEdit Text="{Binding Profit, Mode=OneWay}"
+                                              MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                        <dxlc:LayoutGroup >
+                            <dxlc:LayoutItem Label="Payback Percent">
+                                <dxe:TextEdit EditValue="{Binding PaybackPercent, Mode=TwoWay}"
+                                        MaskType="Numeric" Mask="p2" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                            <dxlc:LayoutItem Label="Payback Due" Visibility="{Binding PaybackPercentVisibility}">
+                                <dxe:TextEdit Text="{Binding PaybackDue, Mode=OneWay}"
+                                    MaskType="Numeric" Mask="C2" IsReadOnly="True" MaskUseAsDisplayFormat="True"/>
+                            </dxlc:LayoutItem>
+                        </dxlc:LayoutGroup>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup>
 
-            <dxlc:LayoutItem>
-                <account:AccountButtonsView DataContext="{Binding ActionButtons}"/>
-            </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                    <dxlc:LayoutGroup>
+                        <dxlc:LayoutItem>
+                            <dx:SimpleButton Content="Deposit"
+                                             Command="{Binding DepositCommand}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem>
+                            <dx:SimpleButton Content="Withdraw"
+                                             Command="{Binding WithdrawCommand}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem>
+                            <dx:SimpleButton Content="Bonus"
+                                             Command="{Binding BonusCommand}"/>
+                        </dxlc:LayoutItem>
+                        <dxlc:LayoutItem>
+                            <dx:SimpleButton Content="Bet"
+                                             Command="{Binding BetCommand}"/>
+                        </dxlc:LayoutItem>
+                    </dxlc:LayoutGroup>
+                </dxlc:LayoutGroup>
+
+                <dxlc:LayoutGroup Header="Account Status">
+                    <dxlc:LayoutItem Label="New Account Offer Completed">
+                        <dxe:CheckEdit IsChecked="{Binding HasCompletedNewAccountOffer}"/>
+                    </dxlc:LayoutItem>
+                    <dxlc:LayoutItem Label="Limited Account">
+                        <dxe:CheckEdit IsChecked="{Binding IsLimitedAccount}"/>
+                    </dxlc:LayoutItem>
+                </dxlc:LayoutGroup>
+            </dxlc:LayoutGroup>
         </dxlc:LayoutControl>
     </Grid>
 </UserControl>

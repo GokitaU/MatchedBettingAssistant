@@ -21,7 +21,7 @@ namespace MatchedBettingAssistant.DataAccess.DTO
         public int Id
         {
             get => this.detail.Id;
-            set { this.detail.Id = value; }
+            set => this.detail.Id = value;
         }
 
         public TransactionDetailDto(TransactionDetail detail)

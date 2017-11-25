@@ -11,61 +11,24 @@ using MatchedBettingAssistant.ViewModel.Messages;
 
 namespace MatchedBettingAssistant.ViewModel.Account
 {
-
-    public class EditBookmakerViewModel : ViewModelBase, IAddsEntity, IRefreshable
+    public class EditBookmakerViewModel : EditAccountViewModel
     {
-        private IBettingAccount account;
-        private readonly IRepository repository;
+        private DelegateCommand depositCommand;
+        private DelegateCommand withdrawCommand;
+        private DelegateCommand bonusCommand;
+        private DelegateCommand betCommand;
 
         public EditBookmakerViewModel(IRepository repository)
-        {
-            this.repository = repository;
-            this.RegisterMessages();
-            this.ActionButtons = new BookmakerButtonsViewModel(this.account, this.repository);
-        }
-
-        public IAccount Account
-        {
-            get => this.account;
-            set
-            {
-                this.account = value as IBettingAccount;
-                RaisePropertyChanged(()=>Account);
-            }
-        }
-
-        public string Name
-        {
-            get => this.account?.Name;
-            set
-            {
-                this.account.Name = value;
-                RaisePropertyChanged(() => this.Name);
-
-                Messenger.Default.Send(new AccountNameChangedMessage(this.account));
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the starting balance
-        /// </summary>
-        public double StartingBalance
-        {
-            get => this.account?.StartingBalance ?? 0;
-            set
-            {
-                this.account.StartingBalance = value;
-                EntityPropertyChanged(() => this.StartingBalance);
-                UpdateBalance();
-            }
+            : base(repository)
+        { 
         }
 
         public bool IsExchange
         {
-            get => this.account?.IsExchange ?? false;
+            get => this.BettingAccount?.IsExchange ?? false;
             set
             {
-                this.account.IsExchange = value;
+                this.BettingAccount.IsExchange = value;
 
                 if (this.IsExchange)
                 {
@@ -79,20 +42,20 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public double CommissionPercent
         {
-            get => this.account?.CommissionPercent ?? 0;
+            get => this.BettingAccount?.CommissionPercent ?? 0;
             set
             {
-                this.account.CommissionPercent = value;
+                this.BettingAccount.CommissionPercent = value;
                 EntityPropertyChanged(()=>this.CommissionPercent);
             }
         }
 
         public double PaybackPercent
         {
-            get => this.account?.PaybackPercent ?? 0;
+            get => this.BettingAccount?.PaybackPercent ?? 0;
             set
             {
-                this.account.PaybackPercent = value;
+                this.BettingAccount.PaybackPercent = value;
                 EntityPropertyChanged(()=>this.PaybackPercent);
                 UpdateBalance();
             }
@@ -100,13 +63,13 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public bool LimitedAccount
         {
-            get => this.account?.LimitedAccount ?? false;
+            get => this.BettingAccount?.LimitedAccount ?? false;
             set
             {
-                if (this.account.LimitedAccount == value)
+                if (this.BettingAccount.LimitedAccount == value)
                     return;
 
-                this.account.LimitedAccount = value;
+                this.BettingAccount.LimitedAccount = value;
 
                 RaisePropertyChanged(() => this.LimitedAccount);
             }
@@ -114,31 +77,69 @@ namespace MatchedBettingAssistant.ViewModel.Account
 
         public bool CompletedNewAccountOffer
         {
-            get => this.account?.CompletedNewAccountOffer ?? false;
+            get => this.BettingAccount?.CompletedNewAccountOffer ?? false;
             set
             {
-                if (this.account.CompletedNewAccountOffer == value)
+                if (this.BettingAccount.CompletedNewAccountOffer == value)
                     return;
 
-                this.account.CompletedNewAccountOffer = value;
+                this.BettingAccount.CompletedNewAccountOffer = value;
 
                 RaisePropertyChanged(() => this.CompletedNewAccountOffer);
             }
         }
 
-        public double Balance => this.account?.Balance ?? 0;
+        public double AccountProfit => this.BettingAccount?.AccountProfit ?? 0;
 
-        public double AccountProfit => this.account?.AccountProfit ?? 0;
+        public double Profit => this.BettingAccount?.Profit ?? 0;
 
-        public double Profit => this.account?.Profit ?? 0;
+        public double PaybackDue => this.BettingAccount?.PaybackDue ?? 0;
 
-        public double PaybackDue => this.account?.PaybackDue ?? 0;
+        /// <summary>
+        /// Gets the command for depositing funds to account
+        /// </summary>
+        public DelegateCommand DepositCommand => 
+            this.depositCommand ?? (this.depositCommand = new DelegateCommand(Deposit, CanWithdrawAndDeposit));
 
-        public BookmakerButtonsViewModel ActionButtons { get; }
+        /// <summary>
+        /// Gets the command for withdrawing funds from account
+        /// </summary>
+        public DelegateCommand WithdrawCommand => 
+            this.withdrawCommand ?? (this.withdrawCommand = new DelegateCommand(Withdraw, CanWithdrawAndDeposit));
 
-        public Visibility PaybackPercentVisibility
+        public DelegateCommand BonusCommand => this.bonusCommand ?? (this.bonusCommand = new DelegateCommand(Bonus));
+
+        public DelegateCommand BetCommand => this.betCommand ?? (this.betCommand = new DelegateCommand(Bet));
+
+
+        public Visibility PaybackPercentVisibility => this.IsExchange ? Visibility.Hidden : Visibility.Visible;
+
+        protected override void New()
         {
-            get => this.IsExchange ? Visibility.Hidden : Visibility.Visible;
+            this.Account = this.Repository.BookmakerRepository.New();
+            this.Name = "New Bookmaker";
+        }
+
+        public override void Refresh()
+        {
+            this.RaisePropertyChanged(() => IsExchange);
+            this.RaisePropertyChanged(() => CommissionPercent);
+            this.RaisePropertyChanged(() => LimitedAccount);
+            this.RaisePropertyChanged(() => CompletedNewAccountOffer);
+            this.RaisePropertyChanged(() => PaybackPercent);
+            this.RaisePropertyChanged(() => AccountProfit);
+            this.RaisePropertyChanged(() => Profit);
+            this.RaisePropertyChanged(() => PaybackDue);
+
+            base.Refresh();
+
+        }
+
+        private IBettingAccount BettingAccount => this.Account as IBettingAccount;
+
+        private bool CanWithdrawAndDeposit()
+        {
+            return true;
         }
 
         private void RegisterMessages()
@@ -159,35 +160,68 @@ namespace MatchedBettingAssistant.ViewModel.Account
             this.RaisePropertyChanged(() => this.PaybackDue);
         }
 
-        private void EntityPropertyChanged<T>(Expression<Func<T>> expression)
+        /// <summary>
+        /// requests a deposit of funds
+        /// </summary>
+        private void Deposit()
         {
-            RaisePropertyChanged(expression);
-            Messenger.Default.Send(new ModelSaveStatusChangedMessage());
+
+            TransferFunds((action) => new DepositActionAccountSetter(action));
         }
 
-        public void Add()
+        /// <summary>
+        /// requests a withdrawal of funds 
+        /// </summary>
+        private void Withdraw()
         {
-            this.Account = this.repository.BookmakerRepository.New();
-            this.Name = "New Bookmaker";
-            Refresh();
-
-            Messenger.Default.Send(new AccountAddedMessage(this.account));
+            TransferFunds((action) => new WithdrawActionAccountSetter(action));
         }
 
-        public void Refresh()
+        /// <summary>
+        /// creates a message to request the transfer of funds
+        /// </summary>
+        /// <param name="setterGetter"></param>
+        private void TransferFunds(Func<TransferFundsAccountAction, ITransferActionAccountSetter> setterGetter)
         {
-            this.RaisePropertyChanged(() => Name);
-            this.RaisePropertyChanged(() => IsExchange);
-            this.RaisePropertyChanged(() => StartingBalance);
-            this.RaisePropertyChanged(() => CommissionPercent);
-            this.RaisePropertyChanged(() => LimitedAccount);
-            this.RaisePropertyChanged(() => CompletedNewAccountOffer);
-            this.RaisePropertyChanged(() => PaybackPercent);
-            this.RaisePropertyChanged(() => Balance);
-            this.RaisePropertyChanged(() => AccountProfit);
-            this.RaisePropertyChanged(() => Profit);
-            this.RaisePropertyChanged(() => PaybackDue);
+            var detail = this.Repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+            detail.CreateLayTransaction();
 
+            var action = new TransferFundsAccountAction(detail)
+            {
+                Destination = this.BettingAccount,
+                Date = DateTime.Today
+            };
+
+            var accountSetter = setterGetter(action);
+
+            var wallets = this.Repository.WalletRepository.GetWallets();
+            var depositViewModel = new TransferFundsToAccountViewModel(action, wallets, accountSetter, this.Repository.TransactionRepository);
+
+            Messenger.Default.Send(new TransferFundsMessage(depositViewModel));
+        }
+
+        private void Bonus()
+        {
+            var detail = this.Repository.TransactionRepository.NewDetail();
+            detail.CreateBackTransaction();
+
+            var action = new ApplyFundsAccountAction(detail)
+            {
+                Destination = this.BettingAccount,
+                Date = DateTime.Today
+            };
+
+            var applyFunds = new ApplyFundsToAccountViewModel(action, this.Repository.TransactionRepository);
+
+            Messenger.Default.Send(new ApplyFundsMessage(applyFunds));
+        }
+
+        private void Bet()
+        {
+            var bet = new PlaceBetViewModel(this.BettingAccount, this.Repository);
+
+            Messenger.Default.Send(new PlaceBetMessage(bet));
         }
     }
 }

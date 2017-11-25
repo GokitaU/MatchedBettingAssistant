@@ -8,7 +8,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
 {
     public class AccountViewModel : ViewModelBase, IAddsEntity
     {
-        private ViewModelBase editViewModel;
+        private EditAccountViewModel editViewModel;
         private ViewModelBase transactionViewModel;
 
         public AccountViewModel()
@@ -17,7 +17,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
            
         }
 
-        public AccountViewModel(ViewModelBase account, ViewModelBase transaction) : this()
+        public AccountViewModel(EditAccountViewModel account, ViewModelBase transaction) : this()
         {
             this.EditViewModel = account;
             this.TransactionViewModel = transaction;
@@ -27,7 +27,7 @@ namespace MatchedBettingAssistant.ViewModel.Account
         public IDialogService ApplyDialogService => ServiceContainer.GetService<IDialogService>("ApplyDialog");
         public IDialogService BetDialogService => ServiceContainer.GetService<IDialogService>("BetDialog");
 
-        public ViewModelBase EditViewModel
+        public EditAccountViewModel EditViewModel
         {
             get => editViewModel;
             set
@@ -55,11 +55,28 @@ namespace MatchedBettingAssistant.ViewModel.Account
             }
         }
 
+        public void Unregister()
+        {
+            Messenger.Default.Unregister<SelectedAccountChangedMessage>(this, AccountChanged);
+            Messenger.Default.Unregister<TransferFundsMessage>(this, TransferFunds);
+            Messenger.Default.Unregister<PlaceBetMessage>(this, PlaceBet);
+            Messenger.Default.Unregister<ApplyFundsMessage>(this, ApplyFunds);
+        }
+
         private void RegisterMessages()
         {
+            Messenger.Default.Register<SelectedAccountChangedMessage>(this, AccountChanged);
             Messenger.Default.Register<TransferFundsMessage>(this, TransferFunds);
             Messenger.Default.Register<PlaceBetMessage>(this, PlaceBet);
             Messenger.Default.Register<ApplyFundsMessage>(this, ApplyFunds);
+        }
+
+        private void AccountChanged(SelectedAccountChangedMessage msg)
+        {
+            if (this.EditViewModel != null)
+            {
+                this.EditViewModel.Account = msg.Account;
+            }
         }
 
         private void TransferFunds(TransferFundsMessage msg)
